@@ -671,20 +671,22 @@
     padding: 48px 0 28px;
     color: var(--ink-soft);
   }
-  .colophon { display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 32px; }
+  .colophon { display: grid; grid-template-columns: 1.6fr 1fr; gap: 48px; }
   .colophon h4 { font-family: var(--mono); font-size: 10.5px; letter-spacing: 2.2px; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 14px; }
-  .colophon .credo { font-family: var(--serif); font-style: italic; font-size: 22px; line-height: 1.25; color: var(--ink); max-width: 30ch; letter-spacing: -0.01em; }
-  .colophon address { font-style: normal; font-size: 14px; line-height: 1.6; }
+  .colophon .credo { font-family: var(--serif); font-style: italic; font-size: 22px; line-height: 1.3; color: var(--ink); max-width: 42ch; letter-spacing: -0.01em; }
+  .colophon address { font-style: normal; font-size: 14px; line-height: 1.85; }
   .colophon a:hover { color: var(--ember); }
   .copyline {
-    margin-top: 32px;
-    padding-top: 18px;
+    margin-top: 38px;
+    padding-top: 20px;
     border-top: 1px solid var(--rule);
-    display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;
-    font-family: var(--mono); font-size: 10.5px; letter-spacing: 2px; text-transform: uppercase; color: var(--ink-soft);
+    display: grid; gap: 8px;
+    font-family: var(--mono); font-size: 10.5px; letter-spacing: 1.7px; text-transform: uppercase; color: var(--ink-soft);
   }
-  .copyline .em { color: var(--ember); }
-  @media (max-width: 800px) { .colophon { grid-template-columns: 1fr; } }
+  .copyline .registered { color: var(--ink); letter-spacing: 1.5px; }
+  .copyline .registered a { color: var(--ember); }
+  .copyline .registered a:hover { color: var(--ember-deep); }
+  @media (max-width: 800px) { .colophon { grid-template-columns: 1fr; gap: 32px; } }
 
   /* ═══ Mobile / responsive misc ═══════════════════════════════ */
   @media (max-width: 900px) {
@@ -727,6 +729,7 @@
         <span class="small">— A CineArt AI Production —</span>
       </div>
       <div class="mast-right">
+        <a href="/team/">Team</a>
         <a href="https://forms.gle/wfrBxsDLvXXEUr718" target="_blank" rel="noopener noreferrer">Request Access ↗</a>
       </div>
     </div>
@@ -870,27 +873,19 @@
     <div class="colophon">
       <div>
         <h4>Colophon</h4>
-        <p class="credo">Built in London by filmmakers and <span style="color:var(--ember);font-style:italic;">AI specialists</span> — with working SaaS exits, delivery credits across the global film and TV industry, and senior engineering pedigree from creative-AI labs.</p>
-      </div>
-      <div>
-        <h4>Address</h4>
-        <address>
-          CineArt AI Limited<br>
-          Registered in England &amp; Wales<br>
-          85 Great Portland Street<br>
-          London W1W 7LT<br>
-          <a href="mailto:cinesmith@cineartai.com">cinesmith@cineartai.com</a>
-        </address>
+        <p class="credo">Built in London by filmmakers and <span style="color:var(--ember);font-style:italic;">AI specialists</span> — with delivery credits across the global film and TV industry, and senior engineering pedigree from creative-AI labs.</p>
       </div>
       <div>
         <h4>On the web</h4>
         <address>
-          <a href="https://www.cineartai.com" target="_blank" rel="noopener">cineartai.com ↗</a><br>
-          <a href="https://cinesmith.io">cinesmith.io ↗</a>
+          <a href="/team/">Team</a><br>
+          <a href="https://www.cineartai.com" target="_blank" rel="noopener noreferrer">cineartai.com ↗</a><br>
+          <a href="mailto:cinesmith@cineartai.com">cinesmith@cineartai.com</a>
         </address>
       </div>
     </div>
     <div class="copyline">
+      <span class="registered">CineArt AI Limited · Registered in England &amp; Wales · 85 Great Portland Street, London W1W 7LT · <a href="tel:+447958707232">+44 7958 707232</a></span>
       <span>© MMXXVI · CineArt AI Limited · All Rights Reserved</span>
     </div>
   </div>

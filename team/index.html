@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<!--
+  cinesmith.io/team — Team page
+  ─────────────────────────────────────────────────────────────
+  Same editorial cinema aesthetic as the root page. Two profile
+  cards (Taimur, Dita) with sprocket-edged portrait frames + bios
+  written in filmmaker register (per project memory).
+-->
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CineSmith — Team</title>
+<meta name="description" content="Filmmakers and AI specialists building CineSmith. Based in London. Backed by 20+ years of credits across global film and TV.">
+<meta name="theme-color" content="#0B0F14">
+<link rel="icon" type="image/png" href="/assets/favicon.png">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="CineSmith — Team">
+<meta property="og:description" content="Filmmakers and AI specialists building CineSmith. Based in London.">
+<meta property="og:image" content="https://cinesmith.io/assets/og-cover.png">
+<meta property="og:url" content="https://cinesmith.io/team/">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --paper:        #F2EBDC;
+    --paper-warm:   #ECE3D0;
+    --paper-deep:   #E2D6BC;
+    --ink:          #0B0F14;
+    --ink-2:        #141B24;
+    --ink-soft:     #2A323C;
+    --rule:         rgba(11, 15, 20, 0.18);
+    --rule-soft:    rgba(11, 15, 20, 0.08);
+    --rule-hair:    rgba(11, 15, 20, 0.04);
+    --ember:        #C8451B;
+    --ember-soft:   #D86036;
+    --ember-deep:   #7A2A12;
+    --paper-mute:   rgba(11, 15, 20, 0.55);
+
+    --serif:  'Instrument Serif', 'Times New Roman', Georgia, serif;
+    --sans:   'Instrument Sans', system-ui, -apple-system, sans-serif;
+    --mono:   'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+
+    --w-max:  1320px;
+    --gutter: clamp(20px, 4vw, 56px);
+    --ease:   cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+  body {
+    font-family: var(--sans);
+    color: var(--ink);
+    background: var(--paper);
+    font-size: 16.5px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+    font-feature-settings: 'ss01', 'cv11', 'kern';
+    cursor: none;
+  }
+
+  ::selection { background: var(--ember); color: var(--paper); }
+
+  /* Paper grain — same as index */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 95;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 240 240' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.92' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.07 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    mix-blend-mode: multiply;
+    opacity: 0.55;
+  }
+
+  a { color: inherit; text-decoration: none; }
+  a:hover { color: var(--ember); }
+
+  .wrap { max-width: var(--w-max); margin: 0 auto; padding: 0 var(--gutter); position: relative; }
+
+  /* ─── Custom cursor ─────────────────────────────────────── */
+  #cursor {
+    position: fixed; top: 0; left: 0;
+    width: 24px; height: 24px;
+    border: 1.5px solid var(--ink);
+    border-radius: 50%;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    transition: width 200ms var(--ease), height 200ms var(--ease), background 200ms var(--ease), border-color 200ms var(--ease), mix-blend-mode 200ms;
+    z-index: 100;
+    mix-blend-mode: difference;
+  }
+  #cursor.is-hover { width: 56px; height: 56px; background: var(--paper); border-color: var(--paper); }
+  @media (hover: none) { #cursor { display: none; } body { cursor: auto; } }
+
+  /* ─── Scene marker ──────────────────────────────────────── */
+  .scene-marker {
+    display: inline-flex; align-items: center; gap: 12px;
+    font-family: var(--mono); font-size: 11px; letter-spacing: 2.6px; text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-bottom: 22px;
+  }
+  .scene-marker::before {
+    content: ''; width: 28px; height: 1px; background: var(--ink-soft);
+  }
+  .em { color: var(--ember); }
+  .it { font-family: var(--serif); font-style: italic; font-weight: 400; }
+
+  /* ─── Masthead — same as index ──────────────────────────── */
+  .masthead { border-bottom: 1px solid var(--ink); background: var(--paper); position: relative; z-index: 10; }
+  .masthead-strip {
+    background: var(--ink); color: var(--paper);
+    font-family: var(--mono); font-size: 10.5px; letter-spacing: 2px; text-transform: uppercase;
+    padding: 9px 0;
+  }
+  .masthead-strip .wrap { display: flex; justify-content: space-between; align-items: center; }
+  .masthead-strip .em { color: var(--ember-soft); font-weight: 600; }
+  .masthead-bar { padding: 22px 0 18px; }
+  .masthead-bar .wrap {
+    display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 28px;
+  }
+  .mast-left, .mast-right {
+    font-family: var(--mono); font-size: 11px; letter-spacing: 2.4px; text-transform: uppercase; color: var(--ink-soft);
+  }
+  .mast-right { text-align: right; display: flex; gap: 24px; justify-content: flex-end; }
+  .mast-right a { transition: color 160ms var(--ease); }
+  .mast-brand {
+    font-family: var(--serif); font-size: clamp(28px, 4vw, 44px); line-height: 1; text-align: center;
+    letter-spacing: -0.01em; display: flex; flex-direction: column; align-items: center; gap: 4px;
+  }
+  .mast-brand .small {
+    font-family: var(--mono); font-size: 9.5px; letter-spacing: 2.6px; color: var(--ink-soft);
+    text-transform: uppercase; font-style: normal;
+  }
+
+  /* ─── Page header ──────────────────────────────────────── */
+  .page-head {
+    padding: clamp(60px, 9vw, 110px) 0 clamp(40px, 6vw, 70px);
+    border-bottom: 1px solid var(--rule);
+  }
+  .page-head .wrap { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: clamp(40px, 6vw, 88px); align-items: end; }
+  .page-head h1 {
+    font-family: var(--serif);
+    font-size: clamp(56px, 9vw, 128px);
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+  }
+  .page-head h1 .lo { color: var(--paper-mute); font-style: normal; }
+  .page-head .lead {
+    font-family: var(--sans);
+    font-size: clamp(16px, 1.4vw, 18.5px);
+    line-height: 1.55;
+    color: var(--ink-soft);
+    max-width: 46ch;
+  }
+  .page-head .lead .first {
+    font-family: var(--serif); font-style: italic; font-size: 1.6em; line-height: 0.6; float: left; margin: 0.18em 8px 0 0; color: var(--ember);
+  }
+  @media (max-width: 880px) {
+    .page-head .wrap { grid-template-columns: 1fr; gap: 28px; }
+  }
+
+  /* ─── Profile blocks ───────────────────────────────────── */
+  .profiles {
+    padding: clamp(60px, 8vw, 110px) 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .profile {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+    gap: clamp(40px, 6vw, 88px);
+    align-items: start;
+    padding: clamp(50px, 7vw, 90px) 0;
+    border-top: 1px solid var(--rule);
+  }
+  .profile:first-of-type { border-top: 0; padding-top: 0; }
+  .profile.flip { grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); }
+  .profile.flip .profile-portrait { order: 2; }
+  .profile.flip .profile-body { order: 1; }
+
+  .profile-portrait {
+    position: relative;
+    padding: 14px 36px 14px 0;
+  }
+  .profile.flip .profile-portrait { padding: 14px 0 14px 36px; }
+  .profile-portrait .frame {
+    position: relative; background: var(--ink); padding: 12px;
+    box-shadow: 0 12px 38px -12px rgba(11, 15, 20, 0.5);
+  }
+  .profile-portrait .sprockets {
+    position: absolute;
+    inset: 12px auto 12px -10px;
+    width: 8px;
+    display: flex; flex-direction: column; gap: 5px; justify-content: space-between;
+  }
+  .profile-portrait .sprockets span { width: 8px; height: 8px; background: var(--paper-warm); border-radius: 1px; }
+  .profile-portrait .sprockets.right {
+    left: auto; right: -10px;
+  }
+  .profile-portrait img {
+    display: block; width: 100%; height: auto;
+    filter: contrast(1.05) saturate(0.92);
+  }
+  .profile-portrait .frame-tag {
+    position: absolute; bottom: 22px; left: 22px;
+    font-family: var(--mono); font-size: 9.5px; letter-spacing: 2.4px; text-transform: uppercase;
+    color: var(--paper); background: var(--ember); padding: 5px 9px;
+  }
+  .profile-portrait .frame-meta {
+    position: absolute; top: 22px; right: 22px;
+    font-family: var(--mono); font-size: 9px; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--paper-mute);
+  }
+
+  .profile-body { padding-top: 14px; }
+  .role-tag {
+    display: inline-block;
+    font-family: var(--mono); font-size: 11px; letter-spacing: 2.4px; text-transform: uppercase;
+    color: var(--ember); font-weight: 700;
+    margin-bottom: 14px;
+  }
+  .profile-body h2 {
+    font-family: var(--serif);
+    font-size: clamp(40px, 6vw, 72px);
+    line-height: 0.96;
+    letter-spacing: -0.015em;
+    margin-bottom: 26px;
+  }
+  .profile-body h2 .last { font-style: italic; }
+  .profile-body p {
+    font-size: 16.5px;
+    line-height: 1.6;
+    color: var(--ink-soft);
+    margin-bottom: 18px;
+    max-width: 60ch;
+  }
+  .profile-body p strong { font-weight: 700; color: var(--ink); }
+
+  .credit-list {
+    list-style: none;
+    margin: 22px 0 22px;
+    padding-top: 22px;
+    border-top: 1px solid var(--rule-soft);
+    display: grid; grid-template-columns: 130px 1fr; gap: 14px 24px;
+    font-family: var(--mono); font-size: 11px; letter-spacing: 1.6px; text-transform: uppercase;
+  }
+  .credit-list dt { color: var(--ember); font-weight: 700; }
+  .credit-list dd { color: var(--ink-soft); }
+
+  .profile-links {
+    display: flex; gap: 18px;
+    margin-top: 18px;
+    font-family: var(--mono); font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
+  }
+  .profile-links a {
+    color: var(--ink); padding: 10px 14px; border: 1px solid var(--ink);
+    transition: background 200ms var(--ease), color 200ms var(--ease);
+  }
+  .profile-links a:hover { background: var(--ink); color: var(--paper); }
+
+  @media (max-width: 880px) {
+    .profile, .profile.flip { grid-template-columns: 1fr; gap: 32px; }
+    .profile-portrait, .profile.flip .profile-portrait { padding: 0; }
+    .profile.flip .profile-portrait { order: 0; }
+    .profile.flip .profile-body { order: 1; }
+  }
+
+  /* ─── Closer ───────────────────────────────────────────── */
+  .closer {
+    padding: clamp(70px, 10vw, 130px) 0;
+    text-align: left;
+    background: var(--paper-deep);
+    border-bottom: 1px solid var(--ink);
+  }
+  .closer .wrap { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: clamp(40px, 6vw, 88px); align-items: center; }
+  .closer h2 {
+    font-family: var(--serif);
+    font-size: clamp(40px, 6vw, 78px);
+    line-height: 0.98;
+    letter-spacing: -0.015em;
+  }
+  .closer-cta {
+    display: inline-flex; align-items: center; gap: 14px;
+    font-family: var(--mono); font-size: 12px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase;
+    background: var(--ink); color: var(--paper);
+    padding: 22px 28px;
+    transition: background 200ms var(--ease);
+  }
+  .closer-cta::after { content: '→'; font-family: var(--serif); font-size: 22px; line-height: 0; transform: translateY(-1px); }
+  .closer-cta:hover { background: var(--ember); color: var(--paper); }
+  @media (max-width: 880px) { .closer .wrap { grid-template-columns: 1fr; } }
+
+  /* ─── Footer (unified with index) ───────────────────────── */
+  footer { background: var(--ink); color: var(--paper); padding: clamp(60px, 8vw, 90px) 0 30px; font-family: var(--sans); position: relative; z-index: 5; }
+  footer h4 { font-family: var(--mono); font-size: 11px; letter-spacing: 2.4px; text-transform: uppercase; color: var(--ember-soft); margin-bottom: 14px; }
+  footer .colophon { display: grid; grid-template-columns: 1.4fr 1fr; gap: clamp(40px, 6vw, 80px); padding-bottom: 50px; border-bottom: 1px solid rgba(242, 235, 220, 0.16); }
+  @media (max-width: 720px) { footer .colophon { grid-template-columns: 1fr; gap: 36px; } }
+  footer .credo { font-size: 15px; line-height: 1.55; color: rgba(242, 235, 220, 0.78); max-width: 56ch; }
+  footer address { font-style: normal; font-family: var(--mono); font-size: 11.5px; letter-spacing: 1.4px; text-transform: uppercase; line-height: 1.85; color: rgba(242, 235, 220, 0.78); }
+  footer address a { color: var(--paper); }
+  footer address a:hover { color: var(--ember-soft); }
+  footer .copyline {
+    margin-top: 30px; padding-top: 24px; border-top: 1px solid rgba(242, 235, 220, 0.08);
+    display: grid; gap: 8px;
+    font-family: var(--mono); font-size: 10.5px; letter-spacing: 1.6px; text-transform: uppercase;
+    color: rgba(242, 235, 220, 0.55);
+  }
+  footer .copyline .registered { color: rgba(242, 235, 220, 0.78); letter-spacing: 1.4px; }
+  footer .copyline .registered a { color: var(--ember-soft); }
+
+  /* Reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; animation: none !important; }
+  }
+</style>
+</head>
+
+<body>
+
+<div id="cursor" aria-hidden="true"></div>
+
+<!-- ═══ MASTHEAD ═════════════════════════════════════════════════ -->
+<header class="masthead">
+  <div class="masthead-strip">
+    <div class="wrap">
+      <span><span class="em">●</span>&nbsp;&nbsp;ISSUE 01 · UK · MMXXVI</span>
+      <span>The team behind CineSmith</span>
+    </div>
+  </div>
+  <div class="masthead-bar">
+    <div class="wrap">
+      <div class="mast-left"><a href="/">← cinesmith.io</a></div>
+      <div class="mast-brand">
+        Cine<span class="it">Smith</span>
+        <span class="small">— A CineArt AI Production —</span>
+      </div>
+      <div class="mast-right">
+        <a href="/team/">Team</a>
+        <a href="https://forms.gle/wfrBxsDLvXXEUr718" target="_blank" rel="noopener noreferrer">Request Access ↗</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ═══ PAGE HEAD ════════════════════════════════════════════════ -->
+<section class="page-head">
+  <div class="wrap">
+    <div>
+      <span class="scene-marker"><span class="em">SC.01</span> — The collective</span>
+      <h1>Filmmakers <span class="it">and</span> AI specialists.</h1>
+    </div>
+    <p class="lead">
+      <span class="first">C</span>ineSmith is built by people who have spent careers on set and in the edit suite — directing, producing, cutting, and engineering the systems that move productions from idea to screen. We're using what we know about how film and TV actually get made to build the platform we wish we'd had.
+    </p>
+  </div>
+</section>
+
+<!-- ═══ PROFILES ═════════════════════════════════════════════════ -->
+<section class="profiles">
+  <div class="wrap">
+
+    <article class="profile">
+      <aside class="profile-portrait">
+        <div class="frame">
+          <div class="sprockets" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+          <img src="/assets/team/taimur.jpg" alt="Taimur Khan portrait" loading="eager" decoding="async">
+          <span class="frame-tag">CO-FOUNDER</span>
+          <span class="frame-meta">A-CAM · UK · 2026</span>
+        </div>
+      </aside>
+      <div class="profile-body">
+        <span class="role-tag">Filmmaker · Technologist · Co-Founder</span>
+        <h2>Taimur <span class="last">Khan</span></h2>
+        <p>
+          Filmmaker and technologist with <strong>20+ years across documentary, drama, commercial, and broadcast</strong> — from the early-1990s Asian music-video circuit to series-editor seats on <em>Johnny vs Amber</em> (Discovery+) and <em>The Russell Murders</em> (Sky Documentaries).
+        </p>
+        <p>
+          Editorial credits with Netflix, BBC, Channel 4, HBO, Discovery, Al Jazeera, Arte France, CNN, and The Economist. Recognition at <strong>Sundance and Cannes</strong>; films that have earned the Grierson. Founded WIDEI Films at Ealing Studios in 2004; built Skylight, an early cloud-collaboration platform for production teams that was covered by BBC News, The Guardian, and the FT.
+        </p>
+        <p>
+          Now bringing two decades of pipeline-and-post knowledge — and a pilot's licence's worth of obsessive systems thinking — to the agentic platform underneath CineSmith.
+        </p>
+        <dl class="credit-list">
+          <dt>Notable</dt>
+          <dd>Johnny vs Amber · The Russell Murders · Democracy in Flames</dd>
+          <dt>Broadcasters</dt>
+          <dd>Netflix · BBC · Channel 4 · HBO · Discovery · CNN · Al Jazeera</dd>
+          <dt>Festivals</dt>
+          <dd>Sundance · Cannes · Frontline Club</dd>
+          <dt>Awards</dt>
+          <dd>Grierson Award winner</dd>
+        </dl>
+        <div class="profile-links">
+          <a href="https://www.linkedin.com/in/khantaimur/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
+          <a href="https://twitter.com/khantaimur" target="_blank" rel="noopener noreferrer">X ↗</a>
+        </div>
+      </div>
+    </article>
+
+    <article class="profile flip">
+      <aside class="profile-portrait">
+        <div class="frame">
+          <div class="sprockets" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+          <img src="/assets/team/dita.jpg" alt="Dita Pesek portrait" loading="lazy" decoding="async">
+          <span class="frame-tag">CO-FOUNDER</span>
+          <span class="frame-meta">B-CAM · UK · 2026</span>
+        </div>
+      </aside>
+      <div class="profile-body">
+        <span class="role-tag">Filmmaker · Technologist · Co-Founder</span>
+        <h2>Dita <span class="last">Pesek</span></h2>
+        <p>
+          Filmmaker and technologist who works at the seam between cinematic craft and applied AI. <strong>Director, writer, and producer</strong> with short films at Cannes, and reality-TV directing credits across the Czech Republic and Panama.
+        </p>
+        <p>
+          Crew credits include <em>Oliver Twist</em> (Polanski) and <em>From Hell</em> (Hughes Brothers). Studied directing and screenwriting at film school in the Czech Republic; financed her short <em>Crossroads</em> through one of the platform's earliest filmmaker-led crowdfunds.
+        </p>
+        <p>
+          Outside the cut, a sought-after speaker on cybersecurity, application security, and social engineering — including a featured talk at <strong>BSides London</strong> on hacking humans. Designs and builds the CineSmith product alongside Taimur.
+        </p>
+        <dl class="credit-list">
+          <dt>Directed</dt>
+          <dd>Crossroads (short, crowdfunded) · Reality TV (CZ / PA)</dd>
+          <dt>Crew on</dt>
+          <dd>Oliver Twist · From Hell</dd>
+          <dt>Festivals</dt>
+          <dd>Cannes Film Festival</dd>
+          <dt>Speaking</dt>
+          <dd>BSides London — hacking humans</dd>
+        </dl>
+        <div class="profile-links">
+          <a href="https://www.linkedin.com/in/dita-pesek-7339a219b/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
+        </div>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- ═══ CLOSER ═══════════════════════════════════════════════════ -->
+<section class="closer">
+  <div class="wrap">
+    <h2>The waitlist <span class="it">is open.</span></h2>
+    <a href="https://forms.gle/wfrBxsDLvXXEUr718" target="_blank" rel="noopener noreferrer" class="closer-cta">Request early access</a>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═══════════════════════════════════════════════════ -->
+<footer>
+  <div class="wrap">
+    <div class="colophon">
+      <div>
+        <h4>Colophon</h4>
+        <p class="credo">Built in London by filmmakers and <span style="color:var(--ember);font-style:italic;">AI specialists</span> — with delivery credits across the global film and TV industry, and senior engineering pedigree from creative-AI labs.</p>
+      </div>
+      <div>
+        <h4>On the web</h4>
+        <address>
+          <a href="/">cinesmith.io</a><br>
+          <a href="/team/">Team</a><br>
+          <a href="https://www.cineartai.com" target="_blank" rel="noopener noreferrer">cineartai.com ↗</a><br>
+          <a href="mailto:cinesmith@cineartai.com">cinesmith@cineartai.com</a>
+        </address>
+      </div>
+    </div>
+    <div class="copyline">
+      <span class="registered">CineArt AI Limited · Registered in England &amp; Wales · 85 Great Portland Street, London W1W 7LT · <a href="tel:+447958707232">+44 7958 707232</a></span>
+      <span>© MMXXVI · CineArt AI Limited · All Rights Reserved</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Custom cursor — same behaviour as index page
+  (function () {
+    const cursor = document.getElementById('cursor');
+    if (!cursor || matchMedia('(hover: none)').matches) return;
+    let x = 0, y = 0, tx = 0, ty = 0;
+    document.addEventListener('mousemove', (e) => { tx = e.clientX; ty = e.clientY; });
+    function loop() {
+      x += (tx - x) * 0.22;
+      y += (ty - y) * 0.22;
+      cursor.style.transform = `translate(${x}px, ${y}px) translate(-50%, -50%)`;
+      requestAnimationFrame(loop);
+    }
+    requestAnimationFrame(loop);
+    document.querySelectorAll('a, button, .frame').forEach((el) => {
+      el.addEventListener('mouseenter', () => cursor.classList.add('is-hover'));
+      el.addEventListener('mouseleave', () => cursor.classList.remove('is-hover'));
+    });
+  })();
+</script>
+
+</body>
+</html>
