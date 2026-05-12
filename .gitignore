@@ -1,0 +1,9 @@
+# Editor / OS
+.DS_Store
+.vscode/
+.idea/
+Thumbs.db
+
+# Local files
+*.local
+previews/
