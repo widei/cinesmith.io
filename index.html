@@ -531,42 +531,6 @@
     .pain:nth-child(even) { padding-left: 0; }
   }
 
-  /* ─── Perks — shot list ─────────────────────────────────── */
-  .perks { border-top: 1px solid var(--ink); }
-  .perks li {
-    list-style: none;
-    display: grid;
-    grid-template-columns: 96px 1fr auto;
-    gap: 28px;
-    align-items: baseline;
-    padding: 26px 4px;
-    border-bottom: 1px solid var(--rule);
-    transition: background 240ms var(--ease);
-  }
-  .perks li:hover { background: var(--paper-warm); }
-  .perks .slug {
-    font-family: var(--mono); font-size: 11px; letter-spacing: 2.4px; text-transform: uppercase;
-    color: var(--ember); font-weight: 700;
-  }
-  .perks .body {
-    font-family: var(--sans);
-    font-size: 17px;
-    line-height: 1.45;
-    color: var(--ink);
-  }
-  .perks .body strong {
-    font-family: var(--serif); font-style: italic; font-weight: 400;
-    font-size: 22px; color: var(--ink); margin-right: 10px; letter-spacing: -0.01em;
-  }
-  .perks .tag {
-    font-family: var(--mono); font-size: 10.5px; letter-spacing: 2.2px; text-transform: uppercase;
-    color: var(--ink-soft);
-  }
-  @media (max-width: 720px) {
-    .perks li { grid-template-columns: 60px 1fr; }
-    .perks .tag { grid-column: 2; color: var(--ember); margin-top: 4px; }
-    .perks .body strong { display: block; margin-bottom: 4px; font-size: 24px; }
-  }
 
   /* ─── Reactions — pull quotes ───────────────────────────── */
   .reactions {
@@ -763,7 +727,7 @@
         <span class="small">— A CineArt AI Production —</span>
       </div>
       <div class="mast-right">
-        <a href="#waitlist">Request Access ↗</a>
+        <a href="https://forms.gle/wfrBxsDLvXXEUr718" target="_blank" rel="noopener noreferrer">Request Access ↗</a>
       </div>
     </div>
   </div>
@@ -853,38 +817,10 @@
   </div>
 </section>
 
-<!-- ═══ PERKS — shot list ═══════════════════════════════════════ -->
-<section class="col reveal">
-  <div class="wrap">
-    <span class="scene-marker"><span class="em">SC.02</span> — What you get on the waitlist</span>
-    <div class="section-head">
-      <h2 class="section-title">First 50 UK <span class="it">production teams.</span></h2>
-    </div>
-
-    <ul class="perks">
-      <li>
-        <span class="slug">01 · Access</span>
-        <span class="body"><strong>Priority access to the closed beta.</strong> Skip the public queue. Onboard directly with the founder.</span>
-        <span class="tag">Cohort 02</span>
-      </li>
-      <li>
-        <span class="slug">02 · Influence</span>
-        <span class="body"><strong>Direct feature input.</strong> Your production's specific bottlenecks shape what ships next.</span>
-        <span class="tag">Roadmap input</span>
-      </li>
-      <li>
-        <span class="slug">03 · Recognition</span>
-        <span class="body"><strong>Lifetime founding-team perks.</strong> Permanent recognition + preferred pricing when paid tiers open.</span>
-        <span class="tag">Founding cohort</span>
-      </li>
-    </ul>
-  </div>
-</section>
-
 <!-- ═══ REACTIONS — pull quotes ═════════════════════════════════ -->
 <section class="col reveal">
   <div class="wrap">
-    <span class="scene-marker"><span class="em">SC.03</span> — Early reactions</span>
+    <span class="scene-marker"><span class="em">SC.02</span> — Early reactions</span>
     <div class="section-head">
       <h2 class="section-title">What people say <span class="it">after</span> they see it.</h2>
       <p class="section-lead"><span class="first">A</span> handful of producers, directors, and showrunners have seen private demos. Below — their words, unprompted, unedited.</p>
@@ -917,12 +853,12 @@
     <span></span><span></span><span></span><span></span>
   </div>
   <div class="wrap">
-    <span class="scene-marker"><span class="em">SC.04</span> — Final cue</span>
+    <span class="scene-marker"><span class="em">SC.03</span> — Final cue</span>
     <div class="closer-grid">
       <h2>Early access is opening to <span class="it">50 UK production teams.</span> Be one of them.</h2>
       <div>
         <p>Less tooling. More filmmaking. Add your name and we'll be in touch when the next cohort opens.</p>
-        <a href="#waitlist" class="closer-cta">Join the UK waitlist</a>
+        <a href="https://forms.gle/wfrBxsDLvXXEUr718" target="_blank" rel="noopener noreferrer" class="closer-cta">Join the UK waitlist</a>
       </div>
     </div>
   </div>
@@ -934,7 +870,7 @@
     <div class="colophon">
       <div>
         <h4>Colophon</h4>
-        <p class="credo">Built in London by filmmakers, <span style="color:var(--ember);font-style:italic;">AI specialists</span>, and founders — with working SaaS exits, delivery credits across the global film and TV industry, and senior engineering pedigree from creative-AI labs. Backed by the active industry network <span style="color:var(--ember);font-style:italic;">CineArt AI</span> has built over 20+ years.</p>
+        <p class="credo">Built in London by filmmakers and <span style="color:var(--ember);font-style:italic;">AI specialists</span> — with working SaaS exits, delivery credits across the global film and TV industry, and senior engineering pedigree from creative-AI labs. Backed by the active industry network <span style="color:var(--ember);font-style:italic;">CineArt AI</span> has built over 20+ years.</p>
       </div>
       <div>
         <h4>Address</h4>
@@ -974,7 +910,7 @@
       requestAnimationFrame(loop);
     }
     loop();
-    document.querySelectorAll('a, button, input, select, .reaction, .perks li, .pain, .frame').forEach((el) => {
+    document.querySelectorAll('a, button, input, select, .reaction, .pain, .frame').forEach((el) => {
       el.addEventListener('mouseenter', () => c.classList.add('lg'));
       el.addEventListener('mouseleave', () => c.classList.remove('lg'));
     });
@@ -1063,20 +999,21 @@
     requestAnimationFrame(tickTc);
   })();
 
-  // ┌─ Waitlist CTA ────────────────────────────────────────────
-  // The CTA is a plain external link to a hosted Google Form, so
-  // there is no submission logic to wire here. We do append UTM
-  // params to the form URL so attribution survives the click.
-  (function appendUtmsToCta() {
-    const cta = document.getElementById('waitlist-cta');
-    if (!cta || !cta.href) return;
+  // ┌─ Waitlist CTAs ───────────────────────────────────────────
+  // CTAs are plain external links to a hosted Google Form, so there
+  // is no submission logic to wire here. We do append UTM params to
+  // every form link on the page so attribution survives the click
+  // regardless of which CTA the visitor uses (hero / nav / closer).
+  (function appendUtmsToFormLinks() {
     const here = new URLSearchParams(window.location.search);
     const utms = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'];
     const params = new URLSearchParams();
     utms.forEach((k) => { const v = here.get(k); if (v) params.set(k, v); });
     if (!params.toString()) return;
-    const sep = cta.href.includes('?') ? '&' : '?';
-    cta.href = cta.href + sep + params.toString();
+    document.querySelectorAll('a[href*="forms.gle/"]').forEach((a) => {
+      const sep = a.href.includes('?') ? '&' : '?';
+      a.href = a.href + sep + params.toString();
+    });
   })();
 </script>
 
