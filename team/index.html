@@ -86,20 +86,30 @@
 
   .wrap { max-width: var(--w-max); margin: 0 auto; padding: 0 var(--gutter); position: relative; }
 
-  /* ─── Custom cursor ─────────────────────────────────────── */
+  /* ─── Custom crosshair cursor ─────────────────────────────── */
   #cursor {
-    position: fixed; top: 0; left: 0;
-    width: 24px; height: 24px;
-    border: 1.5px solid var(--ink);
-    border-radius: 50%;
+    position: fixed;
+    top: 0; left: 0;
+    width: 22px; height: 22px;
+    margin: -11px 0 0 -11px;
     pointer-events: none;
-    transform: translate(-50%, -50%);
-    transition: width 200ms var(--ease), height 200ms var(--ease), background 200ms var(--ease), border-color 200ms var(--ease), mix-blend-mode 200ms;
-    z-index: 100;
+    z-index: 9999;
     mix-blend-mode: difference;
+    will-change: transform;
+    transition: width 200ms var(--ease), height 200ms var(--ease), margin 200ms var(--ease);
   }
-  #cursor.is-hover { width: 56px; height: 56px; background: var(--paper); border-color: var(--paper); }
-  @media (hover: none) { #cursor { display: none; } body { cursor: auto; } }
+  #cursor::before, #cursor::after {
+    content: '';
+    position: absolute;
+    background: #fff;
+  }
+  #cursor::before { left: 50%; top: 0; bottom: 0; width: 1px; transform: translateX(-50%); }
+  #cursor::after  { top: 50%; left: 0; right: 0; height: 1px; transform: translateY(-50%); }
+  #cursor.lg { width: 56px; height: 56px; margin: -28px 0 0 -28px; }
+  @media (hover: none), (max-width: 800px) {
+    body { cursor: auto; }
+    #cursor { display: none; }
+  }
 
   /* ─── Scene marker ──────────────────────────────────────── */
   .scene-marker {
@@ -480,22 +490,23 @@
 </footer>
 
 <script>
-  // Custom cursor — same behaviour as index page
+  // Custom crosshair cursor — identical to index page so the experience
+  // doesn't break across navigation.
   (function () {
-    const cursor = document.getElementById('cursor');
-    if (!cursor || matchMedia('(hover: none)').matches) return;
+    const c = document.getElementById('cursor');
+    if (!c || matchMedia('(hover: none)').matches) return;
     let x = 0, y = 0, tx = 0, ty = 0;
-    document.addEventListener('mousemove', (e) => { tx = e.clientX; ty = e.clientY; });
+    document.addEventListener('mousemove', (e) => { x = e.clientX; y = e.clientY; }, { passive: true });
     function loop() {
-      x += (tx - x) * 0.22;
-      y += (ty - y) * 0.22;
-      cursor.style.transform = `translate(${x}px, ${y}px) translate(-50%, -50%)`;
+      tx += (x - tx) * 0.32;
+      ty += (y - ty) * 0.32;
+      c.style.transform = `translate3d(${tx}px, ${ty}px, 0)`;
       requestAnimationFrame(loop);
     }
-    requestAnimationFrame(loop);
+    loop();
     document.querySelectorAll('a, button, .frame').forEach((el) => {
-      el.addEventListener('mouseenter', () => cursor.classList.add('is-hover'));
-      el.addEventListener('mouseleave', () => cursor.classList.remove('is-hover'));
+      el.addEventListener('mouseenter', () => c.classList.add('lg'));
+      el.addEventListener('mouseleave', () => c.classList.remove('lg'));
     });
   })();
 </script>
