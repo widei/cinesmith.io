@@ -17,12 +17,12 @@ An end-to-end production platform powered by agentic AI. Replaces the usual chai
 
 **Built for** anyone making creative content — feature films, drama, documentary, podcasts, commercials. Scales from independent producers up to studios, networks, and agencies.
 
-**Genuinely new about it:**
+**Why CineSmith**
 
-1. **Built from inside the industry.** Founders are working filmmakers with delivery credits across Netflix, BBC, Channel 4, HBO, Discovery, Al Jazeera, Arte France and CNN — not generic AI engineers building for an industry they do not work in.
-2. **Agentic, not generative-only.** The platform orchestrates AI agents across the full production workflow rather than producing isolated outputs. A single instruction can move a project through script, storyboard, scheduling and budgeting in sequence.
-3. **One system, not a stack.** Replaces the usual production-tool chain with a single coherent platform.
-4. **Story-aware throughout.** Every agent stays briefed against the same story bible.
+- **Built by people who actually make the work.** Founders are working filmmakers with delivery credits across Netflix, BBC, Channel 4, HBO, Discovery, Al Jazeera, Arte France and CNN — not generic AI engineers building for an industry they do not work in.
+- **One system, not a stack of twelve.** Replaces the usual chain of script → storyboard → previs → schedule → budget tooling with a single coherent platform.
+- **Agentic, not generative-only.** A single instruction can move a project through script, storyboard, scheduling and budgeting in sequence — not just generate an isolated frame.
+- **Story-aware end to end.** Every agent stays briefed against the same story bible, so character, tone and continuity persist across stages.
 
 ---
 
@@ -70,11 +70,3 @@ London W1W 7LT
 Registered in England and Wales
 
 cinesmith.io · [cineartai.com](https://www.cineartai.com)
-
----
-
-## This repository
-
-This is the source of the public site at **https://cinesmith.io** — a single static page built in plain HTML/CSS/JS, served via GitHub Pages. The site is intentionally lightweight: editorial cinema-magazine aesthetic, no client-side JS framework, no analytics SDK, no tracking pixel. The waitlist CTA opens a hosted Google Form.
-
-If you're a filmmaker or production team and want to talk about CineSmith, the right starting point is the [waitlist](https://cinesmith.io) — not this repo.
