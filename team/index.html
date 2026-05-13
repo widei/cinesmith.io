@@ -145,6 +145,7 @@
     font-family: var(--serif); font-size: clamp(28px, 4vw, 44px); line-height: 1; text-align: center;
     letter-spacing: -0.01em; display: flex; flex-direction: column; align-items: center; gap: 4px;
   }
+  .mast-brand a, .mast-brand a:hover { color: inherit; text-decoration: none; display: flex; flex-direction: column; align-items: center; gap: 4px; }
   .mast-brand .small {
     font-family: var(--mono); font-size: 9.5px; letter-spacing: 2.6px; color: var(--ink-soft);
     text-transform: uppercase; font-style: normal;
@@ -349,8 +350,10 @@
     <div class="wrap">
       <div class="mast-left"><a href="/">← cinesmith.io</a></div>
       <div class="mast-brand">
-        Cine<span class="it">Smith</span>
-        <span class="small">— A CineArt AI Production —</span>
+        <a href="/" aria-label="CineSmith home">
+          Cine<span class="it">Smith</span>
+          <span class="small">— A CineArt AI Production —</span>
+        </a>
       </div>
       <div class="mast-right">
         <a href="/team/">Team</a>
