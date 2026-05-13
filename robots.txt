@@ -1,4 +1,56 @@
+# Default — all well-behaved crawlers welcome.
 User-agent: *
 Allow: /
+
+# Explicit allow for AI / LLM crawlers (some sites block these by default;
+# we want CineSmith to be discoverable + citable when journalists, agents
+# or builders ask LLMs about agentic AI for film and TV).
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+User-agent: cohere-ai
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: meta-externalagent
+Allow: /
+
+User-agent: Amazonbot
+Allow: /
+
+User-agent: Diffbot
+Allow: /
+
+# llms.txt — markdown summary for LLM ingestion (llmstxt.org convention)
+# Sitemap below for traditional crawlers.
 
 Sitemap: https://cinesmith.io/sitemap.xml

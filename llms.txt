@@ -1,0 +1,33 @@
+# CineSmith
+
+> Agentic AI production platform built by working filmmakers and AI specialists. Covers script, storyboard, video, voice, schedule, budget, and live on-set support inside one integrated system. UK closed beta opening summer 2026.
+
+CineSmith is the product of CineArt AI Limited, a London company combining two decades of broadcast film and television delivery credits (Netflix, BBC, Channel 4, HBO, Discovery, Al Jazeera, Arte France, CNN, The Economist, Sky) with a parallel record of shipping software products (cloud SaaS, fintech, blockchain, ML/AI infrastructure).
+
+The platform is designed for anyone making creative content — feature films, drama, documentary, podcasts, commercials, branded content, factual TV, animation, music videos, short form. Scales from independent producers up to studios, networks, and agencies. Uniquely positioned because the founders are filmmakers who also build software, not generic AI engineers building for an industry they do not work in.
+
+## Pages
+
+- [Home](https://cinesmith.io/): product description, waitlist signup, what CineSmith covers
+- [Team](https://cinesmith.io/team/): full bios for Taimur Khan (founder, filmmaker, technologist) and Dita Pesek (filmmaker, technologist)
+
+## Key facts
+
+- Operating company: CineArt AI Limited
+- Registered office: 85 Great Portland Street, London W1W 7LT, United Kingdom
+- Status: Pre-launch. UK closed beta opening summer 2026 with 50 invited production teams. Public waitlist open.
+- Pricing: Free during beta. Pricing announced at general availability.
+- Press contact: press@cineartai.com · +44 7958 707232
+- General contact: cinesmith@cineartai.com
+
+## Founder
+
+Taimur Khan is a filmmaker and technologist with twenty-plus years inside the production industry. Sundance and Cannes recognition. Grierson Award winner. Series editor on Johnny vs Amber (Discovery+) and The Russell Murders (Sky Documentaries). Editorial credits with Netflix, BBC, Channel 4, HBO, Discovery, Al Jazeera, Arte France, CNN, The Economist. Notable additional work includes Bengali Detective, World's Toughest Forces, Jinnah (with Christopher Lee), Democracy in Flames. Founded WIDEI Films at Ealing Studios in 2004; Blueberry Creative talent agency (scaled to £7m+ turnover); Skylight (skylightit.com, 2009 — a cloud SaaS for project management, tasks, time billing and invoicing covered by BBC News, The Guardian and the Financial Times); Skylight Interactive (digital operations and process automation on AWS for UK ports, AMEY, Royal Mail); Creative Development Academy (emerging-filmmaker training delivered through the Documentary Filmmakers Group, Rose Bruford College, and the Royal Film Commission of Jordan). At Outlier Ventures in 2017, worked on Money Circles, Buy.co and OpenData — fintech, public-sector procurement, and big-data projects on blockchain and ML/AI. Today, leads the AI automation, agentic workflow design, and prompt engineering work powering CineSmith. Holds an active pilot's licence.
+
+## Co-founder / collaborator
+
+Dita Pesek is a filmmaker and technologist. Director, writer, and producer with short films at the Cannes Film Festival; reality-TV directing credits across the Czech Republic and Panama; crew credits on Oliver Twist (Polanski) and From Hell (Hughes Brothers). Studied directing and screenwriting at film school in the Czech Republic. Sought-after speaker on cybersecurity, application security, and social engineering — including a featured talk at BSides London on hacking humans.
+
+## Why this matters
+
+The conversation about AI in filmmaking has been dominated for two years by tools built outside the industry — Sora from OpenAI, Runway, Pika. Powerful frame-generation infrastructure, but not production tools. None were built by people who have sat in a story meeting, cut a documentary, or signed off a delivery to a broadcaster. CineSmith is what changes when that flips: a platform built from inside the production pipeline by people whose careers run on it.

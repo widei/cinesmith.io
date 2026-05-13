@@ -1,173 +1,80 @@
-# cinesmith.io — waitlist site
+# CineSmith
 
-The public waitlist for CineSmith. Single static page hosted on **GitHub
-Pages**. The page's CTA opens a hosted **Google Form** in a new tab — Google
-captures the lead and writes it to a bound Sheet. No backend, no secrets, no
-infrastructure to maintain.
+**Agentic AI for filmmakers. From idea to rough cut. In one platform.**
 
-```
-[GitHub Pages: cinesmith.io]
-        │ click CTA
-        ▼
-[Google Form (forms.gle/…)]
-        │ submit
-        ▼
-[Google Sheet — bound to the form]
-```
+CineSmith is the agentic AI production platform built by working filmmakers and AI specialists. It covers the full pipeline a film, TV or brand team uses today — script, storyboard, video, voice, schedule, budget, and live on set — inside one integrated system rather than across a dozen disconnected tools.
 
-All emails come from `cinesmith@cineartai.com` (no MX setup needed on
-`cinesmith.io` itself).
+🌐 **Site:** https://cinesmith.io
+👥 **Team:** https://cinesmith.io/team/
+📨 **Press contact:** press@cineartai.com
+✉️ **General contact:** cinesmith@cineartai.com
 
 ---
 
-## Repo layout
+## What CineSmith is
 
-```
-cinesmith.io/
-├── index.html              # The waitlist page
-├── assets/                 # Hero, favicon, OG cover
-├── CNAME                   # GitHub Pages → cinesmith.io
-├── robots.txt
-├── sitemap.xml
-└── .github/workflows/
-    └── pages.yml           # Auto-deploy on push to main
-```
+An end-to-end production platform powered by agentic AI. Replaces the usual chain of script tool → storyboard tool → previs tool → scheduling tool → budgeting tool with a single coherent system. Every agent is briefed against the same underlying story bible, so character, tone, and continuity persist across stages.
 
-<!-- Earlier Cloudflare Worker + Apps Script stack, if revived, is restorable
-     from a local-only archive branch — see "Custom backend" under Rollback. -->
+**Built for** anyone making creative content — feature films, drama, documentary, podcasts, commercials. Scales from independent producers up to studios, networks, and agencies.
+
+**Genuinely new about it:**
+
+1. **Built from inside the industry.** Founders are working filmmakers with delivery credits across Netflix, BBC, Channel 4, HBO, Discovery, Al Jazeera, Arte France and CNN — not generic AI engineers building for an industry they do not work in.
+2. **Agentic, not generative-only.** The platform orchestrates AI agents across the full production workflow rather than producing isolated outputs. A single instruction can move a project through script, storyboard, scheduling and budgeting in sequence.
+3. **One system, not a stack.** Replaces the usual production-tool chain with a single coherent platform.
+4. **Story-aware throughout.** Every agent stays briefed against the same story bible.
 
 ---
 
-## First-time deploy
+## Status
 
-### 1. Create the Google Form
-
-In a Google account you control:
-
-1. https://forms.google.com → blank form
-2. Title: **CineSmith — Closed Beta Waitlist**
-3. Description: short blurb about the beta
-4. Add fields (suggested):
-   - **Email** — Short answer, *required*, response validation = "Email"
-   - **First name** — Short answer, *required*
-   - **Production company** — Short answer
-   - **Role** — Dropdown: Producer / Director / DOP / Editor / VFX / Founder / Other
-   - **What are you working on?** — Paragraph, optional
-5. **Settings tab → Responses:**
-   - "Collect email addresses" → **Responder input** (do **not** pick "Verified" — it forces Google sign-in and kills conversion for non-Google users)
-   - "Limit to 1 response" → **OFF** (also requires sign-in)
-   - "Allow response editing" → **OFF**
-6. **Settings tab → Presentation:**
-   - Confirmation message: *"You're on the list. We'll be in touch from cinesmith@cineartai.com when the next cohort opens."*
-7. **Responses tab → 3-dot menu → "Get email notifications for new responses"** → ON
-8. **Responses tab → green Sheets icon** → creates `cinesmith_waitlist (Responses)` Sheet automatically. Keep the Sheet private; share read-only with the team if needed.
-9. **Send button → link icon → toggle "Shorten URL"** → copy `https://forms.gle/xxxxx`
-10. The current production URL is wired into `index.html` on the `.waitlist-cta` anchor. Update that one href if the form is ever replaced.
-
-### 2. Create the GitHub repo
-
-In GitHub Desktop or CLI: name `cinesmith.io`, public, push to `main`.
-
-### 3. Add `cinesmith.io` to Cloudflare
-
-- Cloudflare Dashboard → **Add a site** → `cinesmith.io` → Free plan
-- Update nameservers at your registrar to the two Cloudflare ones
-- Wait for activation (usually < 1 hour)
-
-### 4. Configure DNS in Cloudflare
-
-| Type   | Name | Content                        | Proxy            |
-|--------|------|--------------------------------|------------------|
-| A      | @    | `185.199.108.153`              | DNS only         |
-| A      | @    | `185.199.109.153`              | DNS only         |
-| A      | @    | `185.199.110.153`              | DNS only         |
-| A      | @    | `185.199.111.153`              | DNS only         |
-| CNAME  | www  | `<your-github-user>.github.io` | DNS only         |
-
-> GitHub Pages records must be **DNS only** — orange-cloud proxying breaks
-> the SSL handshake.
-
-### 5. Enable GitHub Pages
-
-In the repo: **Settings → Pages**:
-- Source: **GitHub Actions**
-- Custom domain: `cinesmith.io`
-- Enforce HTTPS (after DNS propagates and the SSL cert issues — usually < 1 hour)
-
-The first push to `main` triggers `.github/workflows/pages.yml` and the site
-goes live at `https://cinesmith.io`.
-
-### 6. Test end-to-end
-
-- Open `https://cinesmith.io`
-- Click **Request early access** → opens the Google Form in a new tab
-- Submit a test response
-- Confirm a row appears in the bound Sheet
-- Confirm the email notification arrives
+Pre-launch. **UK closed beta opens summer 2026** with 50 invited production teams.
+Public waitlist live now at [cinesmith.io](https://cinesmith.io).
 
 ---
 
-## Day-to-day
+## The team
 
-### Editing copy / design
+CineSmith is built by **CineArt AI Limited**, a London company combining two decades of broadcast film and television delivery credits with a parallel record of shipping software products (cloud SaaS, fintech, blockchain, ML/AI infrastructure).
 
-Edit `index.html` → push to `main` → GitHub Actions deploys in ~1 min.
+**Taimur Khan** — Founder. Sundance- and Cannes-recognised filmmaker, Grierson Award winner, series-editor on *Johnny vs Amber* (Discovery+) and *The Russell Murders* (Sky Documentaries). Founder of WIDEI Films at Ealing Studios (2004), Skylight (cloud SaaS covered by BBC News, The Guardian, FT in 2009), and Skylight Interactive (process automation for UK ports, AMEY, Royal Mail). Worked at Outlier Ventures on Money Circles, Buy.co and OpenData (2017).
 
-### Editing the form fields
+**Dita Pesek** — Filmmaker, Technologist. Director, writer and producer with short films at the Cannes Film Festival; reality-TV directing credits across the Czech Republic and Panama; crew credits on *Oliver Twist* (Polanski) and *From Hell* (Hughes Brothers). Speaker on cybersecurity and applied AI, including BSides London.
 
-Edit the Google Form directly. The Sheet picks up new columns automatically.
-The CTA URL on `index.html` does not change.
-
-### Sync into Company AI
-
-A separate cron job in the Company AI project polls the bound Sheet and:
-- writes new rows to `data/cinesmith_waitlist.db`
-- fires a confirmation email from `cinesmith@cineartai.com`
-
-That sync lives in the main `The Company` repo (not in this one) so the public
-site stays a static, self-contained artefact.
+[Full team bios →](https://cinesmith.io/team/)
 
 ---
 
-## Security model
+## Content types supported
 
-There is no secret material in this repo. The CTA is a public link to a public
-Google Form — anyone with the URL can submit, which is the intended behaviour
-for a waitlist. Things to know:
-
-- **Spam protection:** Google's built-in anti-abuse handles bot floods. If
-  you see junk responses, delete them in the Sheet — no infrastructure
-  damage possible.
-- **Sheet privacy:** the bound Sheet is owned by the Google account that
-  created the Form. Share with team members as **Viewer**, never **Editor**
-  (Editors can install rogue Apps Script).
-- **URL discoverability:** `forms.gle/...` URLs are unguessable. Treat the
-  shortened link as semi-public — it's safe to print on marketing material.
-- **Brand spoofing:** anyone can create a Google Form pretending to be
-  CineSmith. We mitigate by linking to the canonical form from the
-  `cinesmith.io` page only and including the CineSmith logo at the top of
-  the form so users can verify they landed on the right place.
+Feature films · Episodic drama · Documentary · Micro-drama · Commercials · Branded content · Factual TV · Animation · Music videos · Short form · Podcasts.
 
 ---
 
-## Rollback
+## Press
 
-- **Bad deploy?** Revert the commit on `main` — Pages redeploys automatically.
-- **Form broken / spammed?** Settings → Form is no longer accepting responses
-  → toggle off. Re-enable when ready.
-- **Custom backend (Worker + Apps Script + HMAC) needed later?** The
-  implementation is preserved on local-only refs — never pushed to the
-  public remote. From the owner's workstation, restore with:
-  `git checkout archive/worker-stack-hmac -- worker apps-script`
-  (HMAC-hardened version) or `archive/worker-stack-original` for the
-  pre-HMAC scaffold. Both tags live on the local clone only — if it's been
-  wiped, the code is gone for everyone except whoever still has a clone.
+For press enquiries, interview requests, or press pack:
+
+📨 **press@cineartai.com**
+📞 **+44 7958 707232**
+
+The press packs include detailed founder background, company fact sheets, beta-cohort timeline, FAQ, and a separate company story / about document. Available on request.
 
 ---
 
-## Domain + email
+## Company
 
-- **Domain:** cinesmith.io (registered, on Cloudflare)
-- **Inbound email:** `cinesmith@cineartai.com` — there is no MX on `cinesmith.io`.
-  All transactional + reply email runs through `cineartai.com`.
-- **From-address everywhere:** `cinesmith@cineartai.com`.
+**CineArt AI Limited**
+85 Great Portland Street
+London W1W 7LT
+Registered in England and Wales
+
+cinesmith.io · [cineartai.com](https://www.cineartai.com)
+
+---
+
+## This repository
+
+This is the source of the public site at **https://cinesmith.io** — a single static page built in plain HTML/CSS/JS, served via GitHub Pages. The site is intentionally lightweight: editorial cinema-magazine aesthetic, no client-side JS framework, no analytics SDK, no tracking pixel. The waitlist CTA opens a hosted Google Form.
+
+If you're a filmmaker or production team and want to talk about CineSmith, the right starting point is the [waitlist](https://cinesmith.io) — not this repo.
