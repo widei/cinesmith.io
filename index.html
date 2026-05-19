@@ -284,29 +284,66 @@
     letter-spacing: 0.18em; text-transform: uppercase; color: var(--mute);
   }
 
-  /* ─── Kinetic film slate ──────────────────────────────────────── */
-  .kinetic {
-    background: var(--base-alt);
-    padding: clamp(72px, 10vw, 130px) 0 clamp(80px, 11vw, 140px);
-    border-top: 1px solid var(--rule);
-    border-bottom: 1px solid var(--rule);
-    text-align: center;
+  /* ─── Hero still — large image band between hero and kinetic ── */
+  .hero-still {
+    padding: clamp(40px, 6vw, 80px) 0 clamp(60px, 9vw, 110px);
+    background: var(--base);
   }
+  .hero-still figure {
+    max-width: 1080px; margin: 0 auto;
+    position: relative;
+  }
+  .hero-still img {
+    display: block; width: 100%; height: auto;
+    filter: contrast(1.04) saturate(0.96);
+  }
+  .hero-still figcaption {
+    margin-top: 18px;
+    font-family: var(--body); font-size: 11px; font-weight: 600;
+    letter-spacing: 0.24em; text-transform: uppercase; color: var(--mute);
+    text-align: right;
+  }
+
+  /* ─── Kinetic film slate — cream + ember (contrast island) ──── */
+  .kinetic {
+    --k-paper:    #F2EBDC;     /* original cream paper */
+    --k-paper-deep: #E2D6BC;
+    --k-ink:      #0B0F14;     /* original ink (cool deep black) */
+    --k-ink-soft: #2A323C;
+    --k-mute:     rgba(11, 15, 20, 0.55);
+    --k-rule:     rgba(11, 15, 20, 0.18);
+    --k-ember:    #C8451B;     /* original ember accent */
+    --k-ember-soft: #D86036;
+    background: var(--k-paper);
+    color: var(--k-ink);
+    padding: clamp(72px, 10vw, 130px) 0 clamp(80px, 11vw, 140px);
+    text-align: center;
+    position: relative;
+  }
+  .kinetic::before, .kinetic::after {
+    /* subtle paper-edge bands — gives the section a physical 'page' feel */
+    content: '';
+    position: absolute; left: 0; right: 0; height: 1px;
+    background: var(--k-rule);
+  }
+  .kinetic::before { top: 0; }
+  .kinetic::after { bottom: 0; }
   .kinetic-meta {
     display: flex; justify-content: space-between; align-items: center;
     margin-bottom: 38px;
     font-family: var(--body); font-size: 11px; font-weight: 600;
-    letter-spacing: 0.24em; text-transform: uppercase; color: var(--mute);
+    letter-spacing: 0.24em; text-transform: uppercase; color: var(--k-mute);
   }
   .kinetic-eyebrow { display: inline-block; }
-  .kinetic-rec { display: inline-flex; align-items: center; gap: 10px; }
+  .kinetic-rec { display: inline-flex; align-items: center; gap: 10px; color: var(--k-ink); }
   .kinetic-rec .rec-dot {
-    width: 8px; height: 8px; border-radius: 50%; background: var(--ink);
+    width: 8px; height: 8px; border-radius: 50%; background: var(--k-ember);
     display: inline-block;
+    box-shadow: 0 0 0 2px rgba(200, 69, 27, 0.12);
     animation: rec-blink 1.2s steps(1) infinite;
   }
   @keyframes rec-blink { 0%, 60% { opacity: 1; } 61%, 100% { opacity: 0.25; } }
-  .kinetic-tc { font-variant-numeric: tabular-nums; }
+  .kinetic-tc { font-variant-numeric: tabular-nums; color: var(--k-ink); }
 
   .kinetic-stage {
     position: relative; height: clamp(120px, 18vw, 200px);
@@ -319,15 +356,16 @@
     font-size: clamp(48px, 9vw, 124px);
     line-height: 1.0; letter-spacing: -0.005em;
     text-transform: uppercase;
-    color: var(--ink);
+    color: var(--k-ink);
     opacity: 0; transform: translateY(20%);
     filter: blur(8px);
     transition: opacity 600ms var(--ease), transform 800ms var(--ease), filter 600ms var(--ease);
     white-space: nowrap;
   }
   .kinetic-word .accent {
-    font-family: 'Open Sans', serif; font-style: italic; font-weight: 300;
-    color: var(--mute); text-transform: lowercase;
+    font-family: 'Open Sans', serif; font-style: italic; font-weight: 400;
+    color: var(--k-ember);  /* warm ember accent */
+    text-transform: lowercase;
     margin-left: 6px;
   }
   .kinetic-word.in { opacity: 1; transform: translateY(0); filter: blur(0); }
@@ -338,16 +376,16 @@
     display: grid; grid-template-columns: auto 1fr auto;
     gap: 24px; align-items: center;
     font-family: var(--body); font-size: 11px; font-weight: 600;
-    letter-spacing: 0.18em; text-transform: uppercase; color: var(--mute);
+    letter-spacing: 0.18em; text-transform: uppercase; color: var(--k-mute);
   }
   @media (max-width: 720px) {
     .kinetic-foot { grid-template-columns: 1fr; gap: 16px; text-align: center; }
     .kinetic-meta { flex-direction: column; gap: 12px; }
   }
-  .kinetic-counter { font-variant-numeric: tabular-nums; }
-  .kinetic-counter .sep { margin: 0 4px; }
-  .kinetic-bar { height: 1px; background: var(--rule); position: relative; overflow: hidden; }
-  .kinetic-bar-fill { position: absolute; inset: 0 100% 0 0; background: var(--ink); transition: right 80ms linear; }
+  .kinetic-counter { font-variant-numeric: tabular-nums; color: var(--k-ink); }
+  .kinetic-counter .sep { margin: 0 4px; color: var(--k-ember); }
+  .kinetic-bar { height: 1px; background: var(--k-rule); position: relative; overflow: hidden; }
+  .kinetic-bar-fill { position: absolute; inset: 0 100% 0 0; background: var(--k-ember); box-shadow: 0 0 14px rgba(200, 69, 27, 0.4); transition: right 80ms linear; }
   .kinetic-tag { text-align: right; }
   @media (max-width: 720px) { .kinetic-tag { text-align: center; } }
 
@@ -533,6 +571,16 @@
     <div class="form-foot">
       <span>Limited — 50 UK seats</span>
       <span>UK closed beta · Invite only</span>
+    </div>
+  </div>
+
+  <!-- Hero still — large image band as visual anchor before the kinetic cycler -->
+  <div class="hero-still">
+    <div class="wrap">
+      <figure>
+        <img src="/assets/hero-filmset.png" alt="Film-set still — warm, lightly desaturated, vignette." loading="eager" decoding="async">
+        <figcaption>UK · 2026 · A-CAM · Take 03</figcaption>
+      </figure>
     </div>
   </div>
 </section>
