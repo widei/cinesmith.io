@@ -397,6 +397,46 @@
   }
   footer .registered { color: rgba(255, 255, 255, 0.7); }
   footer .registered a { color: var(--silver); }
+
+  /* ─── Animation system ──────────────────────────────────────── */
+  .reveal {
+    opacity: 0; transform: translateY(28px);
+    transition: opacity 900ms var(--ease), transform 900ms var(--ease);
+    will-change: opacity, transform;
+  }
+  .reveal.in { opacity: 1; transform: translateY(0); }
+
+  .reveal-stagger > * {
+    opacity: 0; transform: translateY(22px);
+    transition: opacity 800ms var(--ease), transform 800ms var(--ease);
+    will-change: opacity, transform;
+  }
+  .reveal-stagger.in > *:nth-child(1) { transition-delay: 0ms; }
+  .reveal-stagger.in > *:nth-child(2) { transition-delay: 90ms; }
+  .reveal-stagger.in > *:nth-child(3) { transition-delay: 180ms; }
+  .reveal-stagger.in > *:nth-child(4) { transition-delay: 270ms; }
+  .reveal-stagger.in > *:nth-child(5) { transition-delay: 360ms; }
+  .reveal-stagger.in > * { opacity: 1; transform: translateY(0); }
+
+  .masthead { animation: fade-down 700ms var(--ease) both; }
+  @keyframes fade-down { from { opacity: 0; transform: translateY(-12px); } to { opacity: 1; transform: translateY(0); } }
+
+  .closer::before { animation: breathe 7s ease-in-out infinite; }
+  @keyframes breathe {
+    0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.7; }
+    50%      { transform: translate(-50%, -50%) scale(1.03); opacity: 1; }
+  }
+
+  .cta { transition: color 220ms var(--ease), transform 240ms var(--ease); }
+  .cta:hover { transform: translateY(-2px); }
+  .profile-links a { transition: color 200ms var(--ease), transform 220ms var(--ease); }
+  .profile-links a:hover { transform: translateY(-2px); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reveal, .reveal-stagger > * { opacity: 1 !important; transform: none !important; transition: none !important; }
+    .masthead, .closer::before { animation: none !important; }
+    .cta:hover, .profile-links a:hover { transform: none !important; }
+  }
 </style>
 </head>
 
@@ -415,7 +455,7 @@
 
 <!-- ═══ PAGE HEAD ════════════════════════════════════════════════ -->
 <section class="page-head">
-  <div class="wrap">
+  <div class="wrap reveal-stagger">
     <span class="eyebrow">The Collective</span>
     <h1>
       Filmmakers
@@ -432,7 +472,7 @@
 <section class="profiles">
   <div class="wrap">
 
-    <article class="profile">
+    <article class="profile reveal">
       <aside class="profile-portrait">
         <img src="/assets/team/taimur.jpg" alt="Taimur Khan portrait" loading="eager" decoding="async">
         <span class="label">Founder</span>
@@ -473,7 +513,7 @@
       </div>
     </article>
 
-    <article class="profile flip">
+    <article class="profile flip reveal">
       <aside class="profile-portrait">
         <img src="/assets/team/dita.jpg" alt="Dita Pesek portrait" loading="lazy" decoding="async">
         <span class="label">Co-Founder</span>
@@ -510,7 +550,7 @@
 </section>
 
 <!-- ═══ CLOSER ═══════════════════════════════════════════════════ -->
-<section class="closer">
+<section class="closer reveal">
   <div class="wrap">
     <h2>The waitlist <span class="it">is open.</span></h2>
     <a href="https://forms.gle/wfrBxsDLvXXEUr718" target="_blank" rel="noopener noreferrer" class="cta"><span class="label">Request early access</span></a>
@@ -547,6 +587,27 @@
     </div>
   </div>
 </footer>
+
+<script>
+  (function reveal() {
+    const targets = document.querySelectorAll('.reveal, .reveal-stagger');
+    if (!targets.length) return;
+    const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduced || !('IntersectionObserver' in window)) {
+      targets.forEach((el) => el.classList.add('in'));
+      return;
+    }
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          e.target.classList.add('in');
+          io.unobserve(e.target);
+        }
+      });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.04 });
+    targets.forEach((el) => io.observe(el));
+  })();
+</script>
 
 </body>
 </html>

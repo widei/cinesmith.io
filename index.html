@@ -394,6 +394,76 @@
     .kinetic-rec .rec-dot { animation: none; }
   }
 
+  /* ─── Animation system (mobile-safe, transform+opacity only) ── */
+
+  /* Reveal-on-scroll base */
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 900ms var(--ease), transform 900ms var(--ease);
+    will-change: opacity, transform;
+  }
+  .reveal.in { opacity: 1; transform: translateY(0); }
+
+  /* Staggered children */
+  .reveal-stagger > * {
+    opacity: 0;
+    transform: translateY(22px);
+    transition: opacity 800ms var(--ease), transform 800ms var(--ease);
+    will-change: opacity, transform;
+  }
+  .reveal-stagger.in > *:nth-child(1) { transition-delay: 0ms; }
+  .reveal-stagger.in > *:nth-child(2) { transition-delay: 90ms; }
+  .reveal-stagger.in > *:nth-child(3) { transition-delay: 180ms; }
+  .reveal-stagger.in > *:nth-child(4) { transition-delay: 270ms; }
+  .reveal-stagger.in > *:nth-child(5) { transition-delay: 360ms; }
+  .reveal-stagger.in > *:nth-child(6) { transition-delay: 450ms; }
+  .reveal-stagger.in > *:nth-child(7) { transition-delay: 540ms; }
+  .reveal-stagger.in > * { opacity: 1; transform: translateY(0); }
+
+  /* Masthead — fade down on load */
+  .masthead { animation: fade-down 700ms var(--ease) both; }
+  @keyframes fade-down {
+    from { opacity: 0; transform: translateY(-12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Hero still — slow Ken Burns (subtle drift + zoom, mobile-safe) */
+  .hero-still img {
+    animation: kenburns 24s ease-in-out infinite alternate;
+    transform-origin: 50% 50%;
+  }
+  @keyframes kenburns {
+    0%   { transform: scale(1) translate(0, 0); }
+    100% { transform: scale(1.06) translate(-1%, 1%); }
+  }
+
+  /* Closer decorative circle — slow breathe */
+  .closer::before {
+    animation: breathe 7s ease-in-out infinite;
+  }
+  @keyframes breathe {
+    0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.7; }
+    50%      { transform: translate(-50%, -50%) scale(1.03); opacity: 1; }
+  }
+
+  /* Reaction cards — lift on hover */
+  .reaction {
+    transition: border-color 240ms var(--ease), box-shadow 240ms var(--ease), transform 240ms var(--ease);
+  }
+  .reaction:hover { transform: translateY(-4px); }
+
+  /* CTA — magnetic-style nudge on hover */
+  .cta { transition: color 220ms var(--ease), transform 240ms var(--ease); }
+  .cta:hover { transform: translateY(-2px); }
+
+  /* Honor reduced motion universally */
+  @media (prefers-reduced-motion: reduce) {
+    .reveal, .reveal-stagger > * { opacity: 1 !important; transform: none !important; transition: none !important; }
+    .masthead, .hero-still img, .closer::before { animation: none !important; }
+    .cta:hover, .reaction:hover { transform: none !important; }
+  }
+
   /* ─── Section frame ───────────────────────────────────────────── */
   section.col { padding: clamp(80px, 11vw, 140px) 0; }
 
@@ -535,7 +605,7 @@
 
 <!-- ═══ HERO ═════════════════════════════════════════════════════ -->
 <section class="hero" id="waitlist">
-  <div class="wrap">
+  <div class="wrap reveal-stagger">
     <span class="hero-eyebrow">The Proposition</span>
     <h1>
       From idea to rough cut.
@@ -575,7 +645,7 @@
   </div>
 
   <!-- Hero still — large image band as visual anchor before the kinetic cycler -->
-  <div class="hero-still">
+  <div class="hero-still reveal">
     <div class="wrap">
       <figure>
         <img src="/assets/hero-filmset.png" alt="Film-set still — warm, lightly desaturated, vignette." loading="eager" decoding="async">
@@ -617,7 +687,7 @@
 </section>
 
 <!-- ═══ REACTIONS ════════════════════════════════════════════════ -->
-<section class="col">
+<section class="col reveal">
   <div class="wrap">
     <div class="section-head">
       <span class="section-eyebrow">Early Reactions</span>
@@ -626,7 +696,7 @@
       <p class="section-lead">A handful of producers, directors, and showrunners have seen private demos. Below — their words, unprompted, unedited.</p>
     </div>
 
-    <div class="reactions">
+    <div class="reactions reveal-stagger">
       <article class="reaction">
         <span class="qmark" aria-hidden="true">“</span>
         <blockquote>This is the tool we've been <em>waiting for.</em> The moment I get an invite I'm onboarding the entire dev slate.</blockquote>
@@ -647,10 +717,10 @@
 </section>
 
 <!-- ═══ CLOSER — with decorative circle ══════════════════════════ -->
-<section class="closer">
+<section class="closer reveal">
   <div class="wrap">
     <span class="eyebrow">Final Cue</span>
-    <h2>Early access opens to <span class="it">50 UK production teams.</span></h2>
+    <h2>Early access opens to 50 UK <span class="it">production teams.</span></h2>
     <p>Less tooling. More filmmaking. Add your name and we'll be in touch when the next cohort opens.</p>
     <a href="https://forms.gle/wfrBxsDLvXXEUr718" target="_blank" rel="noopener noreferrer" class="cta"><span class="label">Join the UK waitlist</span></a>
   </div>
@@ -740,6 +810,28 @@
       requestAnimationFrame(tickTc);
     }
     requestAnimationFrame(tickTc);
+  })();
+
+  // Reveal-on-scroll — fades and stagger trigger as sections enter viewport.
+  // Mobile-safe: transform + opacity only, IntersectionObserver-driven, honors
+  // prefers-reduced-motion. Hero stagger fires immediately if already in view.
+  (function reveal() {
+    const targets = document.querySelectorAll('.reveal, .reveal-stagger');
+    if (!targets.length) return;
+    const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduced || !('IntersectionObserver' in window)) {
+      targets.forEach((el) => el.classList.add('in'));
+      return;
+    }
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          e.target.classList.add('in');
+          io.unobserve(e.target);
+        }
+      });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.04 });
+    targets.forEach((el) => io.observe(el));
   })();
 
   // UTM appending across all form links
