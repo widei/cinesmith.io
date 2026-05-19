@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <!--
   cinesmith.io/team — Team page
-  ─────────────────────────────────────────────────────────────
-  Same editorial cinema aesthetic as the root page. Two profile
-  cards (Taimur, Dita) with sprocket-edged portrait frames + bios
-  written in filmmaker register (per project memory).
+  ──────────────────────────────────────────────────────────────
+  Same cineartai.com visual language as index.html — white base,
+  Oswald display, Open Sans body, silver-and-black palette,
+  diagonal-fill CTA, underline-dash nav, decorative circle border
+  at the closer. Family cohesion across cineartai.com /
+  cinesmith.io / cinesmithpro.com.
 -->
 <html lang="en-GB">
 <head>
@@ -12,7 +14,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CineSmith — Team</title>
 <meta name="description" content="Filmmakers and AI specialists building CineSmith. Based in London. Backed by 20+ years of credits across global film and TV.">
-<meta name="theme-color" content="#0B0F14">
+<meta name="theme-color" content="#FFFFFF">
 <link rel="icon" type="image/png" href="/assets/favicon.png">
 
 <link rel="canonical" href="https://cinesmith.io/team/">
@@ -27,8 +29,6 @@
 <meta name="twitter:site" content="@khantaimur">
 <meta name="author" content="CineArt AI Limited">
 
-<!-- Structured data — Person schemas for the team. Search engines surface
-     these as people-cards; LLMs use them as canonical bio sources. -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -124,339 +124,291 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
 
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
-    --paper:        #F2EBDC;
-    --paper-warm:   #ECE3D0;
-    --paper-deep:   #E2D6BC;
-    --ink:          #0B0F14;
-    --ink-2:        #141B24;
-    --ink-soft:     #2A323C;
-    --rule:         rgba(11, 15, 20, 0.18);
-    --rule-soft:    rgba(11, 15, 20, 0.08);
-    --rule-hair:    rgba(11, 15, 20, 0.04);
-    --ember:        #C8451B;
-    --ember-soft:   #D86036;
-    --ember-deep:   #7A2A12;
-    --paper-mute:   rgba(11, 15, 20, 0.55);
+    --base:        #FFFFFF;
+    --base-alt:    #F7F7F7;
+    --ink:         #000000;
+    --ink-soft:    #2A2A2A;
+    --mute:        #B0B0B0;
+    --silver:      #C0C0C0;
+    --rule:        #E8E8E8;
 
-    --serif:  'Instrument Serif', 'Times New Roman', Georgia, serif;
-    --sans:   'Instrument Sans', system-ui, -apple-system, sans-serif;
-    --mono:   'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+    --display:     'Oswald', 'Arial Narrow', sans-serif;
+    --body:        'Open Sans', system-ui, -apple-system, sans-serif;
 
-    --w-max:  1320px;
-    --gutter: clamp(20px, 4vw, 56px);
-    --ease:   cubic-bezier(0.22, 1, 0.36, 1);
+    --w-max:       1300px;
+    --gutter:      clamp(20px, 4.5vw, 70px);
+    --ease:        cubic-bezier(0.22, 1, 0.36, 1);
   }
 
-  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+  html { scroll-behavior: smooth; }
   body {
-    font-family: var(--sans);
-    color: var(--ink);
-    background: var(--paper);
-    font-size: 16.5px;
-    line-height: 1.55;
+    font-family: var(--body);
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--ink-soft);
+    background: var(--base);
     -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;
-    font-feature-settings: 'ss01', 'cv11', 'kern';
-    cursor: none;
   }
-
-  ::selection { background: var(--ember); color: var(--paper); }
-
-  /* Paper grain — same as index */
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    z-index: 95;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 240 240' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.92' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.07 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-    mix-blend-mode: multiply;
-    opacity: 0.55;
-  }
-
+  ::selection { background: var(--ink); color: var(--base); }
   a { color: inherit; text-decoration: none; }
-  a:hover { color: var(--ember); }
-
   .wrap { max-width: var(--w-max); margin: 0 auto; padding: 0 var(--gutter); position: relative; }
 
-  /* ─── Custom crosshair cursor ─────────────────────────────── */
-  #cursor {
-    position: fixed;
-    top: 0; left: 0;
-    width: 22px; height: 22px;
-    margin: -11px 0 0 -11px;
-    pointer-events: none;
-    z-index: 9999;
-    mix-blend-mode: difference;
-    will-change: transform;
-    transition: width 200ms var(--ease), height 200ms var(--ease), margin 200ms var(--ease);
-  }
-  #cursor::before, #cursor::after {
-    content: '';
-    position: absolute;
-    background: #fff;
-  }
-  #cursor::before { left: 50%; top: 0; bottom: 0; width: 1px; transform: translateX(-50%); }
-  #cursor::after  { top: 50%; left: 0; right: 0; height: 1px; transform: translateY(-50%); }
-  #cursor.lg { width: 56px; height: 56px; margin: -28px 0 0 -28px; }
-  @media (hover: none), (max-width: 800px) {
-    body { cursor: auto; }
-    #cursor { display: none; }
-  }
-
-  /* ─── Scene marker ──────────────────────────────────────── */
-  .scene-marker {
-    display: inline-flex; align-items: center; gap: 12px;
-    font-family: var(--mono); font-size: 11px; letter-spacing: 2.6px; text-transform: uppercase;
-    color: var(--ink-soft);
-    margin-bottom: 22px;
-  }
-  .scene-marker::before {
-    content: ''; width: 28px; height: 1px; background: var(--ink-soft);
-  }
-  .em { color: var(--ember); }
-  .it { font-family: var(--serif); font-style: italic; font-weight: 400; }
-
-  /* ─── Masthead — same as index ──────────────────────────── */
-  .masthead { border-bottom: 1px solid var(--ink); background: var(--paper); position: relative; z-index: 10; }
-  .masthead-strip {
-    background: var(--ink); color: var(--paper);
-    font-family: var(--mono); font-size: 10.5px; letter-spacing: 2px; text-transform: uppercase;
-    padding: 9px 0;
-  }
-  .masthead-strip .wrap { display: flex; justify-content: space-between; align-items: center; }
-  .masthead-strip .em { color: var(--ember-soft); font-weight: 600; }
-  .masthead-bar { padding: 22px 0 18px; }
-  .masthead-bar .wrap {
-    display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 28px;
-  }
-  .mast-left, .mast-right {
-    font-family: var(--mono); font-size: 11px; letter-spacing: 2.4px; text-transform: uppercase; color: var(--ink-soft);
-  }
-  .mast-right { text-align: right; display: flex; gap: 24px; justify-content: flex-end; }
-  .mast-right a { transition: color 160ms var(--ease); }
-  .mast-brand {
-    font-family: var(--serif); font-size: clamp(28px, 4vw, 44px); line-height: 1; text-align: center;
-    letter-spacing: -0.01em; display: flex; flex-direction: column; align-items: center; gap: 4px;
-  }
-  .mast-brand a, .mast-brand a:hover { color: inherit; text-decoration: none; display: flex; flex-direction: column; align-items: center; gap: 4px; }
-  .mast-brand .small {
-    font-family: var(--mono); font-size: 9.5px; letter-spacing: 2.6px; color: var(--ink-soft);
-    text-transform: uppercase; font-style: normal;
-  }
-
-  /* ─── Page header ──────────────────────────────────────── */
-  .page-head {
-    padding: clamp(60px, 9vw, 110px) 0 clamp(40px, 6vw, 70px);
-    border-bottom: 1px solid var(--rule);
-  }
-  .page-head .wrap { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: clamp(40px, 6vw, 88px); align-items: end; }
-  .page-head h1 {
-    font-family: var(--serif);
-    font-size: clamp(56px, 9vw, 128px);
-    line-height: 0.95;
-    letter-spacing: -0.02em;
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--display);
     color: var(--ink);
+    font-weight: 500;
   }
-  .page-head h1 .lo { color: var(--paper-mute); font-style: normal; }
-  .page-head .lead {
-    font-family: var(--sans);
-    font-size: clamp(16px, 1.4vw, 18.5px);
-    line-height: 1.55;
-    color: var(--ink-soft);
-    max-width: 46ch;
+  h1 { font-size: clamp(48px, 7.6vw, 100px); line-height: 1.02; }
+  h2 { font-size: clamp(36px, 5.2vw, 64px); line-height: 1.06; }
+  h3 { font-size: clamp(22px, 2.6vw, 30px); line-height: 1.25; font-weight: 500; }
+  h4 { font-size: 17px; font-weight: 600; }
+  h5 { font-size: 14px; font-weight: 600; letter-spacing: 0.02em; text-transform: uppercase; }
+  em { font-family: 'Open Sans', serif; font-style: italic; }
+  p { color: var(--ink-soft); }
+
+  /* ─── Masthead ────────────────────────────────────────────────── */
+  .masthead {
+    padding: 28px 0;
+    border-bottom: 1px solid var(--rule);
+    background: var(--base);
+    position: sticky; top: 0; z-index: 50;
   }
-  .page-head .lead .first {
-    font-family: var(--serif); font-style: italic; font-size: 1.6em; line-height: 0.6; float: left; margin: 0.18em 8px 0 0; color: var(--ember);
+  .masthead .wrap { display: flex; justify-content: space-between; align-items: center; gap: 24px; }
+  .brand {
+    font-family: var(--display);
+    font-size: 24px; font-weight: 500; letter-spacing: 0.01em;
+    color: var(--ink); text-transform: uppercase;
   }
-  @media (max-width: 880px) {
-    .page-head .wrap { grid-template-columns: 1fr; gap: 28px; }
+  .mast-right { display: flex; align-items: center; gap: 28px; }
+  .nav-link { position: relative; display: inline-block; padding: 4px 2px; color: var(--ink); font-family: var(--body); font-size: 13px; }
+  .nav-link::after {
+    content: ''; position: absolute; left: 50%; bottom: -1px;
+    width: 18px; height: 1px; background: var(--ink);
+    transform: translateX(-50%) scaleX(0); transform-origin: right;
+    transition: transform 0.2s ease-in;
+  }
+  .nav-link:hover::after, .nav-link.active::after {
+    transform: translateX(-50%) scaleX(1); transform-origin: left;
   }
 
-  /* ─── Profile blocks ───────────────────────────────────── */
-  .profiles {
-    padding: clamp(60px, 8vw, 110px) 0;
+  /* ─── Page head ──────────────────────────────────────────────── */
+  .page-head {
+    padding: clamp(80px, 12vw, 160px) 0 clamp(48px, 7vw, 90px);
+    text-align: center;
     border-bottom: 1px solid var(--rule);
   }
+  .page-head .eyebrow {
+    font-family: var(--body); font-size: 11px; font-weight: 600;
+    letter-spacing: 0.32em; text-transform: uppercase; color: var(--mute);
+    margin-bottom: 28px; display: inline-block;
+  }
+  .page-head h1 {
+    text-transform: uppercase;
+    font-weight: 500;
+    max-width: 16ch; margin: 0 auto 24px;
+  }
+  .page-head h1 .it {
+    display: block; font-family: 'Open Sans', serif; font-style: italic;
+    font-weight: 300; color: var(--mute); text-transform: lowercase;
+    font-size: 0.5em; margin-top: 12px;
+  }
+  .page-head .divider {
+    width: 245px; height: 1px; background: var(--silver);
+    margin: 32px auto;
+  }
+  .page-head .lead {
+    font-size: clamp(15px, 1.3vw, 17px); line-height: 1.7;
+    color: var(--ink-soft); max-width: 56ch; margin: 0 auto;
+  }
+  .page-head .lead strong { color: var(--ink); font-weight: 600; }
+
+  /* ─── Profile blocks ─────────────────────────────────────────── */
+  .profiles { padding: clamp(80px, 11vw, 140px) 0; }
   .profile {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr);
     gap: clamp(40px, 6vw, 88px);
     align-items: start;
-    padding: clamp(50px, 7vw, 90px) 0;
+    padding: clamp(56px, 8vw, 100px) 0;
     border-top: 1px solid var(--rule);
   }
   .profile:first-of-type { border-top: 0; padding-top: 0; }
-  .profile.flip { grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); }
+  .profile.flip { grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); }
   .profile.flip .profile-portrait { order: 2; }
   .profile.flip .profile-body { order: 1; }
 
   .profile-portrait {
     position: relative;
-    padding: 14px 36px 14px 0;
-  }
-  .profile.flip .profile-portrait { padding: 14px 0 14px 36px; }
-  .profile-portrait .frame {
-    position: relative; background: var(--ink); padding: 12px;
-    box-shadow: 0 12px 38px -12px rgba(11, 15, 20, 0.5);
-  }
-  .profile-portrait .sprockets {
-    position: absolute;
-    inset: 12px auto 12px -10px;
-    width: 8px;
-    display: flex; flex-direction: column; gap: 5px; justify-content: space-between;
-  }
-  .profile-portrait .sprockets span { width: 8px; height: 8px; background: var(--paper-warm); border-radius: 1px; }
-  .profile-portrait .sprockets.right {
-    left: auto; right: -10px;
+    background: var(--base-alt);
   }
   .profile-portrait img {
     display: block; width: 100%; height: auto;
-    filter: contrast(1.05) saturate(0.92);
+    filter: grayscale(100%);
+    transition: filter 0.4s var(--ease);
   }
-  .profile-portrait .frame-tag {
-    position: absolute; bottom: 22px; left: 22px;
-    font-family: var(--mono); font-size: 9.5px; letter-spacing: 2.4px; text-transform: uppercase;
-    color: var(--paper); background: var(--ember); padding: 5px 9px;
-  }
-  .profile-portrait .frame-meta {
-    position: absolute; top: 22px; right: 22px;
-    font-family: var(--mono); font-size: 9px; letter-spacing: 2px; text-transform: uppercase;
-    color: var(--paper-mute);
+  .profile-portrait:hover img { filter: grayscale(0); }
+  .profile-portrait .label {
+    position: absolute; top: 18px; left: 18px;
+    font-family: var(--body); font-size: 10px; font-weight: 600;
+    letter-spacing: 0.24em; text-transform: uppercase; color: var(--base);
+    background: var(--ink); padding: 6px 10px;
   }
 
-  .profile-body { padding-top: 14px; }
+  .profile-body { padding-top: 8px; }
   .role-tag {
     display: inline-block;
-    font-family: var(--mono); font-size: 11px; letter-spacing: 2.4px; text-transform: uppercase;
-    color: var(--ember); font-weight: 700;
-    margin-bottom: 14px;
+    font-family: var(--body); font-size: 11px; font-weight: 600;
+    letter-spacing: 0.24em; text-transform: uppercase; color: var(--mute);
+    margin-bottom: 18px;
   }
   .profile-body h2 {
-    font-family: var(--serif);
-    font-size: clamp(40px, 6vw, 72px);
-    line-height: 0.96;
-    letter-spacing: -0.015em;
-    margin-bottom: 26px;
+    text-transform: uppercase;
+    margin-bottom: 28px;
   }
-  .profile-body h2 .last { font-style: italic; }
+  .profile-body h2 .last { font-style: italic; font-weight: 300; color: var(--mute); }
   .profile-body p {
-    font-size: 16.5px;
-    line-height: 1.6;
-    color: var(--ink-soft);
-    margin-bottom: 18px;
-    max-width: 60ch;
+    font-size: 15px; line-height: 1.75;
+    color: var(--ink-soft); margin-bottom: 18px;
+    max-width: 62ch;
   }
-  .profile-body p strong { font-weight: 700; color: var(--ink); }
+  .profile-body p strong { color: var(--ink); font-weight: 600; }
 
   .credit-list {
     list-style: none;
-    margin: 22px 0 22px;
-    padding-top: 22px;
-    border-top: 1px solid var(--rule-soft);
+    margin: 36px 0 24px;
+    padding-top: 28px;
+    border-top: 1px solid var(--rule);
     display: grid; grid-template-columns: 130px 1fr; gap: 14px 24px;
-    font-family: var(--mono); font-size: 11px; letter-spacing: 1.6px; text-transform: uppercase;
+    font-family: var(--body); font-size: 12.5px;
   }
-  .credit-list dt { color: var(--ember); font-weight: 700; }
+  .credit-list dt {
+    font-family: var(--body); font-weight: 600;
+    letter-spacing: 0.18em; text-transform: uppercase; color: var(--mute);
+    font-size: 11px;
+  }
   .credit-list dd { color: var(--ink-soft); }
 
   .profile-links {
-    display: flex; gap: 18px;
-    margin-top: 18px;
-    font-family: var(--mono); font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
+    display: flex; gap: 14px; margin-top: 24px;
   }
   .profile-links a {
-    color: var(--ink); padding: 10px 14px; border: 1px solid var(--ink);
-    transition: background 200ms var(--ease), color 200ms var(--ease);
+    font-family: var(--display); font-size: 12px; font-weight: 500;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--ink); padding: 10px 18px; border: 1px solid var(--ink);
+    position: relative; overflow: hidden;
+    transition: color 200ms var(--ease);
   }
-  .profile-links a:hover { background: var(--ink); color: var(--paper); }
+  .profile-links a::before {
+    content: ''; position: absolute; inset: 0;
+    background: var(--ink);
+    transform: translateX(-101%);
+    transition: transform 0.4s var(--ease);
+    z-index: 0;
+  }
+  .profile-links a span { position: relative; z-index: 1; }
+  .profile-links a:hover { color: var(--base); }
+  .profile-links a:hover::before { transform: translateX(0); }
 
   @media (max-width: 880px) {
     .profile, .profile.flip { grid-template-columns: 1fr; gap: 32px; }
-    .profile-portrait, .profile.flip .profile-portrait { padding: 0; }
     .profile.flip .profile-portrait { order: 0; }
     .profile.flip .profile-body { order: 1; }
   }
 
-  /* ─── Closer ───────────────────────────────────────────── */
+  /* ─── Closer ─────────────────────────────────────────────────── */
   .closer {
-    padding: clamp(70px, 10vw, 130px) 0;
-    text-align: left;
-    background: var(--paper-deep);
-    border-bottom: 1px solid var(--ink);
+    padding: clamp(96px, 14vw, 180px) 0;
+    text-align: center;
+    background: var(--base);
+    position: relative; overflow: hidden;
+    border-top: 1px solid var(--rule);
   }
-  .closer .wrap { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: clamp(40px, 6vw, 88px); align-items: center; }
+  .closer::before {
+    content: '';
+    position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: clamp(520px, 60vw, 780px); height: clamp(520px, 60vw, 780px);
+    border: 1px solid var(--rule);
+    border-radius: 50%; z-index: 0;
+    pointer-events: none;
+  }
+  .closer .wrap { position: relative; z-index: 2; }
   .closer h2 {
-    font-family: var(--serif);
-    font-size: clamp(40px, 6vw, 78px);
-    line-height: 0.98;
-    letter-spacing: -0.015em;
+    text-transform: uppercase;
+    max-width: 16ch; margin: 0 auto 40px;
   }
-  .closer-cta {
-    display: inline-flex; align-items: center; gap: 14px;
-    font-family: var(--mono); font-size: 12px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase;
-    background: var(--ink); color: var(--paper);
-    padding: 22px 28px;
-    transition: background 200ms var(--ease);
+  .closer h2 .it {
+    display: block; font-family: 'Open Sans', serif; font-style: italic;
+    font-weight: 300; color: var(--mute); text-transform: lowercase;
+    font-size: 0.5em; margin-top: 12px;
   }
-  .closer-cta::after { content: '→'; font-family: var(--serif); font-size: 22px; line-height: 0; transform: translateY(-1px); }
-  .closer-cta:hover { background: var(--ember); color: var(--paper); }
-  @media (max-width: 880px) { .closer .wrap { grid-template-columns: 1fr; } }
+  .cta {
+    position: relative;
+    display: inline-block;
+    font-family: var(--display); font-size: 14px; font-weight: 600;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--ink); background: transparent;
+    border: 1px solid var(--ink);
+    padding: 0;
+    min-width: 260px; height: 56px; line-height: 54px;
+    text-align: center;
+    overflow: hidden;
+    transition: color 200ms var(--ease);
+  }
+  .cta span.label { position: relative; z-index: 2; display: inline-block; padding: 0 28px; }
+  .cta::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: var(--ink);
+    transform: translateX(-101%);
+    transition: transform 0.5s var(--ease);
+    z-index: 1;
+  }
+  .cta:hover { color: var(--base); }
+  .cta:hover::before { transform: translateX(0); }
 
-  /* ─── Footer (unified with index) ───────────────────────── */
-  footer { background: var(--ink); color: var(--paper); padding: clamp(60px, 8vw, 90px) 0 30px; font-family: var(--sans); position: relative; z-index: 5; }
-  footer h4 { font-family: var(--mono); font-size: 11px; letter-spacing: 2.4px; text-transform: uppercase; color: var(--ember-soft); margin-bottom: 14px; }
-  footer .colophon { display: grid; grid-template-columns: 1.4fr 1fr; gap: clamp(40px, 6vw, 80px); padding-bottom: 50px; border-bottom: 1px solid rgba(242, 235, 220, 0.16); }
+  /* ─── Footer ─────────────────────────────────────────────────── */
+  footer { background: var(--ink); color: var(--base); padding: clamp(70px, 9vw, 100px) 0 40px; }
+  footer .colophon { display: grid; grid-template-columns: 1.6fr 1fr 1fr; gap: clamp(36px, 5vw, 64px); padding-bottom: 50px; border-bottom: 1px solid rgba(255, 255, 255, 0.12); }
   @media (max-width: 720px) { footer .colophon { grid-template-columns: 1fr; gap: 36px; } }
-  footer .credo { font-size: 15px; line-height: 1.55; color: rgba(242, 235, 220, 0.78); max-width: 56ch; }
-  footer address { font-style: normal; font-family: var(--mono); font-size: 11.5px; letter-spacing: 1.4px; text-transform: uppercase; line-height: 1.85; color: rgba(242, 235, 220, 0.78); }
-  footer address a { color: var(--paper); }
-  footer address a:hover { color: var(--ember-soft); }
+  footer h5 { color: var(--silver); font-family: var(--body); font-weight: 600; font-size: 11px; letter-spacing: 0.24em; text-transform: uppercase; margin-bottom: 18px; }
+  footer .credo { font-family: 'Open Sans', serif; font-style: italic; font-size: 17px; line-height: 1.5; color: var(--base); max-width: 36ch; }
+  footer ul { list-style: none; }
+  footer ul li { padding: 4px 0; font-size: 14px; }
+  footer ul a { color: rgba(255, 255, 255, 0.7); transition: color 160ms var(--ease); }
+  footer ul a:hover { color: var(--base); }
+  footer address { font-style: normal; font-size: 13px; line-height: 1.85; color: rgba(255, 255, 255, 0.7); }
+  footer address a { color: var(--base); }
+  footer address a:hover { color: var(--silver); }
   footer .copyline {
-    margin-top: 30px; padding-top: 24px; border-top: 1px solid rgba(242, 235, 220, 0.08);
+    margin-top: 30px; padding-top: 22px;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
     display: grid; gap: 8px;
-    font-family: var(--mono); font-size: 10.5px; letter-spacing: 1.6px; text-transform: uppercase;
-    color: rgba(242, 235, 220, 0.55);
+    font-family: var(--body); font-size: 11px; letter-spacing: 0.08em;
+    color: rgba(255, 255, 255, 0.5); text-transform: uppercase;
   }
-  footer .copyline .registered { color: rgba(242, 235, 220, 0.78); letter-spacing: 1.4px; }
-  footer .copyline .registered a { color: var(--ember-soft); }
-
-  /* Reduced motion */
-  @media (prefers-reduced-motion: reduce) {
-    * { transition: none !important; animation: none !important; }
-  }
+  footer .registered { color: rgba(255, 255, 255, 0.7); }
+  footer .registered a { color: var(--silver); }
 </style>
 </head>
 
 <body>
 
-<div id="cursor" aria-hidden="true"></div>
-
 <!-- ═══ MASTHEAD ═════════════════════════════════════════════════ -->
 <header class="masthead">
-  <div class="masthead-strip">
-    <div class="wrap">
-      <span><span class="em">●</span>&nbsp;&nbsp;ISSUE 01 · UK · MMXXVI</span>
-      <span>The team behind CineSmith</span>
-    </div>
-  </div>
-  <div class="masthead-bar">
-    <div class="wrap">
-      <div class="mast-left"><a href="/">← cinesmith.io</a></div>
-      <div class="mast-brand">
-        <a href="/" aria-label="CineSmith home">
-          Cine<span class="it">Smith</span>
-          <span class="small">— Agentic AI for filmmakers —</span>
-        </a>
-      </div>
-      <div class="mast-right" aria-hidden="true"></div>
+  <div class="wrap">
+    <a href="/" class="brand">CineSmith</a>
+    <div class="mast-right">
+      <a href="/" class="nav-link">Home</a>
+      <a href="/team/" class="nav-link active">Team</a>
     </div>
   </div>
 </header>
@@ -464,12 +416,14 @@
 <!-- ═══ PAGE HEAD ════════════════════════════════════════════════ -->
 <section class="page-head">
   <div class="wrap">
-    <div>
-      <span class="scene-marker"><span class="em">SC.01</span> — The collective</span>
-      <h1>Filmmakers <span class="it">and</span> AI specialists.</h1>
-    </div>
+    <span class="eyebrow">The Collective</span>
+    <h1>
+      Filmmakers
+      <span class="it">and AI specialists.</span>
+    </h1>
+    <div class="divider"></div>
     <p class="lead">
-      <span class="first">C</span>ineSmith is built by filmmakers who also build software. Across two decades we've directed and cut for Netflix, BBC, Channel 4, HBO, Discovery and others — while in parallel shipping <strong>cloud collaboration platforms, fintech and blockchain infrastructure, and creative AI products</strong>. CineSmith is what happens when the same hands hold both toolsets.
+      <strong>CineSmith is built by filmmakers who also build software.</strong> Across two decades we've directed and cut for Netflix, BBC, Channel 4, HBO, Discovery and others — while in parallel shipping cloud collaboration platforms, fintech and blockchain infrastructure, and creative AI products. CineSmith is what happens when the same hands hold both toolsets.
     </p>
   </div>
 </section>
@@ -480,12 +434,8 @@
 
     <article class="profile">
       <aside class="profile-portrait">
-        <div class="frame">
-          <div class="sprockets" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
-          <img src="/assets/team/taimur.jpg" alt="Taimur Khan portrait" loading="eager" decoding="async">
-          <span class="frame-tag">FOUNDER</span>
-          <span class="frame-meta">A-CAM · UK · 2026</span>
-        </div>
+        <img src="/assets/team/taimur.jpg" alt="Taimur Khan portrait" loading="eager" decoding="async">
+        <span class="label">Founder</span>
       </aside>
       <div class="profile-body">
         <span class="role-tag">Filmmaker · Technologist · Founder</span>
@@ -494,7 +444,7 @@
           <strong>Filmmaker.</strong> 20+ years across documentary, drama, commercial, and broadcast — from the early 1990s Asian music video circuit to series editor seats on <em>Johnny vs Amber</em> (Discovery+) and <em>The Russell Murders</em> (Sky Documentaries). Editorial credits with Netflix, BBC, Channel 4, HBO, Discovery, Al Jazeera, Arte France, CNN, and The Economist. Recognition at <strong>Sundance and Cannes</strong>; films that have earned the Grierson. Founded WIDEI Films at Ealing Studios in 2004.
         </p>
         <p>
-          <strong>Technologist.</strong> Over a decade building software for the people who make screen work. In 2009 launched <em>Skylight</em> (<a href="https://skylightit.com" target="_blank" rel="noopener noreferrer">skylightit.com</a>), a cloud SaaS for project management, tasks, time billing and invoicing — covered by BBC News, The Guardian, and the FT. In 2017 joined <em>Outlier Ventures</em>, working on <em>Money Circles</em>, <em>Buy.co</em> and <em>OpenData</em> — fintech, public-sector procurement and big-data projects built on blockchain and ML/AI. Today, leads the <strong>AI automation, agentic workflow design, and prompt engineering</strong> work powering CineSmith. Computer pioneer since the ZX Spectrum / Commodore 64 days. Holds an active pilot's licence.
+          <strong>Technologist.</strong> Over a decade building software for the people who make screen work. In 2009 launched <em>Skylight</em> (<a href="https://skylightit.com" target="_blank" rel="noopener noreferrer" style="border-bottom: 1px solid var(--silver);">skylightit.com</a>), a cloud SaaS for project management, tasks, time billing and invoicing — covered by BBC News, The Guardian, and the FT. In 2017 joined <em>Outlier Ventures</em>, working on <em>Money Circles</em>, <em>Buy.co</em> and <em>OpenData</em> — fintech, public-sector procurement and big-data projects built on blockchain and ML/AI. Today, leads the <strong>AI automation, agentic workflow design, and prompt engineering</strong> work powering CineSmith. Computer pioneer since the ZX Spectrum / Commodore 64 days. Holds an active pilot's licence.
         </p>
         <p>
           <strong>Entrepreneurial.</strong> A consistent track record of building companies across screen and software. <strong>WIDEI Films</strong> at Ealing Studios (2004) — production company; series for Sky and the Royal Film Commission of Jordan, alongside commercials and animation. <strong>Blueberry Creative</strong> — talent agency connecting TV and film editors, designers, and directors to broadcaster projects (BBC, Channel 4, CNN, HBO and others); scaled to £7m+ turnover. <strong>Skylightit.com</strong> (2009) — cloud SaaS for project management, tasks, time billing and invoicing; press coverage from BBC News, The Guardian, the FT. <strong>Skylight Interactive</strong> — sister company, digital operations and process automation built on AWS for clients including UK ports, AMEY, and Royal Mail. <strong>Creative Development Academy</strong> — emerging-filmmaker training delivered through the Documentary Filmmakers Group, Rose Bruford College, and the Royal Film Commission of Jordan. <strong>CineArt AI</strong> (2024) and <strong>CineSmith</strong> (current).
@@ -517,20 +467,16 @@
           <dd>WIDEI Films · Blueberry Creative · Skylightit.com · Skylight Interactive · Creative Development Academy · CineArt AI</dd>
         </dl>
         <div class="profile-links">
-          <a href="https://www.linkedin.com/in/khantaimur/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
-          <a href="https://twitter.com/khantaimur" target="_blank" rel="noopener noreferrer">X ↗</a>
+          <a href="https://www.linkedin.com/in/khantaimur/" target="_blank" rel="noopener noreferrer"><span>LinkedIn ↗</span></a>
+          <a href="https://twitter.com/khantaimur" target="_blank" rel="noopener noreferrer"><span>X ↗</span></a>
         </div>
       </div>
     </article>
 
     <article class="profile flip">
       <aside class="profile-portrait">
-        <div class="frame">
-          <div class="sprockets" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
-          <img src="/assets/team/dita.jpg" alt="Dita Pesek portrait" loading="lazy" decoding="async">
-          <span class="frame-tag">CO-FOUNDER</span>
-          <span class="frame-meta">B-CAM · UK · 2026</span>
-        </div>
+        <img src="/assets/team/dita.jpg" alt="Dita Pesek portrait" loading="lazy" decoding="async">
+        <span class="label">Co-Founder</span>
       </aside>
       <div class="profile-body">
         <span class="role-tag">Filmmaker · Technologist · Co-Founder</span>
@@ -555,7 +501,7 @@
           <dd>BSides London — hacking humans</dd>
         </dl>
         <div class="profile-links">
-          <a href="https://www.linkedin.com/in/dita-pesek-7339a219b/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
+          <a href="https://www.linkedin.com/in/dita-pesek-7339a219b/" target="_blank" rel="noopener noreferrer"><span>LinkedIn ↗</span></a>
         </div>
       </div>
     </article>
@@ -567,7 +513,7 @@
 <section class="closer">
   <div class="wrap">
     <h2>The waitlist <span class="it">is open.</span></h2>
-    <a href="https://forms.gle/wfrBxsDLvXXEUr718" target="_blank" rel="noopener noreferrer" class="closer-cta">Request early access</a>
+    <a href="https://forms.gle/wfrBxsDLvXXEUr718" target="_blank" rel="noopener noreferrer" class="cta"><span class="label">Request early access</span></a>
   </div>
 </section>
 
@@ -576,17 +522,19 @@
   <div class="wrap">
     <div class="colophon">
       <div>
-        <h4>Colophon</h4>
-        <p class="credo">Built in London by filmmakers and <span style="color:var(--ember);font-style:italic;">AI specialists</span> — with delivery credits across the global film and TV industry, and senior engineering pedigree from creative AI labs.</p>
+        <h5>Colophon</h5>
+        <p class="credo">Built in London by filmmakers and AI specialists — with delivery credits across the global film and TV industry, and senior engineering pedigree from creative AI labs.</p>
       </div>
       <div>
-        <h4>On the web</h4>
-        <address>
-          <a href="/">cinesmith.io</a><br>
-          <a href="/team/">Team</a><br>
-          <a href="https://www.cineartai.com" target="_blank" rel="noopener noreferrer">cineartai.com ↗</a>
-        </address>
-        <h4 style="margin-top:24px;">Contact</h4>
+        <h5>On the web</h5>
+        <ul>
+          <li><a href="/">cinesmith.io</a></li>
+          <li><a href="/team/">Team</a></li>
+          <li><a href="https://www.cineartai.com" target="_blank" rel="noopener noreferrer">cineartai.com ↗</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Contact</h5>
         <address>
           General: <a href="mailto:cinesmith@cineartai.com">cinesmith@cineartai.com</a><br>
           Press: <a href="mailto:press@cineartai.com">press@cineartai.com</a>
@@ -599,28 +547,6 @@
     </div>
   </div>
 </footer>
-
-<script>
-  // Custom crosshair cursor — identical to index page so the experience
-  // doesn't break across navigation.
-  (function () {
-    const c = document.getElementById('cursor');
-    if (!c || matchMedia('(hover: none)').matches) return;
-    let x = 0, y = 0, tx = 0, ty = 0;
-    document.addEventListener('mousemove', (e) => { x = e.clientX; y = e.clientY; }, { passive: true });
-    function loop() {
-      tx += (x - tx) * 0.32;
-      ty += (y - ty) * 0.32;
-      c.style.transform = `translate3d(${tx}px, ${ty}px, 0)`;
-      requestAnimationFrame(loop);
-    }
-    loop();
-    document.querySelectorAll('a, button, .frame').forEach((el) => {
-      el.addEventListener('mouseenter', () => c.classList.add('lg'));
-      el.addEventListener('mouseleave', () => c.classList.remove('lg'));
-    });
-  })();
-</script>
 
 </body>
 </html>
