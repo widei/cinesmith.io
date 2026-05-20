@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 760" preserveAspectRatio="xMidYMid slice" role="img" aria-labelledby="title desc">
+  <title id="title">CineSmith — On the floor</title>
+  <desc id="desc">A film set silhouette: camera on tripod, director, boom operator, key light, set monitor — warm rim light, dark wash, low-contrast cinematic mood.</desc>
+
+  <defs>
+    <!-- Warm "movie magic" radial wash -->
+    <radialGradient id="wash" cx="62%" cy="42%" r="78%">
+      <stop offset="0%"  stop-color="#F2C57A"/>
+      <stop offset="38%" stop-color="#C8451B" stop-opacity="0.55"/>
+      <stop offset="78%" stop-color="#1A0F08"/>
+      <stop offset="100%" stop-color="#0B0705"/>
+    </radialGradient>
+
+    <!-- Sub-rim ground light -->
+    <linearGradient id="floor" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%"  stop-color="#000000" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0.55"/>
+    </linearGradient>
+
+    <!-- Soft top vignette -->
+    <linearGradient id="topv" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%"  stop-color="#000000" stop-opacity="0.45"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0"/>
+    </linearGradient>
+
+    <!-- Tiny grain texture (very faint) -->
+    <filter id="grain" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.95" numOctaves="2" stitchTiles="stitch"/>
+      <feColorMatrix values="0 0 0 0 0
+                             0 0 0 0 0
+                             0 0 0 0 0
+                             0 0 0 0.16 0"/>
+      <feComposite in2="SourceGraphic" operator="in"/>
+    </filter>
+
+    <!-- Subtle lens flare -->
+    <radialGradient id="flare" cx="50%" cy="50%" r="50%">
+      <stop offset="0%"  stop-color="#FFE2A6" stop-opacity="0.85"/>
+      <stop offset="38%" stop-color="#F2C57A" stop-opacity="0.32"/>
+      <stop offset="100%" stop-color="#F2C57A" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Key light cone -->
+    <linearGradient id="cone" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%"  stop-color="#FFE2A6" stop-opacity="0.38"/>
+      <stop offset="100%" stop-color="#FFE2A6" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Backdrop wash -->
+  <rect width="1600" height="760" fill="#0B0705"/>
+  <rect width="1600" height="760" fill="url(#wash)"/>
+
+  <!-- Top vignette -->
+  <rect width="1600" height="240" fill="url(#topv)"/>
+
+  <!-- Lens flare highlight -->
+  <circle cx="1180" cy="240" r="280" fill="url(#flare)"/>
+  <circle cx="1180" cy="240" r="46" fill="#FFE2A6" opacity="0.55"/>
+
+  <!-- Key light cone (warm rim from upper right) -->
+  <polygon points="1600,0 1600,520 720,760 980,0" fill="url(#cone)"/>
+
+  <!-- Set floor -->
+  <rect y="540" width="1600" height="220" fill="url(#floor)"/>
+  <line x1="0" y1="540" x2="1600" y2="540" stroke="#000" stroke-opacity="0.32" stroke-width="1"/>
+
+  <!-- ─── BACKGROUND CREW (small, far) ─────────────────────────── -->
+  <g fill="#000" opacity="0.78">
+    <!-- Set monitor on stand (far left) -->
+    <rect x="120" y="380" width="120" height="78" rx="3"/>
+    <rect x="170" y="458" width="20" height="84"/>
+    <rect x="140" y="540" width="80" height="6"/>
+    <!-- Monitor glow -->
+    <rect x="128" y="388" width="104" height="62" fill="#FFE2A6" opacity="0.55"/>
+    <line x1="138" y1="404" x2="222" y2="404" stroke="#0B0705" stroke-width="1"/>
+    <line x1="138" y1="418" x2="200" y2="418" stroke="#0B0705" stroke-width="1"/>
+    <line x1="138" y1="432" x2="182" y2="432" stroke="#0B0705" stroke-width="1"/>
+  </g>
+
+  <!-- Producer (background, far left) -->
+  <g fill="#000" opacity="0.85">
+    <circle cx="80" cy="416" r="18"/>
+    <path d="M48 540 L48 458 Q48 442 80 442 Q112 442 112 458 L112 540 Z"/>
+  </g>
+
+  <!-- Light stand (mid-left) -->
+  <g fill="#000" opacity="0.88">
+    <rect x="296" y="340" width="6" height="200"/>
+    <rect x="270" y="318" width="58" height="42" rx="2"/>
+    <rect x="278" y="328" width="42" height="22" fill="#FFE2A6" opacity="0.7"/>
+    <!-- Tripod legs -->
+    <line x1="299" y1="540" x2="280" y2="558" stroke="#000" stroke-width="3"/>
+    <line x1="299" y1="540" x2="318" y2="558" stroke="#000" stroke-width="3"/>
+    <line x1="299" y1="540" x2="299" y2="556" stroke="#000" stroke-width="3"/>
+  </g>
+
+  <!-- ─── MID GROUND: DIRECTOR ─────────────────────────────────── -->
+  <g fill="#000">
+    <!-- Director seated in chair -->
+    <!-- Chair back frame -->
+    <rect x="424" y="356" width="6" height="184"/>
+    <rect x="510" y="356" width="6" height="184"/>
+    <rect x="424" y="356" width="92" height="6"/>
+    <rect x="424" y="402" width="92" height="60" opacity="0.92"/>
+    <text x="470" y="438" text-anchor="middle" font-family="'Oswald','Arial Narrow',sans-serif" font-size="14" fill="#F2C57A" letter-spacing="2">DIR.</text>
+    <!-- Body -->
+    <path d="M438 396 Q438 372 470 372 Q502 372 502 396 L502 466 L438 466 Z"/>
+    <!-- Head -->
+    <circle cx="470" cy="352" r="20"/>
+    <!-- Cap brim -->
+    <path d="M448 348 L492 348 L496 340 L444 340 Z"/>
+    <!-- Arm reaching for monitor -->
+    <path d="M502 408 L548 396 L552 408 L506 422 Z"/>
+    <!-- Legs (crossed) -->
+    <path d="M438 466 L460 540 L468 540 L462 480 Z"/>
+    <path d="M502 466 L488 540 L496 540 L500 480 Z"/>
+  </g>
+
+  <!-- Director's monitor on stand -->
+  <g>
+    <rect x="544" y="372" width="92" height="62" rx="3" fill="#000"/>
+    <rect x="550" y="378" width="80" height="50" fill="#1F1308"/>
+    <rect x="556" y="384" width="68" height="38" fill="#C8451B" opacity="0.85"/>
+    <rect x="562" y="388" width="56" height="6" fill="#FFE2A6" opacity="0.65"/>
+    <rect x="562" y="402" width="40" height="4" fill="#FFE2A6" opacity="0.5"/>
+    <rect x="586" y="434" width="8" height="60" fill="#000"/>
+    <rect x="570" y="490" width="40" height="6" fill="#000"/>
+  </g>
+
+  <!-- ─── HERO: CAMERA ON TRIPOD (center-right) ────────────────── -->
+  <g fill="#000">
+    <!-- Tripod -->
+    <line x1="900" y1="538" x2="860" y2="412" stroke="#000" stroke-width="6"/>
+    <line x1="900" y1="538" x2="940" y2="412" stroke="#000" stroke-width="6"/>
+    <line x1="900" y1="538" x2="900" y2="412" stroke="#000" stroke-width="5"/>
+    <!-- Tripod head -->
+    <rect x="868" y="398" width="64" height="22" rx="2"/>
+    <!-- Camera body -->
+    <rect x="836" y="320" width="148" height="84" rx="6"/>
+    <!-- Top handle -->
+    <rect x="884" y="304" width="60" height="16" rx="2"/>
+    <!-- Matte box -->
+    <rect x="976" y="332" width="60" height="60" rx="2"/>
+    <rect x="982" y="338" width="48" height="48" fill="#1F1308"/>
+    <!-- Lens -->
+    <rect x="1024" y="346" width="80" height="32" rx="3"/>
+    <circle cx="1106" cy="362" r="22"/>
+    <circle cx="1106" cy="362" r="14" fill="#1F1308"/>
+    <circle cx="1106" cy="362" r="6" fill="#FFE2A6" opacity="0.65"/>
+    <!-- Director's monitor on top of camera -->
+    <rect x="884" y="284" width="56" height="36" rx="2"/>
+    <rect x="888" y="288" width="48" height="28" fill="#C8451B" opacity="0.85"/>
+    <!-- REC indicator -->
+    <circle cx="966" cy="338" r="5" fill="#FFE2A6"/>
+    <circle cx="966" cy="338" r="2.5" fill="#C8451B"/>
+  </g>
+
+  <!-- ─── DOP / CAMERA OP (behind camera) ──────────────────────── -->
+  <g fill="#000">
+    <circle cx="800" cy="352" r="22"/>
+    <!-- Headphones -->
+    <path d="M778 348 Q778 326 800 326 Q822 326 822 348" stroke="#000" stroke-width="6" fill="none"/>
+    <rect x="772" y="346" width="10" height="14" rx="2"/>
+    <rect x="818" y="346" width="10" height="14" rx="2"/>
+    <!-- Body -->
+    <path d="M768 380 Q768 374 776 374 L824 374 Q832 374 832 380 L832 478 L768 478 Z"/>
+    <!-- Arms on camera -->
+    <path d="M824 396 L878 380 L884 392 L830 410 Z"/>
+    <!-- Legs -->
+    <rect x="776" y="478" width="22" height="62"/>
+    <rect x="802" y="478" width="22" height="62"/>
+  </g>
+
+  <!-- ─── BOOM OPERATOR (right side) ───────────────────────────── -->
+  <g fill="#000" opacity="0.92">
+    <circle cx="1320" cy="380" r="20"/>
+    <!-- Body -->
+    <path d="M1294 400 Q1294 396 1300 396 L1340 396 Q1346 396 1346 400 L1346 500 L1294 500 Z"/>
+    <!-- Arms up -->
+    <path d="M1308 410 Q1296 372 1278 320 L1286 318 Q1310 372 1320 412 Z"/>
+    <path d="M1336 410 Q1348 380 1364 340 L1372 342 Q1356 380 1344 412 Z"/>
+    <!-- Boom pole (long) -->
+    <line x1="1280" y1="320" x2="1080" y2="216" stroke="#000" stroke-width="4"/>
+    <!-- Mic windscreen -->
+    <ellipse cx="1066" cy="208" rx="36" ry="14" fill="#1A0F08" stroke="#000" stroke-width="2"/>
+    <line x1="1042" y1="208" x2="1090" y2="208" stroke="#000" stroke-width="1" opacity="0.6"/>
+    <line x1="1046" y1="200" x2="1086" y2="200" stroke="#000" stroke-width="1" opacity="0.6"/>
+    <line x1="1046" y1="216" x2="1086" y2="216" stroke="#000" stroke-width="1" opacity="0.6"/>
+    <!-- Legs -->
+    <rect x="1300" y="500" width="18" height="40"/>
+    <rect x="1322" y="500" width="18" height="40"/>
+  </g>
+
+  <!-- ─── KEY LIGHT (HMI on stand, far right) ──────────────────── -->
+  <g fill="#000">
+    <rect x="1474" y="270" width="6" height="270"/>
+    <!-- Tripod legs -->
+    <line x1="1477" y1="540" x2="1456" y2="562" stroke="#000" stroke-width="4"/>
+    <line x1="1477" y1="540" x2="1498" y2="562" stroke="#000" stroke-width="4"/>
+    <line x1="1477" y1="540" x2="1477" y2="558" stroke="#000" stroke-width="4"/>
+    <!-- Barn doors / HMI head -->
+    <rect x="1416" y="222" width="120" height="80" rx="3"/>
+    <!-- Light source (glowing) -->
+    <rect x="1426" y="232" width="100" height="60" fill="#FFE2A6"/>
+    <rect x="1426" y="232" width="100" height="60" fill="#FFE2A6" opacity="0.7"/>
+    <!-- Inner filament glow -->
+    <ellipse cx="1476" cy="262" rx="42" ry="22" fill="#FFFFFF" opacity="0.75"/>
+    <!-- Barn doors flags -->
+    <polygon points="1416,222 1396,212 1396,302 1416,312"/>
+    <polygon points="1536,222 1556,212 1556,302 1536,312"/>
+    <!-- Yoke -->
+    <path d="M1416 262 Q1396 262 1396 282" stroke="#000" stroke-width="6" fill="none"/>
+    <path d="M1536 262 Q1556 262 1556 282" stroke="#000" stroke-width="6" fill="none"/>
+  </g>
+
+  <!-- Subtle key-light glow halo -->
+  <circle cx="1476" cy="262" r="180" fill="#FFE2A6" opacity="0.12"/>
+  <circle cx="1476" cy="262" r="80" fill="#FFE2A6" opacity="0.22"/>
+
+  <!-- ─── CABLE RUN on the floor ───────────────────────────────── -->
+  <g fill="none" stroke="#000" stroke-width="3" opacity="0.55">
+    <path d="M0 614 Q220 596 386 612 T720 600 T1050 618 T1380 604 T1600 612"/>
+    <path d="M0 642 Q260 626 480 638 T880 626 T1300 642 T1600 638"/>
+  </g>
+
+  <!-- ─── FILM PERFORATION STRIP (top + bottom) ────────────────── -->
+  <g fill="#0B0705">
+    <rect x="0" y="0" width="1600" height="22"/>
+    <rect x="0" y="738" width="1600" height="22"/>
+  </g>
+  <g fill="#F7F2E7">
+    <!-- Top perforations -->
+    <g>
+      <rect x="20"   y="5" width="38" height="12" rx="2"/>
+      <rect x="100"  y="5" width="38" height="12" rx="2"/>
+      <rect x="180"  y="5" width="38" height="12" rx="2"/>
+      <rect x="260"  y="5" width="38" height="12" rx="2"/>
+      <rect x="340"  y="5" width="38" height="12" rx="2"/>
+      <rect x="420"  y="5" width="38" height="12" rx="2"/>
+      <rect x="500"  y="5" width="38" height="12" rx="2"/>
+      <rect x="580"  y="5" width="38" height="12" rx="2"/>
+      <rect x="660"  y="5" width="38" height="12" rx="2"/>
+      <rect x="740"  y="5" width="38" height="12" rx="2"/>
+      <rect x="820"  y="5" width="38" height="12" rx="2"/>
+      <rect x="900"  y="5" width="38" height="12" rx="2"/>
+      <rect x="980"  y="5" width="38" height="12" rx="2"/>
+      <rect x="1060" y="5" width="38" height="12" rx="2"/>
+      <rect x="1140" y="5" width="38" height="12" rx="2"/>
+      <rect x="1220" y="5" width="38" height="12" rx="2"/>
+      <rect x="1300" y="5" width="38" height="12" rx="2"/>
+      <rect x="1380" y="5" width="38" height="12" rx="2"/>
+      <rect x="1460" y="5" width="38" height="12" rx="2"/>
+      <rect x="1540" y="5" width="38" height="12" rx="2"/>
+    </g>
+    <!-- Bottom perforations -->
+    <g>
+      <rect x="20"   y="743" width="38" height="12" rx="2"/>
+      <rect x="100"  y="743" width="38" height="12" rx="2"/>
+      <rect x="180"  y="743" width="38" height="12" rx="2"/>
+      <rect x="260"  y="743" width="38" height="12" rx="2"/>
+      <rect x="340"  y="743" width="38" height="12" rx="2"/>
+      <rect x="420"  y="743" width="38" height="12" rx="2"/>
+      <rect x="500"  y="743" width="38" height="12" rx="2"/>
+      <rect x="580"  y="743" width="38" height="12" rx="2"/>
+      <rect x="660"  y="743" width="38" height="12" rx="2"/>
+      <rect x="740"  y="743" width="38" height="12" rx="2"/>
+      <rect x="820"  y="743" width="38" height="12" rx="2"/>
+      <rect x="900"  y="743" width="38" height="12" rx="2"/>
+      <rect x="980"  y="743" width="38" height="12" rx="2"/>
+      <rect x="1060" y="743" width="38" height="12" rx="2"/>
+      <rect x="1140" y="743" width="38" height="12" rx="2"/>
+      <rect x="1220" y="743" width="38" height="12" rx="2"/>
+      <rect x="1300" y="743" width="38" height="12" rx="2"/>
+      <rect x="1380" y="743" width="38" height="12" rx="2"/>
+      <rect x="1460" y="743" width="38" height="12" rx="2"/>
+      <rect x="1540" y="743" width="38" height="12" rx="2"/>
+    </g>
+  </g>
+
+  <!-- Frame edge separators -->
+  <line x1="0" y1="22" x2="1600" y2="22" stroke="#F7F2E7" stroke-opacity="0.15" stroke-width="1"/>
+  <line x1="0" y1="738" x2="1600" y2="738" stroke="#F7F2E7" stroke-opacity="0.15" stroke-width="1"/>
+
+  <!-- Slate marker bottom-right -->
+  <g font-family="'Oswald','Arial Narrow',sans-serif" fill="#F7F2E7" opacity="0.62">
+    <text x="1564" y="724" text-anchor="end" font-size="13" letter-spacing="2.4">UK · 2026 · A-CAM · TAKE 03</text>
+  </g>
+
+  <!-- Slate marker top-left -->
+  <g font-family="'Oswald','Arial Narrow',sans-serif" fill="#F7F2E7" opacity="0.6">
+    <text x="36" y="42" font-size="11" letter-spacing="2">SCN 12 / INT — STAGE</text>
+  </g>
+
+  <!-- Grain overlay (very subtle, sits above everything inside the frame) -->
+  <rect x="0" y="22" width="1600" height="716" fill="#FFFFFF" opacity="0.04" filter="url(#grain)"/>
+</svg>
