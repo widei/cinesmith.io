@@ -103,7 +103,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -123,8 +123,9 @@
     --ember-deep:   #7A2A12;
     --paper-mute:   rgba(11, 15, 20, 0.55);
 
-    --serif:  'Instrument Serif', 'Times New Roman', Georgia, serif;
-    --sans:   'Instrument Sans', system-ui, -apple-system, sans-serif;
+    --display: 'Bebas Neue', 'Arial Narrow', sans-serif;
+    --serif:  'Playfair Display', 'Times New Roman', Georgia, serif;
+    --sans:   'Inter', system-ui, -apple-system, sans-serif;
     --mono:   'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
 
     --w-max:  1320px;
@@ -248,14 +249,15 @@
   }
 
   .display {
-    font-family: var(--serif);
+    font-family: var(--display);
     font-weight: 400;
     color: var(--ink);
-    line-height: 0.96;
-    letter-spacing: -0.018em;
+    line-height: 0.86;
+    letter-spacing: 0.005em;
+    text-transform: uppercase;
   }
-  .display .it { font-style: italic; color: var(--ember); }
-  .display .lo { color: var(--ink-soft); font-style: italic; }
+  .display .it { font-family: var(--serif); font-style: italic; text-transform: none; color: var(--ember); letter-spacing: -0.01em; }
+  .display .lo { font-family: var(--serif); color: var(--ink-soft); font-style: italic; text-transform: none; }
 
   .lead {
     font-family: var(--sans);
@@ -376,9 +378,10 @@
     letter-spacing: 2.5px;
     text-transform: uppercase;
     color: var(--paper);
-    background: var(--ink);
+    background: var(--ember);
     cursor: none;
     padding: 22px 26px;
+    border-radius: 14px;
     text-align: left;
     text-decoration: none;
     display: flex;
@@ -387,10 +390,11 @@
     gap: 16px;
     width: 100%;
     box-sizing: border-box;
-    transition: background 200ms var(--ease), color 200ms var(--ease);
+    box-shadow: 0 16px 36px -18px rgba(200, 69, 27, 0.5);
+    transition: background 200ms var(--ease), color 200ms var(--ease), transform 240ms var(--ease);
   }
   .waitlist-cta::after { content: '→'; font-family: var(--serif); font-size: 22px; line-height: 0; transform: translateY(-1px); }
-  .waitlist-cta:hover { background: var(--ember); color: var(--paper); }
+  .waitlist-cta:hover { background: var(--ink); color: var(--paper); transform: translateY(-2px); }
   .waitlist-cta:focus-visible { outline: 2px solid var(--ember); outline-offset: 3px; }
 
   .form-foot {
@@ -409,7 +413,8 @@
     aspect-ratio: 4/5;
     background: var(--ink);
     overflow: hidden;
-    box-shadow: 0 24px 60px -10px rgba(11, 15, 20, 0.28);
+    border-radius: 16px;
+    box-shadow: 0 24px 60px -10px rgba(11, 15, 20, 0.32);
   }
   .frame img { width: 100%; height: 100%; object-fit: cover; display: block; filter: contrast(1.04) saturate(0.95); }
   .frame::after {
@@ -504,23 +509,24 @@
   .kinetic-word {
     position: absolute; inset: 0;
     display: flex; align-items: center; justify-content: flex-start;
-    font-family: var(--serif);
-    font-style: italic;
+    font-family: var(--display);
     font-weight: 400;
-    font-size: clamp(64px, 12vw, 184px);
-    letter-spacing: -0.02em;
+    text-transform: uppercase;
+    font-size: clamp(64px, 12vw, 172px);
+    letter-spacing: 0.01em;
     line-height: 0.92;
     color: var(--paper);
     opacity: 0;
-    transform: translateY(36%);
-    filter: blur(14px);
-    transition: opacity 520ms var(--ease), transform 760ms var(--ease), filter 520ms var(--ease);
-    will-change: opacity, transform, filter;
+    transform: scale(1.01);
+    transition: opacity 280ms steps(3, end), transform 360ms var(--ease);
+    will-change: opacity, transform;
     white-space: nowrap;
   }
   .kinetic-word .accent { color: var(--ember-soft); }
-  .kinetic-word.in { opacity: 1; transform: translateY(0); filter: blur(0); }
-  .kinetic-word.out { opacity: 0; transform: translateY(-32%); filter: blur(14px); }
+  /* Words crossfade; blocky deform comes from the JS-driven #pixelate filter */
+  .kinetic-word.in { opacity: 1; transform: scale(1); }
+  .kinetic-word.out { opacity: 0; transform: scale(0.99); }
+  @media (prefers-reduced-motion: reduce) { .kinetic-stage { filter: none !important; } }
 
   .kinetic-foot {
     margin-top: clamp(20px, 3vw, 36px);
@@ -543,15 +549,16 @@
   section.col + section.col { border-top: 1px solid var(--rule); }
 
   .section-title {
-    font-family: var(--serif);
-    font-size: clamp(36px, 5.4vw, 76px);
-    line-height: 0.98;
-    letter-spacing: -0.015em;
+    font-family: var(--display);
+    font-size: clamp(40px, 6vw, 84px);
+    line-height: 0.9;
+    letter-spacing: 0.005em;
+    text-transform: uppercase;
     color: var(--ink);
     margin-bottom: 28px;
-    max-width: 18ch;
+    max-width: 20ch;
   }
-  .section-title .it { font-style: italic; color: var(--ember); }
+  .section-title .it { font-family: var(--serif); font-style: italic; text-transform: none; color: var(--ember); }
   .section-lead {
     font-size: clamp(17px, 1.5vw, 20px);
     line-height: 1.5;
@@ -614,7 +621,10 @@
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 0;
-    border-top: 1px solid var(--ink);
+    border: 1px solid var(--ink);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 18px 44px -24px rgba(11, 15, 20, 0.3);
   }
   .reaction {
     padding: 44px 28px 36px;
@@ -718,13 +728,14 @@
   .closer .scene-marker { color: rgba(242, 235, 220, 0.55); border-bottom-color: rgba(242, 235, 220, 0.12); }
   .closer .scene-marker .em { color: var(--ember); }
   .closer h2 {
-    font-family: var(--serif);
-    font-size: clamp(40px, 5.4vw, 80px);
-    line-height: 1; letter-spacing: -0.018em;
+    font-family: var(--display);
+    font-size: clamp(44px, 6vw, 92px);
+    line-height: 0.9; letter-spacing: 0.005em;
+    text-transform: uppercase;
     color: var(--paper);
-    max-width: 16ch;
+    max-width: 18ch;
   }
-  .closer h2 .it { font-style: italic; color: var(--ember); }
+  .closer h2 .it { font-family: var(--serif); font-style: italic; text-transform: none; color: var(--ember); }
   .closer p {
     font-family: var(--sans);
     font-size: 17px; line-height: 1.5; color: rgba(242, 235, 220, 0.72);
@@ -735,6 +746,7 @@
     font-family: var(--mono); font-size: 13px; letter-spacing: 2.5px; text-transform: uppercase;
     color: var(--paper); background: var(--ember);
     padding: 22px 28px;
+    border-radius: 14px;
     transition: background 220ms var(--ease), color 220ms var(--ease), transform 320ms var(--ease);
   }
   .closer .closer-cta::after { content: '→'; font-family: var(--serif); font-size: 24px; line-height: 0; transform: translateY(-1px); }
@@ -790,6 +802,17 @@
 <div id="cursor" aria-hidden="true"></div>
 <div id="scroll-progress" aria-hidden="true"></div>
 
+<!-- Mosaic pixelate filter — block size driven by JS on each kinetic word swap -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <filter id="pixelate" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB">
+    <feFlood x="0" y="0" width="2" height="2" flood-color="#ffffff"/>
+    <feComposite id="px-cell" width="3" height="3"/>
+    <feTile result="grid"/>
+    <feComposite in="SourceGraphic" in2="grid" operator="in"/>
+    <feMorphology id="px-dilate" operator="dilate" radius="0"/>
+  </filter>
+</svg>
+
 <!-- ═══ MASTHEAD ═════════════════════════════════════════════════ -->
 <header class="masthead">
   <div class="masthead-strip">
@@ -842,7 +865,7 @@
            rel="noopener noreferrer"
            class="waitlist-cta"
            id="waitlist-cta">
-          Request early access
+          Join the Waitlist Now
         </a>
 
         <div class="form-foot">
@@ -903,7 +926,7 @@
     <span class="scene-marker"><span class="em">SC.02</span> — Early reactions</span>
     <div class="section-head">
       <h2 class="section-title">What people say <span class="it">after</span> they see it.</h2>
-      <p class="section-lead"><span class="first">A</span> handful of producers, directors, and showrunners have seen private demos. Below — their words, unprompted, unedited.</p>
+      <p class="section-lead"><span class="first">A</span> handful of producers, directors, and production teams have seen private demos. Below — their words, unprompted, unedited.</p>
     </div>
 
     <div class="reactions">
@@ -938,7 +961,7 @@
       <h2>Early access is opening to <span class="it">50 UK production teams.</span> Be one of them.</h2>
       <div>
         <p>Less tooling. More filmmaking. Add your name and we'll be in touch when the next cohort opens.</p>
-        <a href="https://forms.gle/wfrBxsDLvXXEUr718" target="_blank" rel="noopener noreferrer" class="closer-cta">Join the UK waitlist</a>
+        <a href="https://forms.gle/wfrBxsDLvXXEUr718" target="_blank" rel="noopener noreferrer" class="closer-cta">Join the Waitlist Now</a>
       </div>
     </div>
   </div>
@@ -1031,6 +1054,25 @@
     if (!words.length) return;
     document.getElementById('kinetic-total').textContent = String(words.length).padStart(2, '0');
 
+    // Mosaic burst — grow the pixelate block size up then back down on each swap
+    const cell = document.getElementById('px-cell');
+    const dil  = document.getElementById('px-dilate');
+    function pixelBurst() {
+      if (reduced || !cell || !dil) return;
+      const dur = 460, t0 = performance.now(), minCell = 3, maxCell = 20;
+      stage.style.filter = 'url(#pixelate)';
+      (function frame(now) {
+        const k = Math.min((now - t0) / dur, 1);
+        const tri = 1 - Math.abs(k * 2 - 1);             // sharp → blocky → sharp
+        const size = minCell + tri * (maxCell - minCell);
+        cell.setAttribute('width', size.toFixed(2));
+        cell.setAttribute('height', size.toFixed(2));
+        dil.setAttribute('radius', (tri * maxCell / 2).toFixed(2));
+        if (k < 1) requestAnimationFrame(frame);
+        else { stage.style.filter = ''; }                // back to crisp
+      })(performance.now());
+    }
+
     const HOLD_MS = 2400;
     let i = 0;
     let cycleStart = performance.now();
@@ -1044,6 +1086,7 @@
       words[i].classList.add('in');
       numEl.textContent = String(i + 1).padStart(2, '0');
       cycleStart = performance.now();
+      pixelBurst();
     }
 
     // Always cycle. Reduced-motion preference is honoured by CSS (no blur/translate transition).
