@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CineSmith — From idea to rough cut. In one platform.</title>
+  <meta name="description" content="The agentic AI production platform for filmmakers. Script, storyboard, video, voice, schedule, budget, and on-set — in one integrated system. Invite-only UK beta." />
+  <meta name="author" content="CineArt AI Limited" />
+  <link rel="canonical" href="https://cinesmith.io/" />
+  <meta property="og:title" content="CineSmith — From idea to rough cut. In one platform." />
+  <meta property="og:description" content="The agentic AI production platform for filmmakers. Invite-only UK beta." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://cinesmith.io/" />
+  <meta property="og:site_name" content="CineSmith" />
+  <meta property="og:locale" content="en_GB" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@khantaimur" />
+  <link rel="icon" type="image/png" href="/assets/favicon.png" />
+
+  <!-- Structured data — Organization + SoftwareApplication -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://cinesmith.io/#organization",
+        "name": "CineArt AI Limited",
+        "url": "https://www.cineartai.com",
+        "logo": "https://cinesmith.io/assets/favicon.png",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "85 Great Portland Street",
+          "addressLocality": "London",
+          "postalCode": "W1W 7LT",
+          "addressCountry": "GB"
+        },
+        "telephone": "+44 7958 707232",
+        "email": "press@cineartai.com",
+        "founder": {
+          "@type": "Person",
+          "name": "Taimur Khan",
+          "jobTitle": "Founder"
+        },
+        "sameAs": ["https://www.cineartai.com"]
+      },
+      {
+        "@type": "SoftwareApplication",
+        "@id": "https://cinesmith.io/#product",
+        "name": "CineSmith",
+        "applicationCategory": "MultimediaApplication",
+        "operatingSystem": "Web",
+        "description": "Agentic AI production platform covering script, storyboard, video, voice, schedule, budget, and live on-set support inside one integrated system.",
+        "url": "https://cinesmith.io/",
+        "creator": { "@id": "https://cinesmith.io/#organization" },
+        "offers": { "@type": "Offer", "availability": "https://schema.org/PreOrder" }
+      }
+    ]
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:ital,wght@0,500;0,600;1,500;1,600&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            background: 'var(--background)',
+            foreground: 'var(--foreground)',
+            accent: 'var(--accent)',
+            'accent-foreground': 'var(--accent-foreground)',
+            muted: 'var(--muted)',
+            'muted-foreground': 'var(--muted-foreground)',
+            border: 'var(--border)',
+            card: 'var(--card)',
+            'card-foreground': 'var(--card-foreground)',
+            primary: 'var(--primary)',
+            'primary-foreground': 'var(--primary-foreground)',
+            secondary: 'var(--secondary)',
+            'secondary-foreground': 'var(--secondary-foreground)',
+          },
+          fontFamily: {
+            display: ['"Bebas Neue"', 'sans-serif'],
+            serif: ['"Playfair Display"', 'Georgia', 'serif'],
+            body: ['Inter', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+        }
+      }
+    }
+  </script>
+
+  <style>
+    :root {
+      --radius: 0.5rem;
+      --background: #f7f4ef;
+      --foreground: #1a1a1a;
+      --card: #f7f4ef;
+      --card-foreground: #1a1a1a;
+      --primary: #1a1a1a;
+      --primary-foreground: #f7f4ef;
+      --secondary: #ebe5da;
+      --secondary-foreground: #1a1a1a;
+      --muted: rgba(26, 26, 26, 0.53);
+      --muted-foreground: rgba(26, 26, 26, 0.53);
+      --accent: #c4654a;
+      --accent-foreground: #f7f4ef;
+      --border: #1a1a1a;
+      --input: rgba(26, 26, 26, 0.13);
+      --ring: #c4654a;
+    }
+
+    * { border-color: var(--border); }
+
+    body {
+      background-color: var(--background);
+      color: var(--foreground);
+      font-family: 'Inter', sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    ::selection { background: var(--accent); color: var(--accent-foreground); }
+
+    /* Film grain overlay */
+    .film-grain {
+      pointer-events: none;
+      position: fixed;
+      inset: 0;
+      z-index: 50;
+      opacity: 0.05;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+
+    .scroll-hide::-webkit-scrollbar { display: none; }
+    .scroll-hide { -ms-overflow-style: none; scrollbar-width: none; }
+
+    /* ─── Animations (fixed from the corrupted source values) ───── */
+    @keyframes entrance {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; }
+      50%      { opacity: 0.25; }
+    }
+    .animate-entrance { animation: entrance 0.8s cubic-bezier(0.32, 0.72, 0, 1) both; }
+    .animate-pulse-dot { animation: pulse-dot 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
+
+    /* Capability cards — grayscale until hover */
+    .capability-card img {
+      filter: grayscale(100%) brightness(0.9);
+      transition: all 0.7s ease;
+    }
+    .capability-card:hover img { filter: grayscale(0%) brightness(1); }
+    .capability-card { border-color: var(--border); border-radius: 16px; box-shadow: 0 16px 40px -20px rgba(20,17,14,0.55); transition: border-color 0.5s ease, transform 0.4s cubic-bezier(0.22,1,0.36,1), box-shadow 0.4s ease; will-change: transform; }
+    .capability-card:hover { border-color: rgba(196, 101, 74, 0.5); transform: translateY(-6px); box-shadow: 0 26px 56px -22px rgba(20,17,14,0.62); }
+    /* Dark film-frame placeholder shown until/if a real image is dropped in */
+    .capability-card {
+      background-color: #14110e;
+      background-image: repeating-linear-gradient(45deg, rgba(247,244,239,0.035) 0 2px, transparent 2px 10px);
+    }
+    .capability-card img[data-broken] { opacity: 0; }
+
+    /* ─── SMPTE colour bars (the "smtp bars") ───────────────────── */
+    .smpte-bars { display: flex; width: 100%; height: 14px; }
+    .smpte-bars span { flex: 1; }
+    .smpte-bars span:nth-child(1) { background: #b8b8b8; }
+    .smpte-bars span:nth-child(2) { background: #d4c200; }
+    .smpte-bars span:nth-child(3) { background: #1bb6c1; }
+    .smpte-bars span:nth-child(4) { background: #2fae45; }
+    .smpte-bars span:nth-child(5) { background: #b93caa; }
+    .smpte-bars span:nth-child(6) { background: #c5302b; }
+    .smpte-bars span:nth-child(7) { background: #2741bd; }
+    .smpte-bars span:nth-child(8) { background: var(--accent); }
+
+    /* ─── Custom crosshair cursor (mix-blend, grows over targets) ─ */
+    @media (hover: hover) and (pointer: fine) {
+      body { cursor: none; }
+      a, button, input, select, .capability-card, figure { cursor: none; }
+    }
+    #cursor {
+      position: fixed; top: 0; left: 0;
+      width: 22px; height: 22px; margin: -11px 0 0 -11px;
+      pointer-events: none; z-index: 9999;
+      mix-blend-mode: difference; will-change: transform;
+      transition: width 200ms cubic-bezier(0.22,1,0.36,1),
+                  height 200ms cubic-bezier(0.22,1,0.36,1),
+                  margin 200ms cubic-bezier(0.22,1,0.36,1);
+    }
+    #cursor::before, #cursor::after { content: ''; position: absolute; background: #fff; }
+    #cursor::before { left: 50%; top: 0; bottom: 0; width: 1px; transform: translateX(-50%); }
+    #cursor::after  { top: 50%; left: 0; right: 0; height: 1px; transform: translateY(-50%); }
+    #cursor.lg { width: 56px; height: 56px; margin: -28px 0 0 -28px; }
+    @media (hover: none), (pointer: coarse), (max-width: 800px) {
+      #cursor { display: none; }
+    }
+
+    /* ─── Hover lifts on interactive blocks ─────────────────────── */
+    .reaction-card { transition: transform 0.4s cubic-bezier(0.22,1,0.36,1), border-color 0.4s ease; }
+    .reaction-card:hover { transform: translateY(-5px); border-color: var(--accent); }
+
+    /* ─── Filmstrip entrance — cards slide + snap in on scroll-in ── */
+    /* .filmstrip-anim is added by JS only; without JS the cards stay visible */
+    .filmstrip-anim article.snap-start {
+      opacity: 0; transform: translateX(52px);
+      transition: opacity 0.6s ease, transform 0.65s cubic-bezier(0.22, 1.35, 0.4, 1);
+      will-change: transform, opacity;
+    }
+    .filmstrip-anim.in article.snap-start { opacity: 1; transform: translateX(0); }
+    .filmstrip-anim.in article.snap-start:nth-child(1) { transition-delay: 0ms; }
+    .filmstrip-anim.in article.snap-start:nth-child(2) { transition-delay: 90ms; }
+    .filmstrip-anim.in article.snap-start:nth-child(3) { transition-delay: 180ms; }
+    .filmstrip-anim.in article.snap-start:nth-child(4) { transition-delay: 270ms; }
+
+    /* ─── Hero kinetic film-slate (runs inside the hero frame) ──── */
+    .kfilm {
+      background-color: #14110e;
+      background-image:
+        radial-gradient(120% 80% at 75% 15%, rgba(196,101,74,0.16), transparent 60%),
+        repeating-linear-gradient(45deg, rgba(247,244,239,0.03) 0 2px, transparent 2px 11px);
+    }
+    .kinetic-stage { position: relative; flex: 1; display: flex; align-items: center; overflow: hidden; }
+    .kinetic-word {
+      position: absolute; left: 0; right: 0;
+      font-family: 'Bebas Neue', sans-serif; text-transform: uppercase;
+      font-size: clamp(46px, 9vw, 124px); line-height: 0.92; letter-spacing: 0.01em;
+      color: #f7f4ef; opacity: 0; transform: scale(1.015);
+      transition: opacity 280ms steps(3, end), transform 360ms cubic-bezier(0.22,1,0.36,1);
+      will-change: opacity, transform;
+    }
+    .kinetic-word .accent { color: var(--accent); }
+    /* Words crossfade; the blocky deform comes from the JS-driven #pixelate filter */
+    .kinetic-word.in  { opacity: 1; transform: scale(1); }
+    .kinetic-word.out { opacity: 0; transform: scale(0.99); }
+
+    .kinetic-bar { flex: 1; height: 1px; background: rgba(247,244,239,0.16); position: relative; overflow: hidden; }
+    .kinetic-bar-fill { position: absolute; inset: 0 100% 0 0; background: var(--accent); box-shadow: 0 0 14px rgba(196,101,74,0.7); transition: right 80ms linear; }
+    @media (prefers-reduced-motion: reduce) {
+      .kinetic-word { transition: opacity 180ms linear; transform: none; }
+      .kinetic-stage { filter: none; }
+    }
+
+    /* ─── Parallax targets (JS-driven translate3d) ──────────────── */
+    [data-parallax] { will-change: transform; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .animate-entrance, .animate-pulse-dot { animation: none !important; }
+      [data-parallax] { transform: none !important; }
+      article.snap-start:hover, .reaction-card:hover { transform: none !important; }
+    }
+</style>
+</head>
+<body>
+  <div class="film-grain" aria-hidden="true"></div>
+  <div id="cursor" aria-hidden="true"></div>
+
+  <!-- Mosaic pixelate filter (block size driven by JS on each word swap) -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <filter id="pixelate" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB">
+      <feFlood x="0" y="0" width="2" height="2" flood-color="#ffffff"/>
+      <feComposite id="px-cell" width="3" height="3"/>
+      <feTile result="grid"/>
+      <feComposite in="SourceGraphic" in2="grid" operator="in"/>
+      <feMorphology id="px-dilate" operator="dilate" radius="0"/>
+    </filter>
+  </svg>
+
+  <main class="min-h-screen bg-background text-foreground font-body">
+
+    <!-- ═══ NAVIGATION ════════════════════════════════════════════ -->
+    <nav class="sticky top-0 z-40 flex items-center justify-between px-6 py-4 bg-background/80 backdrop-blur-md border-b border-border">
+      <div class="flex items-center gap-4">
+        <a href="/index-v2.html" class="font-display text-2xl tracking-tighter">CineSmith</a>
+        <span class="hidden sm:inline-block px-2 py-0.5 text-[10px] font-mono border border-accent text-accent uppercase tracking-widest">
+          Invite-Only UK Beta
+        </span>
+      </div>
+      <div class="flex items-center gap-4 sm:gap-8">
+        <a href="https://forms.gle/wfrBxsDLvXXEUr718" target="_blank" rel="noopener noreferrer"
+           class="bg-foreground text-background px-4 py-2 rounded-lg text-xs font-mono uppercase tracking-widest hover:bg-accent transition-colors duration-300">
+          Join the Waitlist Now
+        </a>
+      </div>
+    </nav>
+
+    <!-- ═══ HERO ══════════════════════════════════════════════════ -->
+    <section class="px-6 pt-16 sm:pt-24 pb-12 overflow-hidden">
+      <div class="max-w-7xl mx-auto">
+        <header class="relative animate-entrance">
+          <div class="flex items-baseline gap-4 mb-2">
+            <span class="font-mono text-xs text-muted-foreground">SCENE 01 / INT. PRODUCT</span>
+            <div class="h-px flex-1 bg-border"></div>
+          </div>
+          <h1 class="text-[14vw] md:text-[12vw] leading-[0.85] font-display uppercase mb-8">
+            From idea to <span class="text-accent">rough cut</span>.
+          </h1>
+          <div class="flex flex-col md:flex-row md:items-end justify-between gap-8">
+            <p class="max-w-[34ch] text-xl md:text-2xl font-medium leading-tight tracking-tight">
+              In one platform. The agentic AI production OS for independent filmmakers and studio leads.
+            </p>
+            <div class="flex items-center gap-4 font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground" data-parallax="0.05">
+              <span>24 FPS</span>
+              <span class="w-1.5 h-1.5 rounded-full bg-accent animate-pulse-dot"></span>
+              <span>00:00:01:12</span>
+            </div>
+          </div>
+
+          <!-- Waitlist button added to hero -->
+          <div class="mt-10">
+            <a href="https://forms.gle/wfrBxsDLvXXEUr718" target="_blank" rel="noopener noreferrer"
+               class="group inline-flex items-center justify-between gap-6 bg-accent text-accent-foreground px-7 py-4 rounded-xl font-mono text-xs uppercase tracking-[0.25em] hover:bg-foreground hover:text-background transition-colors duration-300">
+              <span>Join the Waitlist Now</span>
+              <span class="font-display text-2xl transition-transform group-hover:translate-x-1">&rarr;</span>
+            </a>
+            <p class="mt-3 font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
+              UK Closed Beta · Invite Only · 50 Seats
+            </p>
+          </div>
+        </header>
+
+        <!-- Hero kinetic film-slate — the cycler runs inside the rounded frame -->
+        <figure class="kfilm relative mt-16 overflow-hidden rounded-[20px] border border-border/10 shadow-[0_34px_90px_-36px_rgba(20,17,14,0.6)]">
+          <div class="relative w-full h-[44vh] md:h-[56vh] flex flex-col justify-between p-6 md:p-10">
+            <!-- meta: BUILT FOR + REC timecode -->
+            <div class="flex items-center justify-between font-mono text-[10px] md:text-xs uppercase tracking-[0.28em] text-white/55">
+              <span>Built for</span>
+              <span class="flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-accent animate-pulse-dot"></span>
+                REC · <span id="kinetic-tc">00:00:00:00</span>
+              </span>
+            </div>
+
+            <!-- cycling words -->
+            <div class="kinetic-stage" id="kinetic-stage" aria-live="polite">
+              <span class="kinetic-word in">Feature&nbsp;<span class="accent">Films.</span></span>
+              <span class="kinetic-word">Episodic&nbsp;<span class="accent">Drama.</span></span>
+              <span class="kinetic-word">Documentary.</span>
+              <span class="kinetic-word">Micro-<span class="accent">Drama.</span></span>
+              <span class="kinetic-word">Commercials.</span>
+              <span class="kinetic-word">Branded&nbsp;<span class="accent">Content.</span></span>
+              <span class="kinetic-word">Factual&nbsp;<span class="accent">TV.</span></span>
+              <span class="kinetic-word">Animation.</span>
+              <span class="kinetic-word">Music&nbsp;<span class="accent">Videos.</span></span>
+              <span class="kinetic-word">Short&nbsp;<span class="accent">Form.</span></span>
+              <span class="kinetic-word">Podcasts.</span>
+            </div>
+
+            <!-- counter + progress bar + tag -->
+            <div class="flex items-center gap-4 font-mono text-[10px] md:text-xs uppercase tracking-[0.2em] text-white/45">
+              <span><span id="kinetic-num">01</span>&nbsp;/&nbsp;<span id="kinetic-total">11</span></span>
+              <div class="kinetic-bar"><div class="kinetic-bar-fill" id="kinetic-bar-fill"></div></div>
+              <span class="hidden sm:inline">Story aware · Multi provider · Live on set</span>
+            </div>
+          </div>
+        </figure>
+      </div>
+    </section>
+
+    <!-- ═══ FILMSTRIP — CORE CAPABILITIES ═════════════════════════ -->
+    <!-- TEMPORARILY DISABLED pending final capability images — re-enable by removing style="display:none" -->
+    <section id="process" class="py-20" style="display:none">
+      <div class="flex items-center gap-4 px-6 mb-8">
+        <h2 class="font-mono text-xs uppercase tracking-[0.3em]">
+          Core Capabilities // Filmstrip_v03
+        </h2>
+        <div class="h-px flex-1 bg-border"></div>
+      </div>
+
+      <div class="scroll-hide flex overflow-x-auto snap-x snap-mandatory gap-6 px-6 pb-12" data-filmstrip>
+        <!-- Card 01 -->
+        <article class="flex-none w-[320px] md:w-[400px] snap-start">
+          <div class="capability-card relative aspect-[4/5] mb-4 overflow-hidden border group">
+            <img src="images/film-script.jpg" alt="Unified Scripting — CineSmith capability" width="800" height="1024" loading="lazy" onerror="this.setAttribute('data-broken','')" class="w-full h-full object-cover" />
+            <div class="absolute inset-4 border border-background/20 rounded-lg pointer-events-none flex flex-col justify-between p-2">
+              <span class="font-mono text-[10px] text-background/60">▸ 01 ◂</span>
+              <span class="font-mono text-[10px] text-background/60 self-end">— SCRIPT —</span>
+            </div>
+          </div>
+          <h3 class="font-display text-3xl uppercase mb-1">Unified Scripting</h3>
+          <p class="text-sm text-muted-foreground leading-relaxed">Collaborative drafting with auto-formatting, character tracking, and scene-level versioning.</p>
+        </article>
+
+        <!-- Card 02 -->
+        <article class="flex-none w-[320px] md:w-[400px] snap-start">
+          <div class="capability-card relative aspect-[4/5] mb-4 overflow-hidden border group">
+            <img src="images/film-storyboard.jpg" alt="Visual Storyboarding — CineSmith capability" width="800" height="1024" loading="lazy" onerror="this.setAttribute('data-broken','')" class="w-full h-full object-cover" />
+            <div class="absolute inset-4 border border-background/20 rounded-lg pointer-events-none flex flex-col justify-between p-2">
+              <span class="font-mono text-[10px] text-background/60">▸ 02 ◂</span>
+              <span class="font-mono text-[10px] text-background/60 self-end">— STORY —</span>
+            </div>
+          </div>
+          <h3 class="font-display text-3xl uppercase mb-1">Visual Storyboarding</h3>
+          <p class="text-sm text-muted-foreground leading-relaxed">Generate frames from script lines or upload location scouts. Iterate shots in seconds.</p>
+        </article>
+
+        <!-- Card 03 -->
+        <article class="flex-none w-[320px] md:w-[400px] snap-start">
+          <div class="capability-card relative aspect-[4/5] mb-4 overflow-hidden border group">
+            <img src="images/film-dailies.jpg" alt="Daily Reviews — CineSmith capability" width="800" height="1024" loading="lazy" onerror="this.setAttribute('data-broken','')" class="w-full h-full object-cover" />
+            <div class="absolute inset-4 border border-background/20 rounded-lg pointer-events-none flex flex-col justify-between p-2">
+              <span class="font-mono text-[10px] text-background/60">▸ 03 ◂</span>
+              <span class="font-mono text-[10px] text-background/60 self-end">— DAILIES —</span>
+            </div>
+          </div>
+          <h3 class="font-display text-3xl uppercase mb-1">Daily Reviews</h3>
+          <p class="text-sm text-muted-foreground leading-relaxed">Review 4K dailies with frame-accurate commenting, colour metadata, and team sign-off.</p>
+        </article>
+
+        <!-- Card 04 -->
+        <article class="flex-none w-[320px] md:w-[400px] snap-start">
+          <div class="capability-card relative aspect-[4/5] mb-4 overflow-hidden border group">
+            <img src="images/film-callsheet.jpg" alt="On-Set Scheduling — CineSmith capability" width="800" height="1024" loading="lazy" onerror="this.setAttribute('data-broken','')" class="w-full h-full object-cover" />
+            <div class="absolute inset-4 border border-background/20 rounded-lg pointer-events-none flex flex-col justify-between p-2">
+              <span class="font-mono text-[10px] text-background/60">▸ 04 ◂</span>
+              <span class="font-mono text-[10px] text-background/60 self-end">— OPS —</span>
+            </div>
+          </div>
+          <h3 class="font-display text-3xl uppercase mb-1">On-Set Scheduling</h3>
+          <p class="text-sm text-muted-foreground leading-relaxed">Dynamic call sheets and budgets that update as your day evolves on location.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- ═══ SC.02 — WHAT PEOPLE SAY (replaces Director's Statement) ═ -->
+    <section class="px-6 py-24 bg-foreground text-background">
+      <div class="max-w-7xl mx-auto">
+        <div class="flex items-baseline gap-4 mb-12">
+          <span class="font-mono text-xs text-accent uppercase tracking-widest">SC.02 — Early Reactions</span>
+          <div class="h-px flex-1 bg-background/15"></div>
+        </div>
+        <div class="grid md:grid-cols-2 gap-8 md:gap-16 items-end mb-16">
+          <h2 class="font-display text-5xl md:text-7xl uppercase leading-[0.9] max-w-[18ch]">
+            What people say <span class="text-accent">after they see it.</span>
+          </h2>
+          <p class="font-body text-sm md:text-base text-background/60 max-w-[52ch] md:pb-2">
+            A handful of producers, directors, and production teams have seen private demos. Below — their words, unprompted, unedited.
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-6">
+          <figure class="reaction-card border border-background/15 rounded-2xl p-7 flex flex-col">
+            <span class="font-serif text-5xl text-accent leading-none mb-4" aria-hidden="true">&ldquo;</span>
+            <blockquote class="text-lg leading-relaxed mb-6 flex-1 italic">This is the tool we've been <em class="text-accent font-semibold">waiting for.</em> The moment I get an invite I'm onboarding the entire dev slate.</blockquote>
+            <figcaption class="font-mono text-[10px] uppercase tracking-widest text-background/50">
+              <span class="block text-background mb-1">Producer</span>UK feature production company · After a 20-min demo
+            </figcaption>
+          </figure>
+          <figure class="reaction-card border border-background/15 rounded-2xl p-7 flex flex-col">
+            <span class="font-serif text-5xl text-accent leading-none mb-4" aria-hidden="true">&ldquo;</span>
+            <blockquote class="text-lg leading-relaxed mb-6 flex-1 italic">I haven't been this excited about production software since <em class="text-accent font-semibold">Final Draft launched.</em> Genuinely — when can we use it?</blockquote>
+            <figcaption class="font-mono text-[10px] uppercase tracking-widest text-background/50">
+              <span class="block text-background mb-1">Writer-Director</span>Indie feature in pre-production · London
+            </figcaption>
+          </figure>
+          <figure class="reaction-card border border-background/15 rounded-2xl p-7 flex flex-col">
+            <span class="font-serif text-5xl text-accent leading-none mb-4" aria-hidden="true">&ldquo;</span>
+            <blockquote class="text-lg leading-relaxed mb-6 flex-1 italic">Every documentary director I've shown this to has the same reaction. It's not <em class="text-accent font-semibold">"interesting"</em> — it's "how do I get on the list."</blockquote>
+            <figcaption class="font-mono text-[10px] uppercase tracking-widest text-background/50">
+              <span class="block text-background mb-1">Producer</span>Documentary feature in production · UK
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ SPEC STRIP — Format / Audience / Team / Status ════════ -->
+    <section class="px-6 py-20 md:py-28 bg-background">
+      <div class="max-w-7xl mx-auto">
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-x-10 gap-y-12">
+          <div class="border-t border-border pt-5">
+            <span class="font-mono text-[10px] uppercase tracking-[0.25em] text-accent block mb-3">Format</span>
+            <p class="text-sm md:text-base leading-relaxed text-foreground/80">
+              Agentic AI production platform — script, storyboard, video, voice, schedule, budget, live on set. <span class="font-semibold text-foreground">One system.</span>
+            </p>
+          </div>
+          <div class="border-t border-border pt-5">
+            <span class="font-mono text-[10px] uppercase tracking-[0.25em] text-accent block mb-3">Audience</span>
+            <p class="text-sm md:text-base leading-relaxed text-foreground/80">
+              For anyone making creative content — <span class="font-semibold text-foreground">feature films, drama, documentary, podcasts, commercials.</span>
+            </p>
+          </div>
+          <div class="border-t border-border pt-5">
+            <span class="font-mono text-[10px] uppercase tracking-[0.25em] text-accent block mb-3">Team</span>
+            <p class="text-sm md:text-base leading-relaxed text-foreground/80">
+              Filmmakers and AI specialists — global film &amp; TV delivery credits. <span class="font-semibold text-foreground">Built in London.</span>
+            </p>
+          </div>
+          <div class="border-t border-border pt-5">
+            <span class="font-mono text-[10px] uppercase tracking-[0.25em] text-accent block mb-3">Status</span>
+            <p class="text-sm md:text-base leading-relaxed text-foreground/80">
+              UK closed beta · Invite only · <span class="font-semibold text-foreground">50 seats opening.</span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ SC.03 — FINAL CUE (black, SMPTE bars) ═════════════════ -->
+    <section id="waitlist" class="bg-foreground text-background">
+      <!-- SMPTE colour bars -->
+      <div class="smpte-bars" aria-hidden="true">
+        <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+      </div>
+
+      <div class="px-6 py-24 md:py-32">
+        <div class="max-w-7xl mx-auto">
+          <div class="flex items-baseline gap-3 mb-10">
+            <span class="text-accent">&#9670;</span>
+            <span class="font-mono text-xs text-accent uppercase tracking-[0.3em]">SC.03 — Final Cue</span>
+            <div class="h-px w-40 bg-background/20"></div>
+          </div>
+
+          <div class="grid md:grid-cols-2 gap-12 md:gap-20 items-end">
+            <h2 class="font-display uppercase text-6xl md:text-8xl leading-[0.88]" data-parallax="0.04">
+              Early access is opening to <span class="text-accent">50 UK production teams.</span> Be one of them.
+            </h2>
+
+            <div class="md:pb-3">
+              <p class="text-base md:text-lg text-background/70 leading-relaxed mb-8 max-w-[42ch]">
+                Less tooling. More filmmaking. Add your name and we'll be in touch when the next cohort opens.
+              </p>
+              <a href="https://forms.gle/wfrBxsDLvXXEUr718" target="_blank" rel="noopener noreferrer"
+                 class="group inline-flex items-center justify-between gap-6 bg-accent text-accent-foreground px-7 py-5 rounded-xl font-mono text-xs uppercase tracking-[0.25em] hover:bg-background hover:text-foreground transition-colors duration-300">
+                <span>Join the Waitlist Now</span>
+                <span class="font-display text-2xl transition-transform group-hover:translate-x-1">&rarr;</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Workspace / company line -->
+          <div class="mt-20 pt-8 border-t border-background/15 max-w-[60ch]">
+            <span class="font-display text-2xl uppercase tracking-tight">CineSmith</span>
+            <p class="mt-2 text-sm text-background/55 leading-relaxed">
+              The unified production workspace for the next generation of cinema. Built in London by CineArt AI Limited.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ FOOTER — original content, new layout ═════════════════ -->
+    <footer class="px-6 py-12 border-t border-border">
+      <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start gap-12">
+        <div class="max-w-sm">
+          <h2 class="font-display text-4xl uppercase mb-4">CineSmith</h2>
+          <p class="text-sm text-muted-foreground leading-relaxed">
+            By filmmakers and AI specialists — with delivery credits across the global film and TV industry, and senior engineering pedigree from creative AI labs.
+          </p>
+        </div>
+        <div class="grid grid-cols-2 md:grid-cols-2 gap-12 md:gap-16">
+          <div class="flex flex-col gap-3">
+            <span class="font-mono text-[10px] uppercase tracking-widest text-muted-foreground">On the web</span>
+            <a href="/team-v2.html" class="text-xs hover:text-accent transition-colors">Team</a>
+            <a href="https://www.cineartai.com" target="_blank" rel="noopener noreferrer" class="text-xs hover:text-accent transition-colors">cineartai.com ↗</a>
+          </div>
+          <div class="flex flex-col gap-3">
+            <span class="font-mono text-[10px] uppercase tracking-widest text-muted-foreground">Contact</span>
+            <a href="mailto:cinesmith@cineartai.com" class="text-xs hover:text-accent transition-colors">cinesmith@cineartai.com</a>
+            <a href="mailto:press@cineartai.com" class="text-xs hover:text-accent transition-colors">press@cineartai.com</a>
+            <a href="tel:+447958707232" class="text-xs hover:text-accent transition-colors">+44 7958 707232</a>
+          </div>
+        </div>
+      </div>
+      <div class="max-w-7xl mx-auto mt-16 pt-8 border-t border-border flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] font-mono text-muted-foreground uppercase tracking-widest">
+        <p>CineArt AI Limited · Registered in England &amp; Wales · 85 Great Portland Street, London W1W 7LT</p>
+        <p>© MMXXVI · CineArt AI Limited · All Rights Reserved</p>
+      </div>
+    </footer>
+  </main>
+
+  <script>
+    // ┌─ Custom crosshair cursor — eased follow + grow over targets ─┐
+    (function () {
+      const c = document.getElementById('cursor');
+      if (!c || matchMedia('(hover: none)').matches || matchMedia('(pointer: coarse)').matches) return;
+      let x = 0, y = 0, tx = 0, ty = 0;
+      document.addEventListener('mousemove', (e) => { x = e.clientX; y = e.clientY; }, { passive: true });
+      (function loop() {
+        tx += (x - tx) * 0.32;
+        ty += (y - ty) * 0.32;
+        c.style.transform = `translate3d(${tx}px, ${ty}px, 0)`;
+        requestAnimationFrame(loop);
+      })();
+      document.querySelectorAll('a, button, input, select, .capability-card, .reaction-card').forEach((el) => {
+        el.addEventListener('mouseenter', () => c.classList.add('lg'));
+        el.addEventListener('mouseleave', () => c.classList.remove('lg'));
+      });
+    })();
+
+    // ┌─ Hero kinetic cycler — rotating word + REC timecode + progress bar ─┐
+    (function () {
+      const stage = document.getElementById('kinetic-stage');
+      const numEl = document.getElementById('kinetic-num');
+      const tcEl  = document.getElementById('kinetic-tc');
+      const bar   = document.getElementById('kinetic-bar-fill');
+      if (!stage || !numEl || !tcEl || !bar) return;
+      const words = Array.from(stage.querySelectorAll('.kinetic-word'));
+      if (!words.length) return;
+      document.getElementById('kinetic-total').textContent = String(words.length).padStart(2, '0');
+
+      const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      // Mosaic burst: grow the pixelate block size up then back down on each swap
+      const cell = document.getElementById('px-cell');
+      const dil  = document.getElementById('px-dilate');
+      function pixelBurst() {
+        if (reduced || !cell || !dil) return;
+        const dur = 460, t0 = performance.now(), minCell = 3, maxCell = 20;
+        stage.style.filter = 'url(#pixelate)';
+        (function frame(now) {
+          const k = Math.min((now - t0) / dur, 1);
+          const tri = 1 - Math.abs(k * 2 - 1);            // 0 → 1 → 0 (sharp → blocky → sharp)
+          const size = minCell + tri * (maxCell - minCell);
+          cell.setAttribute('width', size.toFixed(2));
+          cell.setAttribute('height', size.toFixed(2));
+          dil.setAttribute('radius', (tri * maxCell / 2).toFixed(2));
+          if (k < 1) requestAnimationFrame(frame);
+          else { stage.style.filter = ''; }              // back to crisp text
+        })(performance.now());
+      }
+
+      const HOLD_MS = 2400;
+      let i = 0;
+      let cycleStart = performance.now();
+      function setIndex(next) {
+        const prev = i;
+        i = next % words.length;
+        words[prev].classList.remove('in'); words[prev].classList.add('out');
+        words[i].classList.remove('out');  words[i].classList.add('in');
+        numEl.textContent = String(i + 1).padStart(2, '0');
+        cycleStart = performance.now();
+        pixelBurst();
+      }
+      setInterval(() => setIndex(i + 1), HOLD_MS);
+
+      function tickBar(now) {
+        const pct = Math.min(((now - cycleStart) % HOLD_MS) / HOLD_MS, 1);
+        bar.style.right = (100 - pct * 100) + '%';
+        requestAnimationFrame(tickBar);
+      }
+      requestAnimationFrame(tickBar);
+
+      const t0 = performance.now();
+      function tickTc(now) {
+        const s = (now - t0) / 1000;
+        const ff = Math.floor(s * 24) % 24, ss = Math.floor(s) % 60, mm = Math.floor(s / 60) % 60, hh = Math.floor(s / 3600) % 24;
+        tcEl.textContent = [hh, mm, ss, ff].map((n) => String(n).padStart(2, '0')).join(':');
+        requestAnimationFrame(tickTc);
+      }
+      requestAnimationFrame(tickTc);
+    })();
+
+    // ┌─ Filmstrip entrance — slide + snap cards in when strip enters view ─┐
+    (function () {
+      const strip = document.querySelector('[data-filmstrip]');
+      if (!strip || strip.offsetParent === null) return;   // skip if hidden
+      if (matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) return;
+      strip.classList.add('filmstrip-anim');
+      let revealed = false;
+      const reveal = () => { if (!revealed) { revealed = true; strip.classList.add('in'); } };
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((e) => { if (e.isIntersecting) { reveal(); io.disconnect(); } });
+      }, { threshold: 0.12 });
+      io.observe(strip);
+      // Safety net: never leave cards hidden if the observer doesn't fire
+      setTimeout(reveal, 6000);
+    })();
+
+    // ┌─ Filmstrip auto-revolve — shift + snap to the next card, looping ─┐
+    (function () {
+      const strip = document.querySelector('[data-filmstrip]');
+      if (!strip || strip.offsetParent === null) return;   // skip if hidden
+      if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      const cards = Array.from(strip.children);
+      if (cards.length < 2) return;
+
+      // Clone the set once so the loop is seamless (clone[i] aligns with card[i])
+      const originalCount = cards.length;
+      cards.forEach((c) => strip.appendChild(c.cloneNode(true)));
+
+      const gap = parseFloat(getComputedStyle(strip).columnGap || getComputedStyle(strip).gap || '24') || 24;
+      const step = () => cards[0].getBoundingClientRect().width + gap;
+      const setWidth = () => step() * originalCount;
+
+      let paused = false;
+      strip.addEventListener('mouseenter', () => { paused = true; });
+      strip.addEventListener('mouseleave', () => { paused = false; });
+      strip.addEventListener('touchstart', () => { paused = true; }, { passive: true });
+      strip.addEventListener('touchend', () => { setTimeout(() => { paused = false; }, 4000); }, { passive: true });
+      document.addEventListener('visibilitychange', () => { paused = document.hidden; });
+
+      setInterval(() => {
+        if (paused) return;
+        const sw = setWidth();
+        strip.scrollTo({ left: strip.scrollLeft + step(), behavior: 'smooth' });
+        // After the smooth shift settles, if we've crossed into the clones, rewind
+        // by one full set instantly — invisible because the frame is identical.
+        setTimeout(() => { if (strip.scrollLeft >= sw - 1) { strip.scrollLeft -= sw; } }, 700);
+      }, 2600);
+    })();
+
+    // ┌─ Slight scroll parallax — elements drift relative to centre ─┐
+    (function () {
+      if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      const items = Array.from(document.querySelectorAll('[data-parallax]'));
+      if (!items.length) return;
+      let ticking = false;
+      function update() {
+        const vh = window.innerHeight;
+        items.forEach((el) => {
+          const speed = parseFloat(el.dataset.parallax) || 0.05;
+          const rect = el.getBoundingClientRect();
+          const centre = rect.top + rect.height / 2;
+          const offset = (centre - vh / 2) * -speed;
+          el.style.transform = `translate3d(0, ${offset.toFixed(1)}px, 0)`;
+        });
+        ticking = false;
+      }
+      window.addEventListener('scroll', () => { if (!ticking) { requestAnimationFrame(update); ticking = true; } }, { passive: true });
+      window.addEventListener('resize', update, { passive: true });
+      update();
+    })();
+  </script>
+</body>
+</html>
