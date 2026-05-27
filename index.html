@@ -406,6 +406,72 @@
   }
   .form-foot .em { color: var(--ember); font-weight: 600; }
 
+  /* ── Email waitlist form ──────────────────────────────────── */
+  form#waitlist-form {
+    display: flex;
+    align-items: stretch;
+    background: var(--paper-warm);
+    border: 1.5px solid var(--rule);
+    border-radius: 14px;
+    overflow: hidden;
+    transition: border-color 180ms var(--ease), box-shadow 180ms var(--ease);
+  }
+  form#waitlist-form:focus-within {
+    border-color: var(--ember);
+    box-shadow: 0 0 0 3px rgba(200,69,27,0.14);
+  }
+  form#waitlist-form input[type="email"] {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    padding: 18px 20px;
+    font-family: var(--sans);
+    font-size: 15px;
+    color: var(--ink);
+    min-width: 0;
+  }
+  form#waitlist-form input[type="email"]::placeholder { color: var(--paper-mute); }
+  form#waitlist-form button[type="submit"] {
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--paper);
+    background: var(--ember);
+    border: none;
+    cursor: none;
+    padding: 18px 24px;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: background 180ms var(--ease);
+  }
+  form#waitlist-form button[type="submit"]::after {
+    content: '→';
+    font-family: var(--serif);
+    font-size: 20px;
+    line-height: 0;
+    transform: translateY(-1px);
+  }
+  form#waitlist-form button[type="submit"]:hover { background: var(--ink); }
+  .form-success {
+    display: none;
+    margin-top: 12px;
+    padding: 14px 18px;
+    background: var(--paper-warm);
+    border: 1.5px solid var(--rule);
+    border-radius: 10px;
+    font-family: var(--sans);
+    font-size: 14px;
+    color: var(--ink-soft);
+    line-height: 1.5;
+  }
+  .form-success.show { display: block; }
+  .form-success strong { display: block; color: var(--ink); margin-bottom: 4px; }
+
   /* Hero visual — film frame with rebate edge & sprockets */
   .hero-right { position: relative; padding: 14px 0 14px 36px; }
   .frame {
@@ -860,13 +926,14 @@
       </dl>
 
       <div class="form-wrap">
-        <a href="https://forms.gle/wfrBxsDLvXXEUr718"
-           target="_blank"
-           rel="noopener noreferrer"
-           class="waitlist-cta"
-           id="waitlist-cta">
-          Join the Waitlist Now
-        </a>
+        <form id="waitlist-form" novalidate>
+          <input type="email" name="email" required placeholder="you@yourpostroom.com" aria-label="Email address">
+          <button type="submit">Join the Waitlist</button>
+        </form>
+        <div class="form-success" id="waitlist-success">
+          <strong>Almost there — finish in the new tab.</strong>
+          A few quick details about you and the project and you're on the list.
+        </div>
 
         <div class="form-foot">
           <span><span class="em">●</span>&nbsp;LIMITED — 50 SEATS</span>
@@ -950,7 +1017,7 @@
       <h2>Early access is opening to <span class="it">50 production teams.</span> Be one of them.</h2>
       <div>
         <p>Less tooling. More filmmaking. Add your name and we'll be in touch when the next cohort opens.</p>
-        <a href="https://forms.gle/wfrBxsDLvXXEUr718" target="_blank" rel="noopener noreferrer" class="closer-cta">Join the Waitlist Now</a>
+        <a href="#waitlist-form" class="closer-cta">Join the Waitlist Now</a>
       </div>
     </div>
   </div>
@@ -1107,20 +1174,31 @@
     requestAnimationFrame(tickTc);
   })();
 
-  // ┌─ Waitlist CTAs ───────────────────────────────────────────
-  // CTAs are plain external links to a hosted Google Form, so there
-  // is no submission logic to wire here. We do append UTM params to
-  // every form link on the page so attribution survives the click
-  // regardless of which CTA the visitor uses (hero / nav / closer).
-  (function appendUtmsToFormLinks() {
-    const here = new URLSearchParams(window.location.search);
-    const utms = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'];
-    const params = new URLSearchParams();
-    utms.forEach((k) => { const v = here.get(k); if (v) params.set(k, v); });
-    if (!params.toString()) return;
-    document.querySelectorAll('a[href*="forms.gle/"]').forEach((a) => {
-      const sep = a.href.includes('?') ? '&' : '?';
-      a.href = a.href + sep + params.toString();
+  // ┌─ Waitlist form — prefill email into Google Form ───────────
+  (function () {
+    const GFORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSfzb2bj8ExX8lEBasaWEhK6TVQ9sP0hUZ8aZ67yqSsjvhM1Tg/viewform';
+    const EMAIL_ENTRY = 'entry.818317508';
+    function validEmail(s) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(s.trim()); }
+
+    const form = document.getElementById('waitlist-form');
+    const successEl = document.getElementById('waitlist-success');
+    if (!form) return;
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const input = form.querySelector('input[type="email"]');
+      const email = input.value.trim();
+      if (!validEmail(email)) {
+        input.focus();
+        form.style.boxShadow = '0 0 0 3px rgba(200,69,27,0.3)';
+        setTimeout(() => form.style.boxShadow = '', 1200);
+        return;
+      }
+      // Build prefill URL — opens the full form in a new tab with email pre-filled
+      const url = GFORM_URL + '?usp=pp_url&' + EMAIL_ENTRY + '=' + encodeURIComponent(email);
+      window.open(url, '_blank', 'noopener,noreferrer');
+      form.style.display = 'none';
+      if (successEl) successEl.classList.add('show');
     });
   })();
 </script>
