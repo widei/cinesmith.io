@@ -457,6 +457,70 @@
     transform: translateY(-1px);
   }
   form#waitlist-form button[type="submit"]:hover { background: var(--ink); }
+
+  /* ── Closer form (dark background variant) ────────────────── */
+  form#waitlist-form-2 {
+    display: flex;
+    align-items: stretch;
+    background: rgba(242,235,220,0.08);
+    border: 1.5px solid rgba(242,235,220,0.22);
+    border-radius: 14px;
+    overflow: hidden;
+    max-width: 520px;
+    transition: border-color 180ms var(--ease), box-shadow 180ms var(--ease);
+  }
+  form#waitlist-form-2:focus-within {
+    border-color: var(--ember);
+    box-shadow: 0 0 0 3px rgba(200,69,27,0.25);
+  }
+  form#waitlist-form-2 input[type="email"] {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    padding: 18px 20px;
+    font-family: var(--sans);
+    font-size: 15px;
+    color: var(--paper);
+    min-width: 0;
+  }
+  form#waitlist-form-2 input[type="email"]::placeholder { color: rgba(242,235,220,0.45); }
+  form#waitlist-form-2 button[type="submit"] {
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--paper);
+    background: var(--ember);
+    border: none;
+    cursor: none;
+    padding: 18px 24px;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: background 180ms var(--ease);
+  }
+  form#waitlist-form-2 button[type="submit"]::after {
+    content: '→';
+    font-family: var(--serif);
+    font-size: 20px;
+    line-height: 0;
+    transform: translateY(-1px);
+  }
+  form#waitlist-form-2 button[type="submit"]:hover { background: var(--paper); color: var(--ink); }
+  .form-success-2 {
+    display: none;
+    margin-top: 12px;
+    font-family: var(--sans);
+    font-size: 14px;
+    color: rgba(242,235,220,0.72);
+    line-height: 1.5;
+  }
+  .form-success-2.show { display: block; }
+  .form-success-2 strong { display: block; color: var(--paper); margin-bottom: 4px; }
+
   .form-success {
     display: none;
     margin-top: 12px;
@@ -931,7 +995,7 @@
           <button type="submit">Join the Waitlist</button>
         </form>
         <div class="form-success" id="waitlist-success">
-          <strong>Almost there — finish in the new tab.</strong>
+          <strong>Almost there. Finish in the new tab.</strong>
           A few quick details about you and the project and you're on the list.
         </div>
 
@@ -1017,7 +1081,14 @@
       <h2>Early access is opening to <span class="it">50 production teams.</span> Be one of them.</h2>
       <div>
         <p>Less tooling. More filmmaking. Add your name and we'll be in touch when the next cohort opens.</p>
-        <a href="#waitlist-form" class="closer-cta">Join the Waitlist Now</a>
+        <form id="waitlist-form-2" novalidate>
+          <input type="email" name="email" required placeholder="you@yourpostroom.com" aria-label="Email address">
+          <button type="submit">Join the Waitlist</button>
+        </form>
+        <div class="form-success-2" id="waitlist-success-2">
+          <strong>Almost there. Finish in the new tab.</strong>
+          A few quick details and you are on the list.
+        </div>
       </div>
     </div>
   </div>
@@ -1174,32 +1245,35 @@
     requestAnimationFrame(tickTc);
   })();
 
-  // ┌─ Waitlist form — prefill email into Google Form ───────────
+  // ┌─ Waitlist forms — prefill email into Google Form ──────────
   (function () {
     const GFORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSfzb2bj8ExX8lEBasaWEhK6TVQ9sP0hUZ8aZ67yqSsjvhM1Tg/viewform';
     const EMAIL_ENTRY = 'entry.818317508';
     function validEmail(s) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(s.trim()); }
 
-    const form = document.getElementById('waitlist-form');
-    const successEl = document.getElementById('waitlist-success');
-    if (!form) return;
+    function wireForm(formId, successId) {
+      const form = document.getElementById(formId);
+      const successEl = document.getElementById(successId);
+      if (!form) return;
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const input = form.querySelector('input[type="email"]');
+        const email = input.value.trim();
+        if (!validEmail(email)) {
+          input.focus();
+          form.style.boxShadow = '0 0 0 3px rgba(200,69,27,0.3)';
+          setTimeout(() => form.style.boxShadow = '', 1200);
+          return;
+        }
+        const url = GFORM_URL + '?usp=pp_url&' + EMAIL_ENTRY + '=' + encodeURIComponent(email);
+        window.open(url, '_blank', 'noopener,noreferrer');
+        form.style.display = 'none';
+        if (successEl) successEl.classList.add('show');
+      });
+    }
 
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const input = form.querySelector('input[type="email"]');
-      const email = input.value.trim();
-      if (!validEmail(email)) {
-        input.focus();
-        form.style.boxShadow = '0 0 0 3px rgba(200,69,27,0.3)';
-        setTimeout(() => form.style.boxShadow = '', 1200);
-        return;
-      }
-      // Build prefill URL — opens the full form in a new tab with email pre-filled
-      const url = GFORM_URL + '?usp=pp_url&' + EMAIL_ENTRY + '=' + encodeURIComponent(email);
-      window.open(url, '_blank', 'noopener,noreferrer');
-      form.style.display = 'none';
-      if (successEl) successEl.classList.add('show');
-    });
+    wireForm('waitlist-form', 'waitlist-success');
+    wireForm('waitlist-form-2', 'waitlist-success-2');
   })();
 </script>
 
