@@ -328,7 +328,7 @@
   /* ═══ HERO ════════════════════════════════════════════════════ */
   .hero { padding: clamp(56px, 9vw, 110px) 0 clamp(48px, 8vw, 96px); position: relative; }
 
-  .hero .wrap { display: block; }
+  .hero .wrap { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(32px,5vw,80px); align-items: start; }
 
   .hero-left { position: relative; }
 
@@ -368,34 +368,6 @@
   .hero-meta dt { font-family: var(--mono); font-size: 10.5px; letter-spacing: 2px; text-transform: uppercase; color: var(--paper-mute); align-self: center; }
   .hero-meta dd { font-family: var(--sans); font-size: 15px; color: var(--ink); }
   .hero-meta dd .em { color: var(--ember); font-weight: 600; }
-
-  /* Waitlist CTA — opens hosted Google Form in a new tab */
-  .form-wrap { max-width: 580px; }
-  .waitlist-cta {
-    font-family: var(--mono);
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 2.5px;
-    text-transform: uppercase;
-    color: var(--paper);
-    background: var(--ember);
-    cursor: none;
-    padding: 22px 26px;
-    border-radius: 14px;
-    text-align: left;
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 16px;
-    width: 100%;
-    box-sizing: border-box;
-    box-shadow: 0 16px 36px -18px rgba(200, 69, 27, 0.5);
-    transition: background 200ms var(--ease), color 200ms var(--ease), transform 240ms var(--ease);
-  }
-  .waitlist-cta::after { content: '→'; font-family: var(--serif); font-size: 22px; line-height: 0; transform: translateY(-1px); }
-  .waitlist-cta:hover { background: var(--ink); color: var(--paper); transform: translateY(-2px); }
-  .waitlist-cta:focus-visible { outline: 2px solid var(--ember); outline-offset: 3px; }
 
   .form-foot {
     display: flex; align-items: center; justify-content: space-between;
@@ -537,7 +509,7 @@
   .form-success strong { display: block; color: var(--ink); margin-bottom: 4px; }
 
   /* Hero visual — film frame with rebate edge & sprockets */
-  .hero-right { position: relative; padding: 14px 0 14px 36px; }
+  .hero-right { position: relative; padding-top: clamp(16px,3vw,40px); }
   .frame {
     position: relative;
     aspect-ratio: 4/5;
@@ -953,11 +925,11 @@
   </div>
   <div class="masthead-bar">
     <div class="wrap">
-      <div class="mast-left">CineArt AI · Vol. I — No. 01</div>
+      <div class="mast-left">CineArt AI · Vol. I, No. 01</div>
       <div class="mast-brand">
         <a href="/" aria-label="CineSmith home">
           Cine<span class="it">Smith</span>
-          <span class="small">— Agentic AI for filmmakers —</span>
+          <span class="small">· Agentic AI for filmmakers ·</span>
         </a>
       </div>
       <div class="mast-right" aria-hidden="true"></div>
@@ -970,21 +942,23 @@
   <div class="wrap">
     <div class="hero-left">
       <span class="hero-frame-num" aria-hidden="true">01</span>
-      <span class="scene-marker"><span class="em">SC.01</span> — The proposition</span>
+      <span class="scene-marker"><span class="em">SC.01</span> · The proposition</span>
 
       <h1 class="display hero-title">
         <span class="l1">From idea</span>
         <span class="l2"><span class="lo">to</span> <span class="it">rough cut.</span></span>
         <span class="l3"><span class="lo">In</span> one platform.</span>
       </h1>
+    </div>
 
+    <div class="hero-right">
       <dl class="hero-meta">
         <dt>Format</dt>
-        <dd>Agentic AI production platform — script, storyboard, video, voice, schedule, budget, live on set. <span class="em">One system.</span></dd>
+        <dd>Agentic AI production platform: script, storyboard, video, voice, schedule, budget, live on set. <span class="em">One system.</span></dd>
         <dt>Audience</dt>
-        <dd>For anyone making creative content — <span class="em">feature films</span>, <span class="em">drama</span>, <span class="em">documentary</span>, <span class="em">podcasts</span>, <span class="em">commercials</span>.</dd>
+        <dd>For anyone making creative content: <span class="em">feature films</span>, <span class="em">drama</span>, <span class="em">documentary</span>, <span class="em">podcasts</span>, <span class="em">commercials</span>.</dd>
         <dt>Team</dt>
-        <dd>Filmmakers and <span class="em">AI specialists</span> — global film &amp; TV delivery credits. Built in London.</dd>
+        <dd>Filmmakers and <span class="em">AI specialists</span>, with global film and TV delivery credits. Built in London.</dd>
         <dt>Status</dt>
         <dd>Closed beta · Invite only · <span class="em">50 seats opening</span></dd>
       </dl>
@@ -1000,7 +974,7 @@
         </div>
 
         <div class="form-foot">
-          <span><span class="em">●</span>&nbsp;LIMITED — 50 SEATS</span>
+          <span><span class="em">●</span>&nbsp;LIMITED · 50 SEATS</span>
           <span>CLOSED BETA · INVITE ONLY</span>
         </div>
       </div>
@@ -1043,10 +1017,10 @@
 <!-- ═══ REACTIONS — pull quotes ═════════════════════════════════ -->
 <section class="col reveal">
   <div class="wrap">
-    <span class="scene-marker"><span class="em">SC.02</span> — Early reactions</span>
+    <span class="scene-marker"><span class="em">SC.02</span> · Early reactions</span>
     <div class="section-head">
       <h2 class="section-title">What people say <span class="it">after</span> they see it.</h2>
-      <p class="section-lead"><span class="first">A</span> handful of producers, directors, and production teams have seen private demos. Below — their words, unprompted, unedited.</p>
+      <p class="section-lead"><span class="first">A</span> handful of producers, directors, and production teams have seen private demos. Below: their words, unprompted, unedited.</p>
     </div>
 
     <div class="reactions">
@@ -1057,12 +1031,12 @@
       </article>
       <article class="reaction">
         <span class="qmark" aria-hidden="true">“</span>
-        <blockquote>I haven't been this excited about production software since <span class="it">Final Draft launched.</span> Genuinely — when can we use it?</blockquote>
+        <blockquote>I haven't been this excited about production software since <span class="it">Final Draft launched.</span> Genuinely, when can we use it?</blockquote>
         <div class="who"><span class="name">Writer-Director</span>Indie feature in pre-production · London</div>
       </article>
       <article class="reaction">
         <span class="qmark" aria-hidden="true">“</span>
-        <blockquote>Every documentary director I've shown this to has the same reaction. It's not <span class="it">"interesting"</span> — it's "how do I get on the list."</blockquote>
+        <blockquote>Every documentary director I've shown this to has the same reaction. It's not <span class="it">"interesting."</span> It's "how do I get on the list."</blockquote>
         <div class="who"><span class="name">Producer</span>Documentary feature in production · UK</div>
       </article>
     </div>
@@ -1076,7 +1050,7 @@
     <span></span><span></span><span></span><span></span>
   </div>
   <div class="wrap">
-    <span class="scene-marker"><span class="em">SC.03</span> — Final cue</span>
+    <span class="scene-marker"><span class="em">SC.03</span> · Final cue</span>
     <div class="closer-grid">
       <h2>Early access is opening to <span class="it">50 production teams.</span> Be one of them.</h2>
       <div>
@@ -1100,7 +1074,7 @@
     <div class="colophon">
       <div>
         <h4>Colophon</h4>
-        <p class="credo">Built in London by filmmakers and <span style="color:var(--ember);font-style:italic;">AI specialists</span> — with delivery credits across the global film and TV industry, and senior engineering pedigree from creative AI labs.</p>
+        <p class="credo">Built in London by filmmakers and <span style="color:var(--ember);font-style:italic;">AI specialists</span>, with delivery credits across the global film and TV industry, and senior engineering pedigree from creative AI labs.</p>
       </div>
       <div>
         <h4>On the web</h4>
