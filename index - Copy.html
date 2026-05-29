@@ -1,0 +1,1097 @@
+<!DOCTYPE html>
+<!--
+  cinesmith.io — Waitlist
+  ─────────────────────────────────────────────────────────────
+  Editorial cinema magazine aesthetic. Single accent (ember).
+  Instrument Serif (display, italic-led) + Instrument Sans
+  (body) + JetBrains Mono (technical metadata).
+  CTA opens a hosted Google Form in a new tab — no client-side
+  secrets, no backend to maintain. Swap WAITLIST_FORM_URL below
+  when the production form is created.
+-->
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CineSmith — From idea to rough cut. In one platform.</title>
+<meta name="description" content="The agentic AI production platform for filmmakers. Script, storyboard, video, voice, schedule, budget, and live on set — in one integrated system. Invite only UK beta.">
+<meta name="theme-color" content="#0B0F14">
+<link rel="icon" type="image/png" href="/assets/favicon.png">
+
+<link rel="canonical" href="https://cinesmith.io/">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="CineSmith — From idea to rough cut. In one platform.">
+<meta property="og:description" content="The agentic AI production platform for filmmakers. Invite only UK beta.">
+<meta property="og:url" content="https://cinesmith.io">
+<meta property="og:site_name" content="CineSmith">
+<meta property="og:locale" content="en_GB">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@khantaimur">
+<meta name="author" content="CineArt AI Limited">
+
+<!-- Structured data — Organization + SoftwareApplication so search engines and LLMs
+     can extract canonical facts (founder, location, product, status) without inferring. -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://cinesmith.io/#organization",
+      "name": "CineArt AI Limited",
+      "alternateName": "CineArt AI",
+      "url": "https://www.cineartai.com",
+      "logo": "https://cinesmith.io/assets/favicon.png",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "85 Great Portland Street",
+        "addressLocality": "London",
+        "postalCode": "W1W 7LT",
+        "addressCountry": "GB"
+      },
+      "telephone": "+44 7958 707232",
+      "email": "press@cineartai.com",
+      "founder": {
+        "@type": "Person",
+        "@id": "https://cinesmith.io/team/#taimur",
+        "name": "Taimur Khan",
+        "jobTitle": "Founder",
+        "sameAs": [
+          "https://www.linkedin.com/in/khantaimur/",
+          "https://twitter.com/khantaimur",
+          "https://taimurkhan.com/"
+        ]
+      },
+      "foundingLocation": "London, United Kingdom",
+      "sameAs": ["https://www.cineartai.com"]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://cinesmith.io/#website",
+      "url": "https://cinesmith.io/",
+      "name": "CineSmith",
+      "description": "Agentic AI production platform built by working filmmakers and AI specialists.",
+      "publisher": { "@id": "https://cinesmith.io/#organization" },
+      "inLanguage": "en-GB"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "@id": "https://cinesmith.io/#product",
+      "name": "CineSmith",
+      "alternateName": "CineSmith Production Platform",
+      "applicationCategory": "MultimediaApplication",
+      "operatingSystem": "Web",
+      "description": "Agentic AI production platform covering script, storyboard, video, voice, schedule, budget, and live on-set support inside one integrated system. Built for film, drama, documentary, podcasts, and commercials.",
+      "url": "https://cinesmith.io/",
+      "creator": { "@id": "https://cinesmith.io/#organization" },
+      "offers": {
+        "@type": "Offer",
+        "availability": "https://schema.org/PreOrder",
+        "price": "0",
+        "priceCurrency": "GBP",
+        "description": "Free during UK closed beta (summer 2026, 50 invited production teams). Public availability and pricing announced separately."
+      },
+      "audience": {
+        "@type": "Audience",
+        "audienceType": "Producers, directors, writers, production companies, studios, networks, broadcasters, and agencies making feature films, drama, documentary, podcasts, and commercials."
+      }
+    }
+  ]
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --paper:        #F2EBDC;
+    --paper-warm:   #ECE3D0;
+    --paper-deep:   #E2D6BC;
+    --ink:          #0B0F14;
+    --ink-2:        #141B24;
+    --ink-soft:     #2A323C;
+    --rule:         rgba(11, 15, 20, 0.18);
+    --rule-soft:    rgba(11, 15, 20, 0.08);
+    --rule-hair:    rgba(11, 15, 20, 0.04);
+    --ember:        #C8451B;
+    --ember-soft:   #D86036;
+    --ember-deep:   #7A2A12;
+    --paper-mute:   rgba(11, 15, 20, 0.55);
+
+    --serif:  'Instrument Serif', 'Times New Roman', Georgia, serif;
+    --sans:   'Instrument Sans', system-ui, -apple-system, sans-serif;
+    --mono:   'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+
+    --w-max:  1320px;
+    --gutter: clamp(20px, 4vw, 56px);
+    --ease:   cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+  body {
+    font-family: var(--sans);
+    color: var(--ink);
+    background: var(--paper);
+    font-size: 16.5px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+    font-feature-settings: 'ss01', 'cv11', 'kern';
+    cursor: none;
+  }
+
+  ::selection { background: var(--ember); color: var(--paper); }
+
+  /* Subtle paper grain over everything */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 95;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 240 240' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.92' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.07 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    mix-blend-mode: multiply;
+    opacity: 0.55;
+  }
+
+  a { color: inherit; text-decoration: none; }
+  a:hover { color: var(--ember); }
+
+  .wrap { max-width: var(--w-max); margin: 0 auto; padding: 0 var(--gutter); position: relative; }
+
+  /* ─── Custom crosshair cursor ─────────────────────────────── */
+  #cursor {
+    position: fixed;
+    top: 0; left: 0;
+    width: 22px; height: 22px;
+    margin: -11px 0 0 -11px;
+    pointer-events: none;
+    z-index: 9999;
+    mix-blend-mode: difference;
+    will-change: transform;
+    transition: width 200ms var(--ease), height 200ms var(--ease), margin 200ms var(--ease);
+  }
+  #cursor::before, #cursor::after {
+    content: '';
+    position: absolute;
+    background: #fff;
+  }
+  #cursor::before { left: 50%; top: 0; bottom: 0; width: 1px; transform: translateX(-50%); }
+  #cursor::after  { top: 50%; left: 0; right: 0; height: 1px; transform: translateY(-50%); }
+  #cursor.lg { width: 56px; height: 56px; margin: -28px 0 0 -28px; }
+  @media (hover: none), (max-width: 800px) {
+    body { cursor: auto; }
+    #cursor { display: none; }
+  }
+
+  /* ─── Scroll progress hairline ───────────────────────────── */
+  #scroll-progress {
+    position: fixed;
+    top: 0; left: 0;
+    height: 2px;
+    width: 0%;
+    background: var(--ember);
+    z-index: 100;
+    will-change: width;
+  }
+
+  /* ─── Reveal-on-scroll ───────────────────────────────────── */
+  .reveal { opacity: 0; transform: translateY(22px); transition: opacity 800ms var(--ease), transform 800ms var(--ease); }
+  .reveal.in { opacity: 1; transform: translateY(0); }
+
+  /* ═══ Editorial primitives ═══════════════════════════════════ */
+
+  .mono {
+    font-family: var(--mono);
+    font-size: 11.5px;
+    font-weight: 500;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+  .mono .em { color: var(--ember); }
+
+  .scene-marker {
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 2.4px;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    display: inline-flex;
+    align-items: baseline;
+    gap: 14px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--rule);
+    margin-bottom: 36px;
+  }
+  .scene-marker::before {
+    content: '◇';
+    color: var(--ember);
+    font-size: 9px;
+    transform: translateY(-1px);
+  }
+  .scene-marker .em { color: var(--ember); font-weight: 700; }
+
+  .double-rule {
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    height: 5px;
+    background: transparent;
+    margin: 0;
+  }
+
+  .display {
+    font-family: var(--serif);
+    font-weight: 400;
+    color: var(--ink);
+    line-height: 0.96;
+    letter-spacing: -0.018em;
+  }
+  .display .it { font-style: italic; color: var(--ember); }
+  .display .lo { color: var(--ink-soft); font-style: italic; }
+
+  .lead {
+    font-family: var(--sans);
+    font-size: clamp(17px, 1.5vw, 20px);
+    line-height: 1.5;
+    color: var(--ink-soft);
+    max-width: 56ch;
+  }
+  .lead .first {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 1.25em;
+    line-height: 1;
+    color: var(--ink);
+    padding-right: 2px;
+  }
+
+  /* ═══ MASTHEAD ════════════════════════════════════════════════ */
+  .masthead {
+    border-bottom: 1px solid var(--rule);
+    background: var(--paper);
+  }
+  .masthead-strip {
+    background: var(--ink);
+    color: var(--paper);
+  }
+  .masthead-strip .wrap {
+    display: flex; justify-content: space-between; align-items: center;
+    padding-top: 8px; padding-bottom: 8px; gap: 12px;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+    color: rgba(242, 235, 220, 0.7);
+  }
+  .masthead-strip .em { color: var(--ember-soft); }
+
+  .masthead-bar .wrap {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    padding-top: 22px;
+    padding-bottom: 22px;
+    gap: 24px;
+  }
+  .mast-left, .mast-right {
+    font-family: var(--mono);
+    font-size: 10.5px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+  .mast-right { justify-self: end; display: flex; align-items: center; gap: 18px; }
+  .mast-right a { padding: 10px 16px; border: 1px solid var(--ink); border-radius: 0; color: var(--ink); transition: background 220ms var(--ease), color 220ms var(--ease); }
+  .mast-right a:hover { background: var(--ink); color: var(--paper); }
+  .mast-brand {
+    justify-self: center;
+    font-family: var(--serif);
+    font-size: 30px;
+    line-height: 1;
+    color: var(--ink);
+    letter-spacing: -0.5px;
+  }
+  .mast-brand a, .mast-brand a:hover { color: inherit; text-decoration: none; display: block; }
+  .mast-brand .it { font-style: italic; color: var(--ember); }
+  .mast-brand .small { display: block; font-family: var(--mono); font-size: 9px; letter-spacing: 3px; color: var(--ink-soft); margin-top: 6px; text-transform: uppercase; text-align: center; }
+
+  /* ═══ HERO ════════════════════════════════════════════════════ */
+  .hero { padding: clamp(56px, 9vw, 110px) 0 clamp(48px, 8vw, 96px); position: relative; }
+
+  .hero .wrap { display: grid; grid-template-columns: 1.45fr 1fr; gap: clamp(32px, 5vw, 72px); align-items: end; }
+
+  .hero-left { position: relative; }
+
+  .hero-frame-num {
+    position: absolute;
+    top: -28px; right: -8px;
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: clamp(120px, 16vw, 220px);
+    line-height: 0.8;
+    color: var(--ember);
+    opacity: 0.16;
+    pointer-events: none;
+    user-select: none;
+    z-index: 0;
+  }
+
+  .hero-title {
+    position: relative;
+    z-index: 1;
+    font-size: clamp(56px, 8.4vw, 132px);
+    margin-top: 32px;
+  }
+  .hero-title .l1 { display: block; }
+  .hero-title .l2 { display: block; padding-left: 0.6em; }
+  .hero-title .l3 { display: block; padding-left: 1.2em; }
+
+  .hero-meta {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 18px 24px;
+    margin: clamp(28px, 4vw, 44px) 0 clamp(28px, 4vw, 40px);
+    padding: 22px 0;
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+  }
+  .hero-meta dt { font-family: var(--mono); font-size: 10.5px; letter-spacing: 2px; text-transform: uppercase; color: var(--paper-mute); align-self: center; }
+  .hero-meta dd { font-family: var(--sans); font-size: 15px; color: var(--ink); }
+  .hero-meta dd .em { color: var(--ember); font-weight: 600; }
+
+  /* Waitlist CTA — opens hosted Google Form in a new tab */
+  .form-wrap { max-width: 580px; }
+  .waitlist-cta {
+    font-family: var(--mono);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--paper);
+    background: var(--ink);
+    cursor: none;
+    padding: 22px 26px;
+    text-align: left;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    width: 100%;
+    box-sizing: border-box;
+    transition: background 200ms var(--ease), color 200ms var(--ease);
+  }
+  .waitlist-cta::after { content: '→'; font-family: var(--serif); font-size: 22px; line-height: 0; transform: translateY(-1px); }
+  .waitlist-cta:hover { background: var(--ember); color: var(--paper); }
+  .waitlist-cta:focus-visible { outline: 2px solid var(--ember); outline-offset: 3px; }
+
+  .form-foot {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-top: 16px;
+    padding-top: 14px;
+    border-top: 1px solid var(--rule-soft);
+    font-family: var(--mono); font-size: 10.5px; letter-spacing: 2px; text-transform: uppercase; color: var(--paper-mute);
+  }
+  .form-foot .em { color: var(--ember); font-weight: 600; }
+
+  /* Hero visual — film frame with rebate edge & sprockets */
+  .hero-right { position: relative; padding: 14px 0 14px 36px; }
+  .frame {
+    position: relative;
+    aspect-ratio: 4/5;
+    background: var(--ink);
+    overflow: hidden;
+    box-shadow: 0 24px 60px -10px rgba(11, 15, 20, 0.28);
+  }
+  .frame img { width: 100%; height: 100%; object-fit: cover; display: block; filter: contrast(1.04) saturate(0.95); }
+  .frame::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(180deg, transparent 55%, rgba(11, 15, 20, 0.45) 100%);
+    pointer-events: none;
+  }
+  /* Sprocket holes column */
+  .sprockets {
+    position: absolute; left: 0; top: 14px; bottom: 14px;
+    width: 22px;
+    background: var(--ink);
+    display: flex; flex-direction: column; justify-content: space-between;
+    padding: 8px 0;
+  }
+  .sprockets span {
+    display: block;
+    width: 10px; height: 12px;
+    background: var(--paper);
+    margin: 0 auto;
+    border-radius: 1px;
+  }
+  .frame-meta {
+    position: absolute; left: 16px; bottom: 14px;
+    color: var(--paper);
+    font-family: var(--mono);
+    font-size: 10px; letter-spacing: 2.5px; text-transform: uppercase;
+    background: rgba(11, 15, 20, 0.55);
+    backdrop-filter: blur(6px);
+    padding: 6px 10px;
+    border: 1px solid rgba(242, 235, 220, 0.18);
+  }
+  .frame-tag {
+    position: absolute; right: 16px; top: 14px;
+    font-family: var(--serif); font-style: italic;
+    font-size: 18px; color: var(--paper);
+    background: rgba(200, 69, 27, 0.92);
+    padding: 4px 12px;
+    line-height: 1;
+  }
+
+  /* ═══ KINETIC FILM-SLATE BLOCK ═══════════════════════════════ */
+  .kinetic {
+    background: var(--ink);
+    color: var(--paper);
+    position: relative;
+    overflow: hidden;
+    padding: clamp(56px, 8vw, 96px) 0 clamp(40px, 5vw, 64px);
+    border-top: 1px solid rgba(242, 235, 220, 0.06);
+    border-bottom: 1px solid rgba(242, 235, 220, 0.06);
+  }
+  .kinetic::before {
+    content: ''; position: absolute; inset: 0;
+    background: repeating-linear-gradient(to bottom, rgba(242, 235, 220, 0.025) 0 1px, transparent 1px 4px);
+    pointer-events: none; z-index: 1;
+  }
+  .kinetic::after {
+    content: ''; position: absolute;
+    left: 50%; top: 50%;
+    width: 60vw; height: 60vw; max-width: 800px; max-height: 800px;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(closest-side, rgba(200, 69, 27, 0.22), transparent 70%);
+    filter: blur(20px); pointer-events: none; z-index: 0;
+    animation: kinetic-pulse 2400ms var(--ease) infinite;
+  }
+  @keyframes kinetic-pulse {
+    0%, 100% { opacity: 0.55; transform: translate(-50%, -50%) scale(0.96); }
+    50%      { opacity: 1;    transform: translate(-50%, -50%) scale(1.04); }
+  }
+  .kinetic .wrap { position: relative; z-index: 2; }
+
+  .kinetic-meta {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: clamp(22px, 3vw, 36px);
+    font-family: var(--mono);
+    font-size: 11px; font-weight: 500; letter-spacing: 2.4px; text-transform: uppercase;
+    color: rgba(242, 235, 220, 0.55);
+  }
+  .kinetic-eyebrow { display: inline-flex; align-items: center; gap: 14px; }
+  .kinetic-eyebrow::before { content: ''; width: 36px; height: 1px; background: var(--ember); opacity: 0.85; }
+  .kinetic-rec { display: inline-flex; align-items: center; gap: 10px; }
+  .rec-dot {
+    width: 9px; height: 9px; background: var(--ember); border-radius: 50%;
+    box-shadow: 0 0 12px rgba(200, 69, 27, 0.85);
+    animation: rec-blink 1100ms steps(1, end) infinite;
+  }
+  @keyframes rec-blink { 0%, 60% { opacity: 1; } 61%, 100% { opacity: 0.2; } }
+  .kinetic-tc { color: var(--paper); letter-spacing: 1.5px; }
+
+  .kinetic-stage { position: relative; height: clamp(100px, 16vw, 200px); overflow: hidden; }
+  .kinetic-word {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: flex-start;
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(64px, 12vw, 184px);
+    letter-spacing: -0.02em;
+    line-height: 0.92;
+    color: var(--paper);
+    opacity: 0;
+    transform: translateY(36%);
+    filter: blur(14px);
+    transition: opacity 520ms var(--ease), transform 760ms var(--ease), filter 520ms var(--ease);
+    will-change: opacity, transform, filter;
+    white-space: nowrap;
+  }
+  .kinetic-word .accent { color: var(--ember-soft); }
+  .kinetic-word.in { opacity: 1; transform: translateY(0); filter: blur(0); }
+  .kinetic-word.out { opacity: 0; transform: translateY(-32%); filter: blur(14px); }
+
+  .kinetic-foot {
+    margin-top: clamp(20px, 3vw, 36px);
+    display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 22px;
+    font-family: var(--mono); font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
+    color: rgba(242, 235, 220, 0.55);
+  }
+  .kinetic-counter { color: var(--paper); letter-spacing: 1.4px; }
+  .kinetic-counter .sep { color: var(--ember); margin: 0 6px; }
+  .kinetic-bar { height: 1px; background: rgba(242, 235, 220, 0.14); position: relative; overflow: hidden; }
+  .kinetic-bar-fill { position: absolute; inset: 0 100% 0 0; background: var(--ember); box-shadow: 0 0 14px rgba(200, 69, 27, 0.7); transition: right 80ms linear; }
+  .kinetic-tag { color: rgba(242, 235, 220, 0.55); text-align: right; }
+  @media (max-width: 720px) {
+    .kinetic-foot { grid-template-columns: auto 1fr; }
+    .kinetic-tag { display: none; }
+  }
+
+  /* ═══ SECTIONS ═══════════════════════════════════════════════ */
+  section.col { padding: clamp(72px, 10vw, 132px) 0; }
+  section.col + section.col { border-top: 1px solid var(--rule); }
+
+  .section-title {
+    font-family: var(--serif);
+    font-size: clamp(36px, 5.4vw, 76px);
+    line-height: 0.98;
+    letter-spacing: -0.015em;
+    color: var(--ink);
+    margin-bottom: 28px;
+    max-width: 18ch;
+  }
+  .section-title .it { font-style: italic; color: var(--ember); }
+  .section-lead {
+    font-size: clamp(17px, 1.5vw, 20px);
+    line-height: 1.5;
+    color: var(--ink-soft);
+    max-width: 64ch;
+    margin-bottom: 64px;
+  }
+  .section-lead .first {
+    font-family: var(--serif); font-style: italic;
+    font-size: 1.32em; line-height: 1; color: var(--ink); padding-right: 2px;
+  }
+  .section-head {
+    display: grid; grid-template-columns: 1fr; gap: 8px;
+    margin-bottom: clamp(40px, 6vw, 72px);
+  }
+  @media (min-width: 920px) {
+    .section-head { grid-template-columns: 1.3fr 1fr; align-items: end; gap: 56px; }
+    .section-head .section-title { margin-bottom: 0; }
+    .section-head .section-lead { margin-bottom: 0; }
+  }
+
+  /* ─── Pains (4 numbered) ────────────────────────────────── */
+  .pains { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border-top: 1px solid var(--rule); }
+  .pain {
+    display: grid; grid-template-columns: auto 1fr; gap: 28px;
+    padding: 44px 0;
+    border-bottom: 1px solid var(--rule);
+    align-items: start;
+  }
+  .pain:nth-child(odd) { padding-right: clamp(20px, 4vw, 56px); border-right: 1px solid var(--rule); }
+  .pain:nth-child(even) { padding-left: clamp(20px, 4vw, 56px); }
+  .pain-num {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: clamp(64px, 7vw, 104px);
+    line-height: 0.8;
+    color: var(--ember);
+    min-width: 1.6em;
+  }
+  .pain h3 {
+    font-family: var(--serif);
+    font-size: clamp(24px, 2.4vw, 32px);
+    font-weight: 400;
+    line-height: 1.05;
+    color: var(--ink);
+    margin-bottom: 12px;
+    letter-spacing: -0.01em;
+  }
+  .pain h3 .it { font-style: italic; color: var(--ember); }
+  .pain p { font-size: 15.5px; line-height: 1.6; color: var(--ink-soft); max-width: 50ch; }
+  @media (max-width: 720px) {
+    .pains { grid-template-columns: 1fr; }
+    .pain:nth-child(odd) { border-right: 0; padding-right: 0; }
+    .pain:nth-child(even) { padding-left: 0; }
+  }
+
+
+  /* ─── Reactions — pull quotes ───────────────────────────── */
+  .reactions {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0;
+    border-top: 1px solid var(--ink);
+  }
+  .reaction {
+    padding: 44px 28px 36px;
+    border-right: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    position: relative;
+    background: transparent;
+    transition: background 320ms var(--ease);
+  }
+  .reaction:last-child { border-right: 0; }
+  .reaction:hover { background: var(--paper-warm); }
+  .reaction .qmark {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 96px;
+    color: var(--ember);
+    line-height: 0.5;
+    display: block;
+    margin-bottom: 8px;
+    user-select: none;
+  }
+  .reaction blockquote {
+    font-family: var(--serif);
+    font-size: clamp(22px, 1.95vw, 28px);
+    line-height: 1.18;
+    color: var(--ink);
+    margin-bottom: 28px;
+    letter-spacing: -0.01em;
+  }
+  .reaction blockquote .it { font-style: italic; color: var(--ember); }
+  .reaction .who {
+    font-family: var(--mono); font-size: 10.5px; letter-spacing: 2px; text-transform: uppercase; color: var(--ink-soft);
+    padding-top: 14px; border-top: 1px solid var(--rule);
+  }
+  .reaction .who .name { display: block; color: var(--ink); font-weight: 700; margin-bottom: 4px; letter-spacing: 2.4px; }
+  @media (max-width: 900px) { .reactions { grid-template-columns: 1fr; } .reaction { border-right: 0; } }
+
+  /* ─── Testimonials — review columns ─────────────────────── */
+  .testimonials {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 0;
+    border-top: 1px solid var(--ink);
+  }
+  .testimonial {
+    padding: 40px 28px 32px;
+    border-right: 1px solid var(--rule);
+    position: relative;
+  }
+  .testimonial:last-child { border-right: 0; }
+  .testimonial .label {
+    font-family: var(--mono); font-size: 10px; letter-spacing: 2.4px; text-transform: uppercase;
+    color: var(--ember); font-weight: 700;
+    padding-bottom: 18px;
+    margin-bottom: 18px;
+    border-bottom: 1px solid var(--rule);
+    display: block;
+  }
+  .testimonial blockquote {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: clamp(20px, 1.8vw, 26px);
+    line-height: 1.18;
+    color: var(--ink);
+    margin-bottom: 22px;
+    letter-spacing: -0.005em;
+    text-indent: -0.34em;
+  }
+  .testimonial blockquote::before { content: '“'; color: var(--ember); margin-right: 0.04em; }
+  .testimonial blockquote::after  { content: '”'; color: var(--ember); margin-left: 0.04em; }
+  .testimonial .attr {
+    font-family: var(--mono); font-size: 10.5px; letter-spacing: 2px; text-transform: uppercase; color: var(--ink-soft);
+  }
+  .testimonial .attr .name { display: block; color: var(--ink); font-weight: 700; letter-spacing: 2.4px; margin-bottom: 4px; }
+  .testimonials-foot {
+    margin-top: 36px;
+    padding-top: 22px;
+    border-top: 1px solid var(--rule);
+    font-family: var(--mono); font-size: 11px; letter-spacing: 2.2px; text-transform: uppercase; color: var(--ink-soft);
+  }
+  @media (max-width: 900px) { .testimonials { grid-template-columns: 1fr; } .testimonial { border-right: 0; border-bottom: 1px solid var(--rule); } }
+
+  /* ═══ FINAL CTA — colour bars + ink panel ════════════════════ */
+  .closer {
+    background: var(--ink); color: var(--paper);
+    padding: clamp(72px, 10vw, 120px) 0;
+    position: relative; overflow: hidden;
+  }
+  .closer .bars {
+    display: flex; height: 14px; margin-bottom: 56px;
+  }
+  .closer .bars span { flex: 1; }
+  .closer .bars span:nth-child(1) { background: #C0C0C0; }
+  .closer .bars span:nth-child(2) { background: #C0C000; }
+  .closer .bars span:nth-child(3) { background: #00C0C0; }
+  .closer .bars span:nth-child(4) { background: #00C000; }
+  .closer .bars span:nth-child(5) { background: #C000C0; }
+  .closer .bars span:nth-child(6) { background: #C00000; }
+  .closer .bars span:nth-child(7) { background: #0000C0; }
+  .closer .bars span:nth-child(8) { background: var(--ember); }
+
+  .closer-grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: clamp(32px, 5vw, 64px); align-items: end; }
+  .closer .scene-marker { color: rgba(242, 235, 220, 0.55); border-bottom-color: rgba(242, 235, 220, 0.12); }
+  .closer .scene-marker .em { color: var(--ember); }
+  .closer h2 {
+    font-family: var(--serif);
+    font-size: clamp(40px, 5.4vw, 80px);
+    line-height: 1; letter-spacing: -0.018em;
+    color: var(--paper);
+    max-width: 16ch;
+  }
+  .closer h2 .it { font-style: italic; color: var(--ember); }
+  .closer p {
+    font-family: var(--sans);
+    font-size: 17px; line-height: 1.5; color: rgba(242, 235, 220, 0.72);
+    max-width: 42ch; margin-bottom: 28px;
+  }
+  .closer .closer-cta {
+    display: inline-flex; align-items: center; gap: 16px;
+    font-family: var(--mono); font-size: 13px; letter-spacing: 2.5px; text-transform: uppercase;
+    color: var(--paper); background: var(--ember);
+    padding: 22px 28px;
+    transition: background 220ms var(--ease), color 220ms var(--ease), transform 320ms var(--ease);
+  }
+  .closer .closer-cta::after { content: '→'; font-family: var(--serif); font-size: 24px; line-height: 0; transform: translateY(-1px); }
+  .closer .closer-cta:hover { background: var(--paper); color: var(--ink); transform: translateY(-2px); }
+  @media (max-width: 900px) { .closer-grid { grid-template-columns: 1fr; } }
+
+  /* ═══ COLOPHON FOOTER ════════════════════════════════════════ */
+  footer {
+    background: var(--paper);
+    border-top: 1px solid var(--ink);
+    padding: 48px 0 28px;
+    color: var(--ink-soft);
+  }
+  .colophon { display: grid; grid-template-columns: 1.6fr 1fr; gap: 48px; }
+  .colophon h4 { font-family: var(--mono); font-size: 10.5px; letter-spacing: 2.2px; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 14px; }
+  .colophon .credo { font-family: var(--serif); font-style: italic; font-size: 22px; line-height: 1.3; color: var(--ink); max-width: 42ch; letter-spacing: -0.01em; }
+  .colophon address { font-style: normal; font-size: 14px; line-height: 1.85; }
+  .colophon a:hover { color: var(--ember); }
+  .copyline {
+    margin-top: 38px;
+    padding-top: 20px;
+    border-top: 1px solid var(--rule);
+    display: grid; gap: 8px;
+    font-family: var(--mono); font-size: 10.5px; letter-spacing: 1.7px; text-transform: uppercase; color: var(--ink-soft);
+  }
+  .copyline .registered { color: var(--ink); letter-spacing: 1.5px; }
+  .copyline .registered a { color: var(--ember); }
+  .copyline .registered a:hover { color: var(--ember-deep); }
+  @media (max-width: 800px) { .colophon { grid-template-columns: 1fr; gap: 32px; } }
+
+  /* ═══ Mobile / responsive misc ═══════════════════════════════ */
+  @media (max-width: 900px) {
+    .masthead-bar .wrap { grid-template-columns: 1fr auto; }
+    .mast-left { display: none; }
+    .hero .wrap { grid-template-columns: 1fr; }
+    .hero-right { padding-left: 0; }
+    .hero-frame-num { right: -6px; opacity: 0.12; }
+  }
+  @media (max-width: 560px) {
+    .form-foot { flex-direction: column; gap: 8px; align-items: flex-start; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { opacity: 1; transform: none; transition: none; }
+    .kinetic::after, .rec-dot { animation: none; }
+    .kinetic-word { transition: opacity 200ms linear; filter: none; transform: none; }
+  }
+</style>
+</head>
+
+<body>
+
+<div id="cursor" aria-hidden="true"></div>
+<div id="scroll-progress" aria-hidden="true"></div>
+
+<!-- ═══ MASTHEAD ═════════════════════════════════════════════════ -->
+<header class="masthead">
+  <div class="masthead-strip">
+    <div class="wrap">
+      <span><span class="em">●</span>&nbsp;&nbsp;ISSUE 01 · UK · MMXXVI</span>
+      <span>Invite-Only Beta · 50 Seats</span>
+    </div>
+  </div>
+  <div class="masthead-bar">
+    <div class="wrap">
+      <div class="mast-left">CineArt AI · Vol. I — No. 01</div>
+      <div class="mast-brand">
+        <a href="/" aria-label="CineSmith home">
+          Cine<span class="it">Smith</span>
+          <span class="small">— Agentic AI for filmmakers —</span>
+        </a>
+      </div>
+      <div class="mast-right" aria-hidden="true"></div>
+    </div>
+  </div>
+</header>
+
+<!-- ═══ HERO ═════════════════════════════════════════════════════ -->
+<section class="hero" id="waitlist">
+  <div class="wrap">
+    <div class="hero-left">
+      <span class="hero-frame-num" aria-hidden="true">01</span>
+      <span class="scene-marker"><span class="em">SC.01</span> — The proposition</span>
+
+      <h1 class="display hero-title">
+        <span class="l1">From idea</span>
+        <span class="l2"><span class="lo">to</span> <span class="it">rough cut.</span></span>
+        <span class="l3"><span class="lo">In</span> one platform.</span>
+      </h1>
+
+      <dl class="hero-meta">
+        <dt>Format</dt>
+        <dd>Agentic AI production platform — script, storyboard, video, voice, schedule, budget, live on set. <span class="em">One system.</span></dd>
+        <dt>Audience</dt>
+        <dd>For anyone making creative content — <span class="em">feature films</span>, <span class="em">drama</span>, <span class="em">documentary</span>, <span class="em">podcasts</span>, <span class="em">commercials</span>.</dd>
+        <dt>Team</dt>
+        <dd>Filmmakers and <span class="em">AI specialists</span> — global film &amp; TV delivery credits. Built in London.</dd>
+        <dt>Status</dt>
+        <dd>UK closed beta · Invite only · <span class="em">50 seats opening</span></dd>
+      </dl>
+
+      <div class="form-wrap">
+        <a href="https://forms.gle/wfrBxsDLvXXEUr718"
+           target="_blank"
+           rel="noopener noreferrer"
+           class="waitlist-cta"
+           id="waitlist-cta">
+          Request early access
+        </a>
+
+        <div class="form-foot">
+          <span><span class="em">●</span>&nbsp;LIMITED — 50 UK SEATS</span>
+          <span>UK CLOSED BETA · INVITE ONLY</span>
+        </div>
+      </div>
+    </div>
+
+    <aside class="hero-right">
+      <div class="frame">
+        <div class="sprockets" aria-hidden="true">
+          <span></span><span></span><span></span><span></span><span></span>
+          <span></span><span></span><span></span><span></span><span></span>
+        </div>
+        <img src="/assets/hero-filmset.png" alt="Film-set still — warm, lightly desaturated, vignette." loading="eager" decoding="async">
+        <span class="frame-tag">UK · 2026</span>
+        <span class="frame-meta">FRAME 24 / 24 · A-CAM · TAKE 03</span>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<!-- ═══ KINETIC FILM-SLATE ═══════════════════════════════════════ -->
+<section class="kinetic" aria-label="What CineSmith is built for">
+  <div class="wrap">
+    <div class="kinetic-meta">
+      <span class="kinetic-eyebrow">Built for</span>
+      <span class="kinetic-rec">
+        <span class="rec-dot" aria-hidden="true"></span>
+        <span>REC · <span class="kinetic-tc" id="kinetic-tc">00:00:00:00</span></span>
+      </span>
+    </div>
+    <div class="kinetic-stage" id="kinetic-stage" aria-live="polite">
+      <span class="kinetic-word in">Feature&nbsp;<span class="accent">Films.</span></span>
+      <span class="kinetic-word">Episodic&nbsp;<span class="accent">Drama.</span></span>
+      <span class="kinetic-word">Documentary.</span>
+      <span class="kinetic-word">Micro-<span class="accent">Drama.</span></span>
+      <span class="kinetic-word">Commercials.</span>
+      <span class="kinetic-word">Branded&nbsp;<span class="accent">Content.</span></span>
+      <span class="kinetic-word">Factual&nbsp;<span class="accent">TV.</span></span>
+      <span class="kinetic-word">Animation.</span>
+      <span class="kinetic-word">Music&nbsp;<span class="accent">Videos.</span></span>
+      <span class="kinetic-word">Short&nbsp;<span class="accent">Form.</span></span>
+      <span class="kinetic-word">Podcasts.</span>
+    </div>
+    <div class="kinetic-foot">
+      <span class="kinetic-counter"><span id="kinetic-num">01</span><span class="sep">/</span><span id="kinetic-total">11</span></span>
+      <div class="kinetic-bar"><div class="kinetic-bar-fill" id="kinetic-bar-fill"></div></div>
+      <span class="kinetic-tag">Story aware · Multi provider · Live on set</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ REACTIONS — pull quotes ═════════════════════════════════ -->
+<section class="col reveal">
+  <div class="wrap">
+    <span class="scene-marker"><span class="em">SC.02</span> — Early reactions</span>
+    <div class="section-head">
+      <h2 class="section-title">What people say <span class="it">after</span> they see it.</h2>
+      <p class="section-lead"><span class="first">A</span> handful of producers, directors, and showrunners have seen private demos. Below — their words, unprompted, unedited.</p>
+    </div>
+
+    <div class="reactions">
+      <article class="reaction">
+        <span class="qmark" aria-hidden="true">“</span>
+        <blockquote>This is the tool we've been <span class="it">waiting for.</span> The moment I get an invite I'm onboarding the entire dev slate.</blockquote>
+        <div class="who"><span class="name">Producer</span>UK feature production company · After a 20-min demo</div>
+      </article>
+      <article class="reaction">
+        <span class="qmark" aria-hidden="true">“</span>
+        <blockquote>I haven't been this excited about production software since <span class="it">Final Draft launched.</span> Genuinely — when can we use it?</blockquote>
+        <div class="who"><span class="name">Writer-Director</span>Indie feature in pre-production · London</div>
+      </article>
+      <article class="reaction">
+        <span class="qmark" aria-hidden="true">“</span>
+        <blockquote>Every documentary director I've shown this to has the same reaction. It's not <span class="it">"interesting"</span> — it's "how do I get on the list."</blockquote>
+        <div class="who"><span class="name">Producer</span>Documentary feature in production · UK</div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FINAL CTA ═══════════════════════════════════════════════ -->
+<section class="closer reveal">
+  <div class="bars" aria-hidden="true">
+    <span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span>
+  </div>
+  <div class="wrap">
+    <span class="scene-marker"><span class="em">SC.03</span> — Final cue</span>
+    <div class="closer-grid">
+      <h2>Early access is opening to <span class="it">50 UK production teams.</span> Be one of them.</h2>
+      <div>
+        <p>Less tooling. More filmmaking. Add your name and we'll be in touch when the next cohort opens.</p>
+        <a href="https://forms.gle/wfrBxsDLvXXEUr718" target="_blank" rel="noopener noreferrer" class="closer-cta">Join the UK waitlist</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ COLOPHON ════════════════════════════════════════════════ -->
+<footer>
+  <div class="wrap">
+    <div class="colophon">
+      <div>
+        <h4>Colophon</h4>
+        <p class="credo">Built in London by filmmakers and <span style="color:var(--ember);font-style:italic;">AI specialists</span> — with delivery credits across the global film and TV industry, and senior engineering pedigree from creative AI labs.</p>
+      </div>
+      <div>
+        <h4>On the web</h4>
+        <address>
+          <a href="/team/">Team</a><br>
+          <a href="https://www.cineartai.com" target="_blank" rel="noopener noreferrer">cineartai.com ↗</a>
+        </address>
+        <h4 style="margin-top:24px;">Contact</h4>
+        <address>
+          General: <a href="mailto:cinesmith@cineartai.com">cinesmith@cineartai.com</a><br>
+          Press: <a href="mailto:press@cineartai.com">press@cineartai.com</a>
+        </address>
+      </div>
+    </div>
+    <div class="copyline">
+      <span class="registered">CineArt AI Limited · Registered in England &amp; Wales · 85 Great Portland Street, London W1W 7LT · <a href="tel:+447958707232">+44 7958 707232</a></span>
+      <span>© MMXXVI · CineArt AI Limited · All Rights Reserved</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // ┌─ Custom crosshair cursor ─────────────────────────────────
+  (function () {
+    const c = document.getElementById('cursor');
+    if (!c || matchMedia('(hover: none)').matches) return;
+    let x = 0, y = 0, tx = 0, ty = 0;
+    document.addEventListener('mousemove', (e) => { x = e.clientX; y = e.clientY; }, { passive: true });
+    function loop() {
+      tx += (x - tx) * 0.32;
+      ty += (y - ty) * 0.32;
+      c.style.transform = `translate3d(${tx}px, ${ty}px, 0)`;
+      requestAnimationFrame(loop);
+    }
+    loop();
+    document.querySelectorAll('a, button, input, select, .reaction, .pain, .frame').forEach((el) => {
+      el.addEventListener('mouseenter', () => c.classList.add('lg'));
+      el.addEventListener('mouseleave', () => c.classList.remove('lg'));
+    });
+  })();
+
+  // ┌─ Scroll progress bar ─────────────────────────────────────
+  (function () {
+    const bar = document.getElementById('scroll-progress');
+    if (!bar) return;
+    let ticking = false;
+    function update() {
+      const h = document.documentElement;
+      const scrolled = h.scrollTop / (h.scrollHeight - h.clientHeight);
+      bar.style.width = Math.max(0, Math.min(1, scrolled)) * 100 + '%';
+      ticking = false;
+    }
+    window.addEventListener('scroll', () => { if (!ticking) { requestAnimationFrame(update); ticking = true; } }, { passive: true });
+    update();
+  })();
+
+  // ┌─ Reveal-on-scroll ────────────────────────────────────────
+  (function () {
+    const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const els = document.querySelectorAll('.reveal');
+    if (reduced || !('IntersectionObserver' in window)) { els.forEach((el) => el.classList.add('in')); return; }
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.05 });
+    els.forEach((el) => io.observe(el));
+  })();
+
+  // ┌─ Kinetic word cycler + REC timecode + progress bar ───────
+  (function () {
+    const stage = document.getElementById('kinetic-stage');
+    const numEl = document.getElementById('kinetic-num');
+    const tcEl  = document.getElementById('kinetic-tc');
+    const bar   = document.getElementById('kinetic-bar-fill');
+    if (!stage || !numEl || !tcEl || !bar) return;
+
+    const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const words = Array.from(stage.querySelectorAll('.kinetic-word'));
+    if (!words.length) return;
+    document.getElementById('kinetic-total').textContent = String(words.length).padStart(2, '0');
+
+    const HOLD_MS = 2400;
+    let i = 0;
+    let cycleStart = performance.now();
+
+    function setIndex(next) {
+      const prev = i;
+      i = next % words.length;
+      words[prev].classList.remove('in');
+      words[prev].classList.add('out');
+      words[i].classList.remove('out');
+      words[i].classList.add('in');
+      numEl.textContent = String(i + 1).padStart(2, '0');
+      cycleStart = performance.now();
+    }
+
+    // Always cycle. Reduced-motion preference is honoured by CSS (no blur/translate transition).
+    window.__cinesmithKinetic = setInterval(() => setIndex(i + 1), HOLD_MS);
+
+    function tickBar(now) {
+      const elapsed = (now - cycleStart) % HOLD_MS;
+      const pct = Math.min(elapsed / HOLD_MS, 1);
+      bar.style.right = (100 - pct * 100) + '%';
+      requestAnimationFrame(tickBar);
+    }
+    requestAnimationFrame(tickBar);
+
+    const t0 = performance.now();
+    function tickTc(now) {
+      const elapsedSec = (now - t0) / 1000;
+      const totalFrames = Math.floor(elapsedSec * 24);
+      const ff = totalFrames % 24;
+      const ss = Math.floor(elapsedSec) % 60;
+      const mm = Math.floor(elapsedSec / 60) % 60;
+      const hh = Math.floor(elapsedSec / 3600) % 24;
+      tcEl.textContent =
+        String(hh).padStart(2, '0') + ':' +
+        String(mm).padStart(2, '0') + ':' +
+        String(ss).padStart(2, '0') + ':' +
+        String(ff).padStart(2, '0');
+      requestAnimationFrame(tickTc);
+    }
+    requestAnimationFrame(tickTc);
+  })();
+
+  // ┌─ Waitlist CTAs ───────────────────────────────────────────
+  // CTAs are plain external links to a hosted Google Form, so there
+  // is no submission logic to wire here. We do append UTM params to
+  // every form link on the page so attribution survives the click
+  // regardless of which CTA the visitor uses (hero / nav / closer).
+  (function appendUtmsToFormLinks() {
+    const here = new URLSearchParams(window.location.search);
+    const utms = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'];
+    const params = new URLSearchParams();
+    utms.forEach((k) => { const v = here.get(k); if (v) params.set(k, v); });
+    if (!params.toString()) return;
+    document.querySelectorAll('a[href*="forms.gle/"]').forEach((a) => {
+      const sep = a.href.includes('?') ? '&' : '?';
+      a.href = a.href + sep + params.toString();
+    });
+  })();
+</script>
+
+</body>
+</html>
